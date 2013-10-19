@@ -1,6 +1,5 @@
 package com.tchw.gwt.app.client;
 
-import com.tchw.gwt.app.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -16,6 +15,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.tchw.gwt.app.shared.FieldVerifier;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -53,6 +53,10 @@ public class GwtProject implements EntryPoint {
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
+		RootPanel.get("headerPanel").add(new Label("Header panel"));
+		RootPanel.get("footerPanel").add(new Label("Footer panel"));
+		RootPanel.get("leftPanel").add(new Label("Left panel"));
+		
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
 		nameField.selectAll();

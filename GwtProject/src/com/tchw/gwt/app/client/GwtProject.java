@@ -53,9 +53,9 @@ public class GwtProject implements EntryPoint {
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
-		RootPanel.get("headerPanel").add(new Label("Header panel"));
-		RootPanel.get("footerPanel").add(new Label("Footer panel"));
-		RootPanel.get("leftPanel").add(new Label("Left panel"));
+		RootPanel.get("headerPanel").add(HeaderPanel.create());
+		RootPanel.get("footerPanel").add(FooterPanel.create());
+		RootPanel.get("leftPanel").add(LeftPanel.create());
 		
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);

@@ -12,7 +12,6 @@ public class LeftPanel {
 		panel.add(new Label("LeftPanel it is"));
 		panel.add(new Label("Something new f"));
 		panel.add(new Binder1("Added b1"));
-		panel.add(new Binder1("Added b2"));
 		return panel;
 	}
 	

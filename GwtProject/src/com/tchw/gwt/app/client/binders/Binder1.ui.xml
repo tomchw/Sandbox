@@ -2,6 +2,12 @@
 
   <g:HTMLPanel>
     Hello, <span ui:field="nameSpan"/>
+    
+    <table class="table">
+        <tr><td>1</td><td>Adam</td><td>Słodowy</td></tr>
+        <tr><td>2</td><td>Abra</td><td>Kadabra</td></tr>
+    </table>
+    
   </g:HTMLPanel>
 
 </ui:UiBinder>

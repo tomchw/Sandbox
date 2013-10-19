@@ -1,0 +1,2 @@
+serviceClass: com.tchw.gwt.app.client.GreetingService
+path: B14A747AE2A128E2CB0DD65172D4094B.gwt.rpc

@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.tchw.gwt.app.client.examples.CellTableExample;
 import com.tchw.gwt.app.client.tools.Buttons;
 
 public class MainPanel {
@@ -47,5 +48,6 @@ public class MainPanel {
 		panel.add(Buttons.builder("D").danger().large().emptyClick());
 		panel.add(Buttons.builder("E").warning().small().emptyClick());
 		panel.add(Buttons.builder("E").link().large().emptyClick());
+		panel.add(CellTableExample.cellTable());
 	}
 }

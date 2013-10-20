@@ -2,15 +2,15 @@ package com.tchw.gwt.app.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tchw.gwt.app.client.binders.Binder1;
+import com.tchw.gwt.app.client.tools.MouseHandler;
 
 public class LeftPanel {
 	
@@ -18,37 +18,30 @@ public class LeftPanel {
 		VerticalPanel panel = new VerticalPanel();
 		
 		final Label label = new Label("LeftPanel it is");
-		label.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				
-			}
-		});
-		
-		label.addMouseOverHandler(new MouseOverHandler() {
-			@Override
-			public void onMouseOver(MouseOverEvent event) {
-				label.setText(String.valueOf(System.currentTimeMillis()));
-			}
-		});
+
+		MouseHandler mouseHandler = MouseHandler.create()
+				.listenMouseFor(label);
 		
 		panel.add(label);
-		panel.add(new Label("Something new f"));
+		panel.add(mouseHandler.asLabel());
 		panel.add(new Binder1("Added b1"));		
-		panel.add(Buttons.builder("Clear main panel").danger().large().click(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				mainPanel.clear();
-			}
-		}));
-		panel.add(Buttons.builder("Rebuild main panel").success().defaul().click(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				mainPanel.rebuild();
-			}
-		}));
+
+		Button clearMainPanelButton = clearMainPanel(mainPanel);
+		mouseHandler.listenMouseFor(clearMainPanelButton);
 		
-		ToggleButton toggleButton = new ToggleButton("Radio");
+		panel.add(clearMainPanelButton);
+		panel.add(rebiuldMainPanel(mainPanel));
+		
+		ToggleButton toggleButton = toggleButtonChangingLabel(label);
+		panel.add(toggleButton);
+
+		panel.add(new ToggleButton("Radio 2"));
+		panel.add(new ToggleButton("Radio 3"));
+		return panel;
+	}
+
+	private static ToggleButton toggleButtonChangingLabel(final Label label) {
+		ToggleButton toggleButton = new ToggleButton("Radio 1");
 		toggleButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 				@Override
 				public void onValueChange(ValueChangeEvent<Boolean> event) {
@@ -59,15 +52,25 @@ public class LeftPanel {
 					}
 				}
 			});
-		
-		panel.add(toggleButton);
-		panel.add(new ToggleButton("Radio"));
-		panel.add(new ToggleButton("Radio"));
-		panel.add(new ToggleButton("Radio"));
-		panel.add(new ToggleButton("Radio"));
-		panel.add(new ToggleButton("Radio"));
-		
-		return panel;
+		return toggleButton;
+	}
+
+	private static Button rebiuldMainPanel(final MainPanel mainPanel) {
+		return Buttons.builder("Rebuild main panel").success().defaul().click(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				mainPanel.rebuild();
+			}
+		});
+	}
+
+	private static Button clearMainPanel(final MainPanel mainPanel) {
+		return Buttons.builder("Clear main panel").danger().large().click(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				mainPanel.clear();
+			}
+		});
 	}
 	
 }

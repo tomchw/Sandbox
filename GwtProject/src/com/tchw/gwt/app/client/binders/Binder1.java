@@ -2,6 +2,7 @@ package com.tchw.gwt.app.client.binders;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -15,7 +16,9 @@ public class Binder1 extends Composite {
 
 	@UiField SpanElement nameSpan;
 
-	public Binder1(String p_name) {
+	@UiField TableElement table;
+	
+	public Binder1(String p_name) {		
 	    initWidget(uiBinder.createAndBindUi(this));
         nameSpan.setInnerText(p_name);
 	}

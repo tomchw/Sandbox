@@ -1,4 +1,4 @@
-package com.tchw.gwt.app.client;
+package com.tchw.gwt.app.client.panels;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tchw.gwt.app.client.binders.Binder1;
+import com.tchw.gwt.app.client.tools.Buttons;
 import com.tchw.gwt.app.client.tools.MouseHandler;
 
 public class LeftPanel {

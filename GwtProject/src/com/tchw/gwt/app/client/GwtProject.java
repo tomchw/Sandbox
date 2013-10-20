@@ -15,6 +15,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.tchw.gwt.app.client.panels.FooterPanel;
+import com.tchw.gwt.app.client.panels.HeaderPanel;
+import com.tchw.gwt.app.client.panels.LeftPanel;
+import com.tchw.gwt.app.client.panels.MainPanel;
 import com.tchw.gwt.app.shared.FieldVerifier;
 
 /**

@@ -1,4 +1,4 @@
-package com.tchw.gwt.app.client;
+package com.tchw.gwt.app.client.panels;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;

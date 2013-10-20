@@ -1,10 +1,11 @@
-package com.tchw.gwt.app.client;
+package com.tchw.gwt.app.client.panels;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.tchw.gwt.app.client.tools.Buttons;
 
 public class MainPanel {
 

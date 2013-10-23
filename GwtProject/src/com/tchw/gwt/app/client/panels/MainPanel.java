@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tchw.gwt.app.client.examples.CellTableExample;
+import com.tchw.gwt.app.client.examples.ChangeGaugeEveryFewSeconds;
 import com.tchw.gwt.app.client.tools.Buttons;
 import com.tchw.gwt.app.client.visualizations.VGauge;
 
@@ -68,6 +69,7 @@ public class MainPanel {
 				gauge.addValue(15);
 			}
 		}));
+		ChangeGaugeEveryFewSeconds.install(gauge);
 	}
 	
 

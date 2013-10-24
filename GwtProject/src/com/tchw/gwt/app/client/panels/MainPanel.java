@@ -2,12 +2,16 @@ package com.tchw.gwt.app.client.panels;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tchw.gwt.app.client.examples.CellTableExample;
-import com.tchw.gwt.app.client.examples.ChangeGaugeEveryFewSeconds;
 import com.tchw.gwt.app.client.tools.Buttons;
 import com.tchw.gwt.app.client.visualizations.VGauge;
 
@@ -17,6 +21,7 @@ public class MainPanel {
 	
 	private MainPanel(Panel p_panel) {
 		panel = p_panel;
+		addToPanel();
 	}
 	
 	public void clear() {
@@ -25,7 +30,7 @@ public class MainPanel {
 	
 	public void rebuild() {
 		panel.clear();
-		addToPanel(panel);
+		addToPanel();
 	}
 	
 	public Panel asPanel() {
@@ -34,26 +39,22 @@ public class MainPanel {
 	
 	public static MainPanel create() {
 		final VerticalPanel panel = new VerticalPanel();
-		addToPanel(panel);
 		return new MainPanel(panel);
 	}
 
-	private static void addToPanel(final Panel panel) {
-		Button warning = Buttons.builder("E").warning().small().emptyClick();
-		
-		panel.add(Buttons.builder("A").primary().large().emptyClick());
-		panel.add(Buttons.builder("B").defaul().mini().emptyClick());
-		panel.add(Buttons.builder("C").success().small().click(new ClickHandler() {
-			private int counter;
-			@Override
-			public void onClick(ClickEvent event) {
-				panel.add(new Label("Clicked " + ++counter));
-			}
-		}));
-		panel.add(Buttons.builder("D").danger().large().emptyClick());
-		panel.add(warning);
-		panel.add(Buttons.builder("E").link().large().emptyClick());
+	private void addToPanel() {
+		playingWithButtonAndPopupPanel();
+		playingWithButtons();
+		playingWithCellTable();
+		playingWithGauge();
+		//ChangeGaugeEveryFewSeconds.install(gauge);
+	}
+
+	private void playingWithCellTable() {
 		panel.add(CellTableExample.cellTable());
+	}
+
+	private void playingWithGauge() {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		panel.add(verticalPanel);
 		final VGauge gauge = VGauge.builder().buildAndAddTo(verticalPanel);
@@ -69,7 +70,43 @@ public class MainPanel {
 				gauge.addValue(15);
 			}
 		}));
-		ChangeGaugeEveryFewSeconds.install(gauge);
+	}
+
+	private void playingWithButtons() {
+		panel.add(Buttons.builder("B").defaul().mini().emptyClick());
+		panel.add(Buttons.builder("C").success().small().click(new ClickHandler() {
+			private int counter;
+			@Override
+			public void onClick(ClickEvent event) {
+				panel.add(new Label("Clicked " + ++counter));
+			}
+		}));
+		panel.add(Buttons.builder("D").danger().large().emptyClick());
+		panel.add(Buttons.builder("E").warning().small().emptyClick());
+		panel.add(Buttons.builder("E").link().large().emptyClick());
+	}
+
+	private void playingWithButtonAndPopupPanel() {
+		final Button buttonWithPopupPanel = Buttons.builder("A").primary().large().emptyClick();
+		panel.add(buttonWithPopupPanel);
+		
+		final DecoratedPopupPanel popupPanel = new DecoratedPopupPanel();
+		popupPanel.setAutoHideEnabled(true);
+		popupPanel.setAnimationEnabled(true);
+		popupPanel.setWidget(new Label("Hello"));
+		buttonWithPopupPanel.addMouseOverHandler(new MouseOverHandler() {
+			@Override
+			public void onMouseOver(MouseOverEvent event) {
+				popupPanel.showRelativeTo(buttonWithPopupPanel);
+			}
+		});
+		
+		buttonWithPopupPanel.addMouseOutHandler(new MouseOutHandler() {
+			@Override
+			public void onMouseOut(MouseOutEvent event) {
+				popupPanel.hide();
+			}
+		});
 	}
 	
 

@@ -19,6 +19,7 @@ import com.tchw.gwt.app.client.panels.FooterPanel;
 import com.tchw.gwt.app.client.panels.HeaderPanel;
 import com.tchw.gwt.app.client.panels.LeftPanel;
 import com.tchw.gwt.app.client.panels.MainPanel;
+import com.tchw.gwt.app.client.panels.RightPanel;
 import com.tchw.gwt.app.shared.FieldVerifier;
 
 /**
@@ -47,8 +48,9 @@ public class GwtProject implements EntryPoint {
 		RootPanel.get("headerPanel").add(HeaderPanel.create());
 		RootPanel.get("footerPanel").add(FooterPanel.create()); 
 		RootPanel.get("leftPanel").add(LeftPanel.create(mainPanel));
-		RootPanel.get("mainPanel").add(mainPanel.asPanel());
-
+		RootPanel.get("mainPanel").add(mainPanel.panel);
+		RootPanel.get("rightPanel").add(RightPanel.create().panel);
+		
 		originalExample();
 	}
 

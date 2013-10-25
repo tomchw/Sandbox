@@ -43,6 +43,12 @@ public class GwtProject implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		MainPanel mainPanel = MainPanel.create();
+		RootPanel.get("headerPanel").add(HeaderPanel.create());
+		RootPanel.get("footerPanel").add(FooterPanel.create()); 
+		RootPanel.get("leftPanel").add(LeftPanel.create(mainPanel));
+		RootPanel.get("mainPanel").add(mainPanel.asPanel());
+
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -51,17 +57,13 @@ public class GwtProject implements EntryPoint {
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
 
+
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
-		MainPanel mainPanel = MainPanel.create();
-		RootPanel.get("headerPanel").add(HeaderPanel.create());
-		RootPanel.get("footerPanel").add(FooterPanel.create()); 
-		RootPanel.get("leftPanel").add(LeftPanel.create(mainPanel));
-		RootPanel.get("mainPanel").add(mainPanel.asPanel());
 		
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);

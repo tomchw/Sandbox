@@ -47,7 +47,6 @@ public class MainPanel {
 		playingWithButtons();
 		playingWithCellTable();
 		playingWithGauge();
-		//ChangeGaugeEveryFewSeconds.install(gauge);
 	}
 
 	private void playingWithCellTable() {
@@ -70,6 +69,7 @@ public class MainPanel {
 				gauge.addValue(15);
 			}
 		}));
+		//ChangeGaugeEveryFewSeconds.install(gauge);
 	}
 
 	private void playingWithButtons() {

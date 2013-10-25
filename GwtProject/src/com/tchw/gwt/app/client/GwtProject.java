@@ -49,6 +49,10 @@ public class GwtProject implements EntryPoint {
 		RootPanel.get("leftPanel").add(LeftPanel.create(mainPanel));
 		RootPanel.get("mainPanel").add(mainPanel.asPanel());
 
+		originalExample();
+	}
+
+	private void originalExample() {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");

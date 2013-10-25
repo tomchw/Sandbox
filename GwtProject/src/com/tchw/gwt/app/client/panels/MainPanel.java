@@ -73,21 +73,21 @@ public class MainPanel {
 	}
 
 	private void playingWithButtons() {
-		panel.add(Buttons.builder("B").defaul().mini().emptyClick());
-		panel.add(Buttons.builder("C").success().small().click(new ClickHandler() {
+		panel.add(Buttons.builder("Mini default").defaul().mini().emptyClick());
+		panel.add(Buttons.builder("Small success, click me").success().small().click(new ClickHandler() {
 			private int counter;
 			@Override
 			public void onClick(ClickEvent event) {
 				panel.add(new Label("Clicked " + ++counter));
 			}
 		}));
-		panel.add(Buttons.builder("D").danger().large().emptyClick());
-		panel.add(Buttons.builder("E").warning().small().emptyClick());
-		panel.add(Buttons.builder("E").link().large().emptyClick());
+		panel.add(Buttons.builder("Large danger").danger().large().emptyClick());
+		panel.add(Buttons.builder("Small warning").warning().small().emptyClick());
+		panel.add(Buttons.builder("Button as link").link().large().emptyClick());
 	}
 
 	private void playingWithButtonAndPopupPanel() {
-		final Button buttonWithPopupPanel = Buttons.builder("A").primary().large().emptyClick();
+		final Button buttonWithPopupPanel = Buttons.builder("Having popup panel").primary().large().emptyClick();
 		panel.add(buttonWithPopupPanel);
 		
 		final DecoratedPopupPanel popupPanel = new DecoratedPopupPanel();

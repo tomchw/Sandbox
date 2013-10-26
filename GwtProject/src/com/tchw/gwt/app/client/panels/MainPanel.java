@@ -64,8 +64,6 @@ public class MainPanel {
 		CellList<String> list = new CellList<String>(new TextCell());
 		list.setRowCount(3);
 		list.setRowData(0, Arrays.asList("Monday", "Tuesday", "Wednesday"));
-
-		list.getRowElement(1).addClassName("label label-warning");
 		
 		return list;
 	}

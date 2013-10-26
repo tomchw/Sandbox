@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.tchw.gwt.app.client.panels.detail.ListPanel;
 
 public class MainPanel {
 
@@ -34,6 +35,11 @@ public class MainPanel {
 	}
 	
 	private static void initWidgets(Panel mainPanel) {
+		mainPanel.add(cellListPanel());
+		mainPanel.add(ListPanel.builder().build().panel);
+	}
+
+	private static Panel cellListPanel() {
 		final Panel panel = new VerticalPanel();
 		final Label label = infoLabel();
 		
@@ -42,8 +48,7 @@ public class MainPanel {
 		
 		panel.add(list);
 		panel.add(label);
-		
-		mainPanel.add(panel);
+		return panel;
 	}
 
 	private static void setSelectionModel(final Label label, CellList<String> list) {

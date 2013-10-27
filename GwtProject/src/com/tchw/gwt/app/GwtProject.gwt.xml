@@ -20,6 +20,7 @@
 
   <!-- Other module inherits                                      -->
   <inherits name="com.google.common.collect.Collect"/>
+  <inherits name="com.github.gwtbootstrap.Bootstrap"/>  
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.tchw.gwt.app.client.GwtProject'/>

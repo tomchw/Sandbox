@@ -10,8 +10,8 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tchw.gwt.app.client.binders.Binder1;
-import com.tchw.gwt.app.client.tools.Buttons;
-import com.tchw.gwt.app.client.tools.MouseHandler;
+import com.tchw.gwt.app.client.common.button.Buttons;
+import com.tchw.gwt.app.client.common.mouse.MouseHandler;
 
 public class LeftPanel {
 	

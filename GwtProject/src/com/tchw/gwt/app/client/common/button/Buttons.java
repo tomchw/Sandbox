@@ -1,4 +1,4 @@
-package com.tchw.gwt.app.client.tools;
+package com.tchw.gwt.app.client.common.button;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Element;

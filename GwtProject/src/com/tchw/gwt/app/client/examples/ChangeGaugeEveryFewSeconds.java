@@ -2,7 +2,7 @@ package com.tchw.gwt.app.client.examples;
 
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Timer;
-import com.tchw.gwt.app.client.visualizations.VGauge;
+import com.tchw.gwt.app.client.common.visualizations.VGauge;
 
 public class ChangeGaugeEveryFewSeconds {
 

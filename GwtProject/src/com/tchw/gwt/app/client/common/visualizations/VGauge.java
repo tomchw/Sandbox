@@ -1,4 +1,4 @@
-package com.tchw.gwt.app.client.visualizations;
+package com.tchw.gwt.app.client.common.visualizations;
 
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;

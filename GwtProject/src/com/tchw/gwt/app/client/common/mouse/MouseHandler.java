@@ -1,4 +1,4 @@
-package com.tchw.gwt.app.client.tools;
+package com.tchw.gwt.app.client.common.mouse;
 
 import com.google.gwt.event.dom.client.HasAllMouseHandlers;
 import com.google.gwt.event.dom.client.MouseMoveEvent;

@@ -48,7 +48,7 @@ public class GwtProject implements EntryPoint {
 		RootPanel.get("headerPanel").add(HeaderPanel.create());
 		RootPanel.get("footerPanel").add(FooterPanel.create()); 
 		RootPanel.get("leftPanel").add(LeftPanel.create(mainPanel));
-		RootPanel.get("mainPanel").add(mainPanel.panel);
+		RootPanel.get("centerPanel").add(mainPanel.panel);
 		RootPanel.get("rightPanel").add(RightPanel.create().panel);
 		
 		originalExample();

@@ -18,8 +18,8 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.tchw.gwt.app.client.common.button.Buttons;
+import com.tchw.gwt.app.client.widgets.Dropdown;
 import com.tchw.gwt.app.client.widgets.GroupOfButtons;
-import com.tchw.gwt.app.client.widgets.Dropdowns;
 
 public class MainPanel {
 
@@ -49,7 +49,12 @@ public class MainPanel {
 	}
 
 	private static Widget groupOfLinksPanel() {
-		return Dropdowns.builder()
+		Dropdown submenu = Dropdown.builderSubmenu()
+			.add("AAA")
+			.add("BBB")
+			.build();
+		
+		return Dropdown.builder()
 				.add("Home")
 				.add("Srome", new ClickHandler() {
 					@Override
@@ -59,6 +64,7 @@ public class MainPanel {
 				})
 				.divider()
 				.add("Srome")
+				.addSubmenu("Submenu", submenu)
 				.build();
 	}	
 	

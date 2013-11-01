@@ -3,6 +3,8 @@ package com.tchw.gwt.app.client.panels;
 import java.util.Arrays;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellList.Resources;
@@ -17,6 +19,7 @@ import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.tchw.gwt.app.client.common.button.Buttons;
 import com.tchw.gwt.app.client.widgets.GroupOfButtons;
+import com.tchw.gwt.app.client.widgets.Dropdowns;
 
 public class MainPanel {
 
@@ -42,8 +45,23 @@ public class MainPanel {
 	
 	private static void initWidgets(Panel mainPanel) {
 		mainPanel.add(setOfLinksPanel());
+		mainPanel.add(groupOfLinksPanel());
 	}
 
+	private static Widget groupOfLinksPanel() {
+		return Dropdowns.builder()
+				.add("Home")
+				.add("Srome", new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						System.out.println("Click!");
+					}
+				})
+				.divider()
+				.add("Srome")
+				.build();
+	}	
+	
 	private static Widget setOfLinksPanel() {
 		return GroupOfButtons.builder()
 				.addClickable("Home")

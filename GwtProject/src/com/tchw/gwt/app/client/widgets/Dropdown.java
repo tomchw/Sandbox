@@ -11,7 +11,6 @@ public class Dropdown extends Composite {
 
 	private Dropdown(Panel panel) {
 		initWidget(panel);
-		System.out.println(panel.toString());
 	}
 	
 	public static Builder builder() {

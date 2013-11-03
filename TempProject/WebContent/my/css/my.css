@@ -1,0 +1,18 @@
+.t_toggleBorder {
+  position: relative;
+  margin-top: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.t_toggleBorder:hover, 
+.t_toggleBorder:focus {
+  background-color: #eeeeee;
+}
+
+.t_width100 {
+  
+}

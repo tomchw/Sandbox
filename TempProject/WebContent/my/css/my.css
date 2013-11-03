@@ -1,8 +1,5 @@
 .t_toggleBorder {
   position: relative;
-  margin-top: 8px;
-  margin-right: 8px;
-  margin-bottom: 8px;
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -10,9 +7,20 @@
 
 .t_toggleBorder:hover, 
 .t_toggleBorder:focus {
-  background-color: #eeeeee;
+  background-color: #cccccc;
 }
 
-.t_width100 {
-  
+.t_jumbo {
+  background-size: cover;
+  background-image: url('../jpg/pokoj.jpg');         
+  background-repeat: no-repeat;    
+  background-position: bottom center;
+  margin-bottom: 10px;
+}
+
+.t_border {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 20px;  
 }

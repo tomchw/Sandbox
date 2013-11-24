@@ -14,17 +14,18 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.common.io.CharStreams;
+import com.google.gson.JsonElement;
 
 public class PostRequest {
 
 	private final String url;
-	private final String content;
+	private final JsonElement content;
 
-	public static PostRequest create(String url, String content) {
+	public static PostRequest create(String url, JsonElement content) {
 		return new PostRequest(url,  content);
 	}
 	
-	private PostRequest(String url, String content) {
+	private PostRequest(String url, JsonElement content) {
 		this.url = url;
 		this.content = content;
 	}
@@ -35,7 +36,12 @@ public class PostRequest {
 			HttpPost post = new HttpPost(url);
 			post.addHeader("Accept", "application/json");  
 			post.addHeader("Content-Type", "application/json");  
-			post.setEntity(new StringEntity(content));
+			post.setEntity(new StringEntity(content.toString()));
+			
+			System.out.println(post);
+			System.out.println(content);
+			System.out.println("---");
+			
 			CloseableHttpResponse response = httpClient.execute(post);
 			List<String> lines = readContentAndClose(response);
 			for (String line : lines) {

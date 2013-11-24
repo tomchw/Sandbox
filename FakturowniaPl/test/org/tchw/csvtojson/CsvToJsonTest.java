@@ -19,7 +19,7 @@ public class CsvToJsonTest {
 		assertEquals("I was supposed to read one header and two objects", 2, jsons.size());
 		JsonObject apple = jsons.get(0);
 		JsonObject strawberry = jsons.get(1);
-		assertEquals("100", apple.get("price").getAsString());
+		assertEquals("120", apple.get("price_net").getAsString());
 		assertEquals("Strawberry", strawberry.get("name").getAsString());
 	}
 

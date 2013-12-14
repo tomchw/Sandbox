@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -11,6 +12,10 @@ import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
+import org.tchw.jsontocsv.JsonToCsv.From.Execution;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 public class JsonToCsv {
 
@@ -26,12 +31,20 @@ public class JsonToCsv {
         }
     }
 
+    public static Execution fromFileToSimilarFile(String filePath) {
+        return fromFile(filePath).toFile(new File(filePath + ".csv"));
+    }
+
     public static class From {
 
         private final BufferedReader reader;
 
         public From(BufferedReader reader) {
             this.reader = reader;
+        }
+
+        public Execution toFile(File file) {
+            return new Execution(jsonToCsvAndPrintToFile(file));
         }
 
         public Execution toScreen() {
@@ -73,6 +86,19 @@ public class JsonToCsv {
             @Override
             public void handle(JSONArray jsonArray) {
                 System.out.println(jsonToCsv(jsonArray));
+            }
+        };
+    }
+
+    private static JsonArrayHandling jsonToCsvAndPrintToFile(final File file) {
+        return new JsonArrayHandling() {
+            @Override
+            public void handle(JSONArray jsonArray) {
+                try {
+                    Files.write(jsonToCsv(jsonArray), file, Charsets.UTF_8);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
     }

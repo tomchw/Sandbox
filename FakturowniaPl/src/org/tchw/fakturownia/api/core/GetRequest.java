@@ -15,7 +15,7 @@ import com.google.common.io.InputSupplier;
 
 public class GetRequest {
 
-    private static Login domain(String login, String token) {
+    public static Login login(String login, String token) {
         return new Login(login, token);
     }
 
@@ -59,6 +59,10 @@ public class GetRequest {
 
                 public Page(int pageNumber) {
                     this.pageNumber = pageNumber;
+                }
+
+                public Execution writeContentToFile() {
+                    return writeContentToFile("{login}.{table}.{page}.txt");
                 }
 
                 public Execution writeContentToFile(String filePath) {
@@ -138,7 +142,7 @@ public class GetRequest {
     }
 
     public static void main(String[] args) {
-        Login tcc1 = GetRequest.domain("tcc1", "sMEuDnemiZIPcbEL5g");
+        Login tcc1 = GetRequest.login("tcc1", "sMEuDnemiZIPcbEL5g");
         tcc1.invoices().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
         tcc1.products().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
         tcc1.clients().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();

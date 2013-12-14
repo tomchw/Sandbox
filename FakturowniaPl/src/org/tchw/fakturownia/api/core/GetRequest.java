@@ -10,7 +10,6 @@ import org.tchw.fakturownia.api.core.ExecuteRequest.ContentHandlingWithBufferedR
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;
 import com.google.common.io.CharStreams;
-import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 
@@ -34,6 +33,14 @@ public class GetRequest {
             return new Table("invoices.json");
         }
 
+        public Table products() {
+            return new Table("products.json");
+        }
+
+        public Table clients() {
+            return new Table("clients.json");
+        }
+
         public class Table {
 
             private final String table;
@@ -55,7 +62,11 @@ public class GetRequest {
                 }
 
                 public Execution writeContentToFile(String filePath) {
-                    final File file = new File(filePath);
+                    final File file = new File(filePath
+                            .replace("{page}",  String.valueOf(pageNumber))
+                            .replace("{table}", table)
+                            .replace("{login}", login)
+                            );
                     return new Execution(writeToFileContantHandling(file));
                 }
 
@@ -94,7 +105,7 @@ public class GetRequest {
                         }
 
                         private CharSink asCharSink(File file) {
-                            return Files.asCharSink(file, Charsets.UTF_8, FileWriteMode.APPEND);
+                            return Files.asCharSink(file, Charsets.UTF_8);
                         }
 
                         private InputSupplier<Reader> asInputSupplier(final BufferedReader reader) {
@@ -118,7 +129,7 @@ public class GetRequest {
                     }
 
                     public void executeSync() {
-                        String url = "https:/" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "?api_token=" + token;
+                        String url = "https://" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "&api_token=" + token;
                         new ExecuteRequest(url, contentHandlingWithBufferedReader).executeSync();
                     }
                 }
@@ -127,7 +138,10 @@ public class GetRequest {
     }
 
     public static void main(String[] args) {
-        GetRequest.domain("tcc1", "sMEuDnemiZIPcbEL5g").invoices().page(1).printContentToSreen().executeSync();
+        Login tcc1 = GetRequest.domain("tcc1", "sMEuDnemiZIPcbEL5g");
+        tcc1.invoices().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
+        tcc1.products().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
+        tcc1.clients().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
     }
 
 }

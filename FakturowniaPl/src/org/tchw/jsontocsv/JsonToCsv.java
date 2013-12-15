@@ -51,6 +51,17 @@ public class JsonToCsv {
             return new Execution(jsonToCsvAndPrintToScreen());
         }
 
+        public String asStringNow() {
+            final StringBuilder builder = new StringBuilder();
+            new Execution(new JsonArrayHandling() {
+                @Override
+                public void handle(JSONArray jsonArray) {
+                    builder.append(jsonToCsv(jsonArray));
+                }
+            }).executeSync();
+            return builder.toString();
+        }
+
         public class Execution {
 
             private final JsonArrayHandling jsonArrayHandling;

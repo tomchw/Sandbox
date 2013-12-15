@@ -7,8 +7,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.Map;
 
 import org.supercsv.io.CsvBeanReader;
+import org.supercsv.io.CsvMapReader;
 import org.supercsv.prefs.CsvPreference;
 
 import com.google.common.collect.ImmutableList;
@@ -29,10 +31,29 @@ public class CsvBrowsing {
             this.inputStream = inputStream;
         }
 
+        public ImmutableList<Map<String, String>> asListOfMaps() {
+            BufferedReader bufferedReader = bufferedReader(inputStream);
+            CsvMapReader csvReader = new CsvMapReader(bufferedReader, CsvPreference.STANDARD_PREFERENCE);
+            try {
+                String[] header = csvReader.getHeader(true);
+                ImmutableList.Builder<Map<String, String>> listOfMapsBuilder = ImmutableList.builder();
+                Map<String, String> read;
+                while((read=csvReader.read(header))!=null) {
+                    listOfMapsBuilder.add(read);
+                };
+                return listOfMapsBuilder.build();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                closeQuietly(bufferedReader);
+                closeQuietly(csvReader);
+            }
+        }
+
         public <T> ImmutableList<T> asBeanList(Class<T> clazz) {
             ImmutableList<String> fieldNames = declaredFieldNames(clazz);
 
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( inputStream ));
+            BufferedReader bufferedReader = bufferedReader(inputStream);
             CsvBeanReader csvReader = new CsvBeanReader(bufferedReader, CsvPreference.STANDARD_PREFERENCE);
             try {
                 String[] headerWithNulls = headerWithNullsIfThereIsNoSuchField(csvReader.getHeader(true), fieldNames);
@@ -76,5 +97,11 @@ public class CsvBrowsing {
             throw new RuntimeException(e);
         }
     }
+
+    private static BufferedReader bufferedReader(InputStream inputStream) {
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( inputStream ));
+        return bufferedReader;
+    }
+
 
 }

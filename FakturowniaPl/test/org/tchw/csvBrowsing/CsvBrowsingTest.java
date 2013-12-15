@@ -1,6 +1,7 @@
 package org.tchw.csvBrowsing;
 
 import java.util.Iterator;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,17 +19,26 @@ public class CsvBrowsingTest {
         Assert.assertFalse(iterator.hasNext());
     }
 
+    @Test
+    public void csvBrowsingAsListOfMap() {
+        ImmutableList<Map<String, String>> asListOfMap = CsvBrowsing.fromStream(getClass().getResourceAsStream("a.csv")).asListOfMaps();
+        Iterator<Map<String, String>> iterator = asListOfMap.iterator();
+        Assert.assertEquals("1", iterator.next().get("id"));
+        Assert.assertEquals("B", iterator.next().get("value"));
+        Assert.assertFalse(iterator.hasNext());
+    }
+
     public static class MyBean {
 
-        private Number id;
+        private String id;
 
         private String value;
 
-        public Number getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(Number id) {
+        public void setId(String id) {
             this.id = id;
         }
 

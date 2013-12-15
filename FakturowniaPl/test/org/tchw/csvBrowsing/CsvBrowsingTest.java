@@ -20,15 +20,15 @@ public class CsvBrowsingTest {
 
     public static class MyBean {
 
-        private String id;
+        private Number id;
 
         private String value;
 
-        public String getId() {
+        public Number getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(Number id) {
             this.id = id;
         }
 

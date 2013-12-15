@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableList;
 public class CsvBrowsingTest {
 
     @Test
-    public void a() {
+    public void csvBrowsingAsBean() {
         ImmutableList<MyBean> asBeanList = CsvBrowsing.fromStream(getClass().getResourceAsStream("a.csv")).asBeanList(MyBean.class);
         Iterator<MyBean> iterator = asBeanList.iterator();
         Assert.assertEquals("1", iterator.next().getId());

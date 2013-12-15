@@ -2,6 +2,8 @@ package org.tchw.csvBrowsing;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +25,14 @@ public class CsvBrowsing {
         return new From(inputStream);
     }
 
+    public static From fromFile(String path) {
+        try {
+            return new From(new FileInputStream(path));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static class From {
 
         private final InputStream inputStream;
@@ -37,10 +47,14 @@ public class CsvBrowsing {
             try {
                 String[] header = csvReader.getHeader(true);
                 ImmutableList.Builder<Map<String, String>> listOfMapsBuilder = ImmutableList.builder();
-                Map<String, String> read;
-                while((read=csvReader.read(header))!=null) {
-                    listOfMapsBuilder.add(read);
-                };
+                Map<String, String> read = null;
+                try {
+                    while((read=csvReader.read(header))!=null) {
+                        listOfMapsBuilder.add(read);
+                    };
+                } catch (RuntimeException e) {
+                    throw new RuntimeException("Last read: " + read, e);
+                }
                 return listOfMapsBuilder.build();
             } catch (IOException e) {
                 throw new RuntimeException(e);

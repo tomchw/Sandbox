@@ -16,7 +16,8 @@ public class JsonToCsvTest {
         Assert.assertEquals("id,value", iterator.next());
         Assert.assertEquals("1,A", iterator.next());
         Assert.assertEquals("2,B", iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        Assert.assertEquals("", iterator.next());
+        Assert.assertFalse("", iterator.hasNext());
     }
 
 }

@@ -7,17 +7,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
+import org.supercsv.io.CsvListWriter;
+import org.supercsv.prefs.CsvPreference;
 import org.tchw.jsontocsv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
 import org.tchw.jsontocsv.JsonToCsv.From.Execution;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
 
 public class JsonToCsv {
@@ -87,29 +88,40 @@ public class JsonToCsv {
 
     }
 
-    //    private static String jsonToCsv(JSONArray jsonArray) {
-    //        try {
-    //            return CDL.toString(jsonArray);
-    //        } catch (JSONException e) {
-    //            throw new RuntimeException(e);
-    //        }
-    //    }
-
     private static String jsonToCsv2(JSONArray jsonArray) {
-        final ImmutableList.Builder<String> builder = ImmutableList.builder();
-        SimpleJsonArrayToHeaderAndValuesWriter.DEFAULT.process(jsonArray, new JsonArrayToCsvHandler() {
-            final Joiner commaJoiner = Joiner.on(",");
+        StringWriter stringWriter = new StringWriter();
+        final CsvListWriter csvListWriter = new CsvListWriter(stringWriter, CsvPreference.STANDARD_PREFERENCE);
+        try {
+            SimpleJsonArrayToHeaderAndValuesWriter.DEFAULT.process(jsonArray, new JsonArrayToCsvHandler() {
+                @Override
+                public void onHeader(List<String> headers) {
+                    try {
+                        csvListWriter.write(headers);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                @Override
+                public void onObjectValues(List<String> values) {
+                    try {
+                        csvListWriter.write(values);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        } finally {
+            closeQuietly(csvListWriter);
+        }
+        return stringWriter.toString();
+    }
 
-            @Override
-            public void onHeader(List<String> headers) {
-                builder.add(commaJoiner.join(headers));
-            }
-            @Override
-            public void onObjectValues(List<String> values) {
-                builder.add(commaJoiner.join(values));
-            }
-        });
-        return Joiner.on("\r\n").join( builder.build() );
+    private static void closeQuietly(final CsvListWriter csvListWriter) {
+        try {
+            csvListWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static JsonArrayHandling jsonToCsvAndPrintToScreen() {

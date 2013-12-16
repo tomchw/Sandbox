@@ -35,14 +35,14 @@ public class CsvBrowsing {
         }
 
         public ImmutableList<Map<String, String>> asListOfMaps() {
-            final ImmutableList.Builder<Map<String, String>> listOfMapsBuilder = ImmutableList.builder();
+            final ImmutableList.Builder<Map<String, String>> builder = ImmutableList.builder();
             UsingCsvMapReader.DEFAULT.process(inputStream, new LineAsMapHandler() {
                 @Override
                 public void onLineAsMap(ImmutableMap<String, String> lineAsMap) {
-                    listOfMapsBuilder.add(lineAsMap);
+                    builder.add(lineAsMap);
                 }
             });
-            return listOfMapsBuilder.build();
+            return builder.build();
         }
 
         public <T> ImmutableList<T> asBeanList(Class<T> clazz) {

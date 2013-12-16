@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedMap;
 
 public class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
 
@@ -22,7 +22,7 @@ public class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWri
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ImmutableMap<String, String> jsonAsMap = jsonObjectAsMap(jsonObject);
+                ImmutableSortedMap<String, String> jsonAsMap = jsonObjectAsMap(jsonObject);
                 ImmutableList<String> keys = ImmutableList.copyOf( jsonAsMap.keySet() );
                 if( i == 0 ) {
                     handler.onHeader(keys);
@@ -44,9 +44,9 @@ public class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWri
     }
 
     @SuppressWarnings("unchecked")
-    private ImmutableMap<String, String> jsonObjectAsMap(JSONObject jsonObject) throws JSONException {
+    private ImmutableSortedMap<String, String> jsonObjectAsMap(JSONObject jsonObject) throws JSONException {
         Iterator<String> iterator = jsonObject.keys();
-        ImmutableMap.Builder<String, String> jsonMapBuilder = ImmutableMap.builder();
+        ImmutableSortedMap.Builder<String, String> jsonMapBuilder = ImmutableSortedMap.naturalOrder();
         while(iterator.hasNext()) {
             String key = iterator.next();
             jsonMapBuilder.put(key, jsonObject.getString(key));

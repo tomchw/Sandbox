@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.tchw.data.json.Json;
+import org.tchw.data.json.csv.JsonToCsv;
 
 import com.google.common.base.Splitter;
 

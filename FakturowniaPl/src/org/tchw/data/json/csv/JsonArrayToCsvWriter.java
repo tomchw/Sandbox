@@ -1,10 +1,10 @@
-package org.tchw.data.jsontocsv;
+package org.tchw.data.json.csv;
 
 import java.util.List;
 
 import org.json.JSONArray;
 
-public interface JsonArrayToCsvWriter {
+interface JsonArrayToCsvWriter {
 
     void process(JSONArray jsonArray, JsonArrayToCsvHandler handler);
 

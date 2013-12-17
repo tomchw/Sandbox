@@ -3,7 +3,7 @@ package org.tchw.fakturownia.data.example;
 import java.io.File;
 
 import org.tchw.data.json.Json;
-import org.tchw.data.jsontocsv.JsonToCsv;
+import org.tchw.data.json.csv.JsonToCsv;
 
 public class JsonToCsvWriterExample {
 

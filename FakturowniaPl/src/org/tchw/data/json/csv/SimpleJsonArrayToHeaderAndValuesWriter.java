@@ -1,4 +1,4 @@
-package org.tchw.data.jsontocsv;
+package org.tchw.data.json.csv;
 
 import java.util.Iterator;
 
@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSortedMap;
 
-public class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
+class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
 
     public static SimpleJsonArrayToHeaderAndValuesWriter DEFAULT = new SimpleJsonArrayToHeaderAndValuesWriter();
 

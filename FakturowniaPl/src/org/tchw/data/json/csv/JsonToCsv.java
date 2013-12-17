@@ -1,4 +1,4 @@
-package org.tchw.data.jsontocsv;
+package org.tchw.data.json.csv;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,7 +12,7 @@ import org.json.JSONTokener;
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 import org.tchw.data.json.Json;
-import org.tchw.data.jsontocsv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
+import org.tchw.data.json.csv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;

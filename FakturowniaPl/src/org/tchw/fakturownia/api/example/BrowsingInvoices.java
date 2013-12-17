@@ -28,7 +28,7 @@ public class BrowsingInvoices {
         CsvBrowsing.fromFile(filePath).onLineAsMap(new CsvLineAsMapHandler() {
             @Override
             public void onCsvLineAsMap(ImmutableSortedMap<String, String> lineAsMap) {
-                print(lineAsMap, "id", "client_id", "number");
+                print(lineAsMap, "id", "client_id", "number", "price_gross");
             }
         });
 

@@ -29,6 +29,10 @@ public class GetRequest {
             this.token = token;
         }
 
+        public Table invoice(int id) {
+            return new Table("invoices/" + id + ".json");
+        }
+
         public Table invoices() {
             return new Table("invoices.json");
         }

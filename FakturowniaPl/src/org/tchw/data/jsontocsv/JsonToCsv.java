@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONTokener;
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
+import org.tchw.data.json.Json;
 import org.tchw.data.jsontocsv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
 import org.tchw.data.jsontocsv.JsonToCsv.From.Execution;
 
@@ -33,6 +34,15 @@ public class JsonToCsv {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Json.From.Passer<From> takeFromJson() {
+        return new Json.From.Passer<From>() {
+            @Override
+            public From pass(BufferedReader reader) {
+                return new From(reader);
+            }
+        };
     }
 
     public static Execution fromFileToSimilarFile(String filePath) {

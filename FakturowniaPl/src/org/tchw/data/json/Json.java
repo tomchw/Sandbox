@@ -26,6 +26,16 @@ public class Json {
             return new Execution(jsonArrayHandling);
         }
 
+        public <T> T passTo(Passer<T> passer) {
+            return passer.pass(reader);
+        }
+
+        public interface Passer<T> {
+
+            T pass(BufferedReader reader);
+
+        }
+
         public class Execution {
 
             private final JSONArrayHandling jsonArrayHandling;

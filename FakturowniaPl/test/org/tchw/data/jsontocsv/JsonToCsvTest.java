@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.data.jsontocsv.JsonToCsv;
+import org.tchw.data.json.Json;
 
 import com.google.common.base.Splitter;
 
@@ -19,6 +19,11 @@ public class JsonToCsvTest {
         Assert.assertEquals("2,B", iterator.next());
         Assert.assertEquals("", iterator.next());
         Assert.assertFalse("", iterator.hasNext());
+    }
+
+    @Test
+    public void test2() {
+        Json.from(getClass().getResourceAsStream("simpleJson.txt")).passTo(JsonToCsv.takeFromJson()).toScreen().executeSync();
     }
 
 }

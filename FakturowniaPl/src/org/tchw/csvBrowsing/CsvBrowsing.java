@@ -6,11 +6,10 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.tchw.csvBrowsing.UsingCsvBeanReader.LineAsBeanHandler;
-import org.tchw.csvBrowsing.UsingCsvMapReader.LineAsMapHandler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedMap;
 
 public class CsvBrowsing {
 
@@ -34,11 +33,20 @@ public class CsvBrowsing {
             this.inputStream = inputStream;
         }
 
+        public void onLineAsMap(final CsvLineAsMapHandler handler) {
+            UsingCsvMapReader.DEFAULT.process(inputStream, new CsvLineAsMapHandler() {
+                @Override
+                public void onCsvLineAsMap(ImmutableSortedMap<String, String> lineAsMap) {
+                    handler.onCsvLineAsMap(lineAsMap);
+                }
+            });
+        }
+
         public ImmutableList<Map<String, String>> asListOfMaps() {
             final ImmutableList.Builder<Map<String, String>> builder = ImmutableList.builder();
-            UsingCsvMapReader.DEFAULT.process(inputStream, new LineAsMapHandler() {
+            UsingCsvMapReader.DEFAULT.process(inputStream, new CsvLineAsMapHandler() {
                 @Override
-                public void onLineAsMap(ImmutableMap<String, String> lineAsMap) {
+                public void onCsvLineAsMap(ImmutableSortedMap<String, String> lineAsMap) {
                     builder.add(lineAsMap);
                 }
             });
@@ -56,5 +64,7 @@ public class CsvBrowsing {
             return builder.build();
         }
     }
+
+
 
 }

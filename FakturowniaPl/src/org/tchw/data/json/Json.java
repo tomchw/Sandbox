@@ -33,6 +33,10 @@ public class Json {
         }
     }
 
+    public static From fromResource(Class<?> clazz, String resourceName) {
+        return new From(clazz.getResourceAsStream(resourceName));
+    }
+
     public static class From {
 
         private final BufferedReader reader;

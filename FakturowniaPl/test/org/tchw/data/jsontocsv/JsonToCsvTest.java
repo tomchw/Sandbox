@@ -12,7 +12,7 @@ public class JsonToCsvTest {
 
     @Test
     public void test() {
-        String csvString = JsonToCsv.fromStream(getClass().getResourceAsStream("simpleJson.txt")).asStringNow();
+        String csvString = Json.from(getClass().getResourceAsStream("simpleJson.txt")).passTo(JsonToCsv.takeFromJson()).asStringNow();
         Iterator<String> iterator = Splitter.onPattern("(\r\n|\n)").splitToList(csvString).iterator();
         Assert.assertEquals("id,value", iterator.next());
         Assert.assertEquals("1,A", iterator.next());

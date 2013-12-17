@@ -2,11 +2,7 @@ package org.tchw.data.jsontocsv;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -17,24 +13,11 @@ import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 import org.tchw.data.json.Json;
 import org.tchw.data.jsontocsv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
-import org.tchw.data.jsontocsv.JsonToCsv.From.Execution;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
 public class JsonToCsv {
-
-    public static From fromStream(InputStream input) {
-        return new From(new BufferedReader(new InputStreamReader(input)));
-    }
-
-    public static From fromFile(String filePath) {
-        try {
-            return new From(new BufferedReader(new FileReader(new File(filePath))));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static Json.From.Passer<From> takeFromJson() {
         return new Json.From.Passer<From>() {
@@ -43,10 +26,6 @@ public class JsonToCsv {
                 return new From(reader);
             }
         };
-    }
-
-    public static Execution fromFileToSimilarFile(String filePath) {
-        return fromFile(filePath).toFile(new File(filePath + ".csv"));
     }
 
     public static class From {

@@ -1,6 +1,9 @@
 package org.tchw.data.json;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -12,6 +15,22 @@ public class Json {
 
     public static From from(InputStream inputStream) {
         return new From(inputStream);
+    }
+
+    public static From from(File file) {
+        try {
+            return new From(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static From fromFile(String filePath) {
+        try {
+            return new From(new FileInputStream(filePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static class From {
@@ -31,9 +50,7 @@ public class Json {
         }
 
         public interface Passer<T> {
-
             T pass(BufferedReader reader);
-
         }
 
         public class Execution {

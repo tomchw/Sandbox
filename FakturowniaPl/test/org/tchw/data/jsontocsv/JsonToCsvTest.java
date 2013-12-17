@@ -1,9 +1,10 @@
-package org.tchw.jsontocsv;
+package org.tchw.data.jsontocsv;
 
 import java.util.Iterator;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.tchw.data.jsontocsv.JsonToCsv;
 
 import com.google.common.base.Splitter;
 

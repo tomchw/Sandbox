@@ -1,4 +1,4 @@
-package org.tchw.csvBrowsing;
+package org.tchw.data.csvBrowsing;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

@@ -1,10 +1,11 @@
-package org.tchw.csvBrowsing;
+package org.tchw.data.csvBrowsing;
 
 import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.tchw.data.csvBrowsing.CsvBrowsing;
 
 import com.google.common.collect.ImmutableList;
 

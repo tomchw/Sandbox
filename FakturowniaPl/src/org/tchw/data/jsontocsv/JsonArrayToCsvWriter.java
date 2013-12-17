@@ -1,4 +1,4 @@
-package org.tchw.jsontocsv;
+package org.tchw.data.jsontocsv;
 
 import java.util.List;
 

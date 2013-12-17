@@ -1,9 +1,9 @@
-package org.tchw.fakturownia.api.example;
+package org.tchw.fakturownia.data.example;
 
 import java.util.Map;
 
-import org.tchw.csvBrowsing.CsvBrowsing;
-import org.tchw.csvBrowsing.CsvLineAsMapHandler;
+import org.tchw.data.csvBrowsing.CsvBrowsing;
+import org.tchw.data.csvBrowsing.CsvLineAsMapHandler;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;

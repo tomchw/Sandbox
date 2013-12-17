@@ -1,6 +1,6 @@
-package org.tchw.fakturownia.api.example;
+package org.tchw.fakturownia.data.example;
 
-import org.tchw.jsontocsv.JsonToCsv;
+import org.tchw.data.jsontocsv.JsonToCsv;
 
 public class JsonToCsvWriterExample {
 

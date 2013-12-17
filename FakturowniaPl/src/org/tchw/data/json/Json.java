@@ -49,12 +49,32 @@ public class Json {
             return new Execution(jsonArrayHandling);
         }
 
+        public AsJSONTokener asJSONTokener() {
+            return new AsJSONTokener();
+        }
+
         public <T> T passTo(Passer<T> passer) {
             return passer.pass(reader);
         }
 
         public interface Passer<T> {
             T pass(BufferedReader reader);
+        }
+
+        public interface JSONTokenerPasser<T> {
+            T pass(JSONTokener tokener);
+        }
+
+        public class AsJSONTokener {
+
+            public JSONTokener get() {
+                return new JSONTokener(reader);
+            }
+
+            public <T> T passTo(JSONTokenerPasser<T> passer) {
+                return passer.pass(get());
+            }
+
         }
 
         public class Execution {

@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class Json {
@@ -53,6 +54,14 @@ public class Json {
             return new AsJSONTokener();
         }
 
+        public AsJSONArray asJSONArray() {
+            return new AsJSONArray();
+        }
+
+        public AsJSONObject asJSONObject() {
+            return new AsJSONObject();
+        }
+
         public <T> T passTo(Passer<T> passer) {
             return passer.pass(reader);
         }
@@ -63,6 +72,14 @@ public class Json {
 
         public interface JSONTokenerPasser<T> {
             T pass(JSONTokener tokener);
+        }
+
+        public interface JSONArrayPasser<T> {
+            T pass(JSONArray tokener);
+        }
+
+        public interface JSONObjectPasser<T> {
+            T pass(JSONObject tokener);
         }
 
         public class AsJSONTokener {
@@ -77,6 +94,38 @@ public class Json {
 
         }
 
+        public class AsJSONArray {
+
+            public JSONArray get() {
+                try {
+                    return new JSONArray( new JSONTokener(reader) );
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public <T> T passTo(JSONArrayPasser<T> passer) {
+                return passer.pass(get());
+            }
+
+        }
+
+        public class AsJSONObject {
+
+            public JSONObject get() {
+                try {
+                    return new JSONObject( new JSONTokener(reader) );
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public <T> T passTo(JSONObjectPasser<T> passer) {
+                return passer.pass(get());
+            }
+
+        }
+
         public class Execution {
 
             private final JSONArrayHandling jsonArrayHandling;
@@ -86,12 +135,12 @@ public class Json {
             }
 
             public void executeSync() {
-                jsonArrayHandling.handle(asJSONArray(reader));
+                jsonArrayHandling.handle(asJSONArray0(reader));
             }
         }
     }
 
-    private static JSONArray asJSONArray(BufferedReader reader) {
+    private static JSONArray asJSONArray0(BufferedReader reader) {
         try {
             return new JSONArray(new JSONTokener(reader));
         } catch (JSONException e) {

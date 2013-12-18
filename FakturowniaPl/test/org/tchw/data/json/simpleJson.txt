@@ -6,6 +6,10 @@
 
 {
       "id":"2",
-      "value":"B"
+      "value":"B",
+      "children": [
+                    {"child_id":"11", "child_name":"AA"},
+                    {"child_id":"22", "child_name":"BB"}
+                  ]
 }
 ]

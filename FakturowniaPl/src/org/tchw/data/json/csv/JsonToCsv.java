@@ -1,14 +1,11 @@
 package org.tchw.data.json.csv;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONTokener;
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 import org.tchw.data.json.Json;
@@ -19,61 +16,38 @@ import com.google.common.io.Files;
 
 public class JsonToCsv {
 
-    public static Json.From.Passer<From> takeFromJson() {
-        return new Json.From.Passer<From>() {
+    public static Json.From.JSONArrayPasser<FromJSONArray> takeFromJSONArray() {
+        return new Json.From.JSONArrayPasser<FromJSONArray>() {
             @Override
-            public From pass(BufferedReader reader) {
-                return new From(reader);
+            public FromJSONArray pass(JSONArray jsonArray) {
+                return new FromJSONArray(jsonArray);
             }
         };
     }
 
-    public static class From {
+    public static class FromJSONArray {
 
-        private final BufferedReader reader;
+        private final JSONArray jsonArray;
 
-        public From(BufferedReader reader) {
-            this.reader = reader;
+        public FromJSONArray(JSONArray jsonArray) {
+            this.jsonArray = jsonArray;
         }
 
-        public Execution toFile(File file) {
-            return new Execution(jsonToCsvAndPrintToFile(file));
-        }
-
-        public Execution toScreen() {
-            return new Execution(jsonToCsvAndPrintToScreen());
-        }
-
-        public String asStringNow() {
-            final StringBuilder builder = new StringBuilder();
-            new Execution(new JsonArrayHandling() {
-                @Override
-                public void handle(JSONArray jsonArray) {
-                    builder.append(jsonToCsv2(jsonArray));
-                }
-            }).executeSync();
-            return builder.toString();
-        }
-
-        public class Execution {
-
-            private final JsonArrayHandling jsonArrayHandling;
-
-            public Execution(JsonArrayHandling jsonArrayHandling) {
-                this.jsonArrayHandling = jsonArrayHandling;
+        public void toFile(File file) {
+            try {
+                Files.write(jsonToCsv2(jsonArray), file, Charsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-            public void executeSync() {
-                JSONArray jsonArray = asJSONArray(reader);
-                jsonArrayHandling.handle(jsonArray);
-            }
-
         }
-    }
 
-    private interface JsonArrayHandling {
+        public void toScreen() {
+            System.out.println(jsonToCsv2(jsonArray));
+        }
 
-        void handle(JSONArray jsonArray);
+        public String asString() {
+            return jsonToCsv2(jsonArray);
+        }
 
     }
 
@@ -113,33 +87,4 @@ public class JsonToCsv {
         }
     }
 
-    private static JsonArrayHandling jsonToCsvAndPrintToScreen() {
-        return new JsonArrayHandling() {
-            @Override
-            public void handle(JSONArray jsonArray) {
-                System.out.println(jsonToCsv2(jsonArray));
-            }
-        };
-    }
-
-    private static JsonArrayHandling jsonToCsvAndPrintToFile(final File file) {
-        return new JsonArrayHandling() {
-            @Override
-            public void handle(JSONArray jsonArray) {
-                try {
-                    Files.write(jsonToCsv2(jsonArray), file, Charsets.UTF_8);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-    }
-
-    private static JSONArray asJSONArray(BufferedReader reader) {
-        try {
-            return new JSONArray(new JSONTokener(reader));
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

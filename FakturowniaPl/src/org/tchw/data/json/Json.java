@@ -54,34 +54,6 @@ public class Json {
             return new AsJSONTokener();
         }
 
-        public AsJSONArray asJSONArray() {
-            return new AsJSONArray();
-        }
-
-        public AsJSONObject asJSONObject() {
-            return new AsJSONObject();
-        }
-
-        public <T> T passTo(Passer<T> passer) {
-            return passer.pass(reader);
-        }
-
-        public interface Passer<T> {
-            T pass(BufferedReader reader);
-        }
-
-        public interface JSONTokenerPasser<T> {
-            T pass(JSONTokener tokener);
-        }
-
-        public interface JSONArrayPasser<T> {
-            T pass(JSONArray tokener);
-        }
-
-        public interface JSONObjectPasser<T> {
-            T pass(JSONObject tokener);
-        }
-
         public class AsJSONTokener {
 
             public JSONTokener get() {
@@ -91,7 +63,10 @@ public class Json {
             public <T> T passTo(JSONTokenerPasser<T> passer) {
                 return passer.pass(get());
             }
+        }
 
+        public AsJSONArray asJSONArray() {
+            return new AsJSONArray();
         }
 
         public class AsJSONArray {
@@ -107,7 +82,10 @@ public class Json {
             public <T> T passTo(JSONArrayPasser<T> passer) {
                 return passer.pass(get());
             }
+        }
 
+        public AsJSONObject asJSONObject() {
+            return new AsJSONObject();
         }
 
         public class AsJSONObject {
@@ -123,7 +101,18 @@ public class Json {
             public <T> T passTo(JSONObjectPasser<T> passer) {
                 return passer.pass(get());
             }
+        }
 
+        public interface JSONTokenerPasser<T> {
+            T pass(JSONTokener tokener);
+        }
+
+        public interface JSONArrayPasser<T> {
+            T pass(JSONArray tokener);
+        }
+
+        public interface JSONObjectPasser<T> {
+            T pass(JSONObject tokener);
         }
 
         public class Execution {

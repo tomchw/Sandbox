@@ -9,9 +9,7 @@ public class JsonToCsvWriterExample {
 
     public static void main(String[] args) {
         String filePath = "c:/Private/Work/Werbum/firma-ksiegarska-werbum.invoices.json.1.txt";
-        Json.fromFile(filePath).passTo(JsonToCsv.takeFromJson())
-            .toFile(new File(filePath + ".csv"))
-            .executeSync();
+        Json.fromFile(filePath).asJSONArray().passTo(JsonToCsv.takeFromJSONArray()).toFile(new File(filePath + ".csv"));
     }
 
 }

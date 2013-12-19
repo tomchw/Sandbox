@@ -1,0 +1,10 @@
+{
+"client_id":376848,
+"number":"2/09/2013",
+"positions":
+    [{
+    "price_net":"21.5",
+    "product_id":823093,
+    "quantity":"500.0",
+    }]
+}

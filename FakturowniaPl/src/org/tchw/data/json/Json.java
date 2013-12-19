@@ -74,7 +74,7 @@ public class Json {
         }
 
         public interface JSONObjectPasser<T> {
-            T pass(JSONObject tokener);
+            T pass(JSONObject jsonObject);
         }
 
         public AsJSONObject asJSONObject() {

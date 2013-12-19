@@ -1,4 +1,4 @@
-package org.tchw.data.jsontocsv;
+package org.tchw.data.json.csv;
 
 import java.util.Iterator;
 

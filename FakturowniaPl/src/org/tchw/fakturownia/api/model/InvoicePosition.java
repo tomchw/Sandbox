@@ -1,21 +1,16 @@
 package org.tchw.fakturownia.api.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.tchw.data.json.JsonObject;
 
 public class InvoicePosition {
 
-    private final JSONObject json;
+    private final JsonObject json;
 
-    public InvoicePosition(JSONObject json) {
+    public InvoicePosition(JsonObject json) {
         this.json = json;
     }
 
     public String priceNet() {
-        try {
-            return json.getString("price_net");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return json.getString("price_net");
     }
 }

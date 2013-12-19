@@ -2,59 +2,43 @@ package org.tchw.fakturownia.api.model;
 
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.tchw.data.json.Json.From.JSONObjectPasser;
+import org.tchw.data.json.JsonArray;
+import org.tchw.data.json.JsonObject;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
 public class Invoice {
 
-    private final JSONObject json;
+    private final JsonObject json;
 
     private final List<InvoicePosition> positions;
 
     public Invoice(JSONObject jsonObject) {
-        this.json = jsonObject;
-        try {
-            this.positions = invoicePositions(jsonObject.getJSONArray("positions"));
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        this.json = JsonObject.create(jsonObject);
+        this.positions = invoicePositions(this.json.getArray("positions"));
     }
 
     public int clientId() {
-        try {
-            return json.getInt("client_id");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return json.getInt("client_id");
     }
 
     public String number() {
-        try {
-            return json.getString("number");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return json.getString("number");
     }
 
     public List<InvoicePosition> positions() {
         return positions;
     }
 
-    private static List<InvoicePosition> invoicePositions(JSONArray json) {
-        try {
-            Builder<InvoicePosition> builder = ImmutableList.builder();
-            for (int i = 0; i < json.length(); i++) {
-                builder.add(new InvoicePosition(json.getJSONObject(i)));
-            }
-            return builder.build();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+    private static List<InvoicePosition> invoicePositions(JsonArray json) {
+        Builder<InvoicePosition> builder = ImmutableList.builder();
+        for (int i = 0; i < json.length(); i++) {
+            builder.add(new InvoicePosition(json.getObject(i)));
         }
+        return builder.build();
     }
 
     public static JSONObjectPasser<From> takeFromJSONObject() {

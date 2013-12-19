@@ -13,4 +13,12 @@ public class InvoicePosition {
     public String priceNet() {
         return json.getString("price_net");
     }
+
+    public String productId() {
+        return json.getString("product_id");
+    }
+
+    public String quantity() {
+        return json.getString("quantity");
+    }
 }

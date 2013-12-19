@@ -1,4 +1,4 @@
-package org.tchw.fakturownia;
+package org.tchw.fakturownia.model;
 
 import org.junit.Assert;
 import org.junit.Test;

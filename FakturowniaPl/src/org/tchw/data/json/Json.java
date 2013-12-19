@@ -50,25 +50,21 @@ public class Json {
             }
         }
 
-        public interface JSONArrayPasser<T> {
-            T pass(JSONArray tokener);
+        public interface JsonArrayPasser<T> {
+            T pass(JsonArray tokener);
         }
 
-        public AsJSONArray asJSONArray() {
-            return new AsJSONArray();
+        public AsJsonArray asJsonArray() {
+            return new AsJsonArray();
         }
 
-        public class AsJSONArray {
+        public class AsJsonArray {
 
-            public JSONArray get() {
-                try {
-                    return new JSONArray( new JSONTokener(reader) );
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
+            public JsonArray get() {
+                return JsonArray.create(reader);
             }
 
-            public <T> T passTo(JSONArrayPasser<T> passer) {
+            public <T> T passTo(JsonArrayPasser<T> passer) {
                 return passer.pass(get());
             }
         }

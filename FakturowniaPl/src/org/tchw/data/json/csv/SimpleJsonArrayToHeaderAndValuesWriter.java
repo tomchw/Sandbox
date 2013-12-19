@@ -1,12 +1,11 @@
 package org.tchw.data.json.csv;
 
-import java.util.Iterator;
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.tchw.data.json.JsonArray;
+import org.tchw.data.json.JsonObject;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedMap;
 
 class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
@@ -17,11 +16,11 @@ class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
     }
 
     @Override
-    public void process(JSONArray jsonArray, JsonArrayToCsvHandler handler) {
+    public void process(JsonArray jsonArray, JsonArrayToCsvHandler handler) {
         ImmutableList<String> header = null;
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JsonObject jsonObject = jsonArray.getObject(i);
                 ImmutableSortedMap<String, String> jsonAsMap = jsonObjectAsMap(jsonObject);
                 ImmutableList<String> keys = ImmutableList.copyOf( jsonAsMap.keySet() );
                 if( i == 0 ) {
@@ -44,11 +43,10 @@ class SimpleJsonArrayToHeaderAndValuesWriter implements JsonArrayToCsvWriter {
     }
 
     @SuppressWarnings("unchecked")
-    private ImmutableSortedMap<String, String> jsonObjectAsMap(JSONObject jsonObject) throws JSONException {
-        Iterator<String> iterator = jsonObject.keys();
+    private ImmutableSortedMap<String, String> jsonObjectAsMap(JsonObject jsonObject) throws JSONException {
+        ImmutableSet<String> keys = jsonObject.keys();
         ImmutableSortedMap.Builder<String, String> jsonMapBuilder = ImmutableSortedMap.naturalOrder();
-        while(iterator.hasNext()) {
-            String key = iterator.next();
+        for (String key : keys) {
             jsonMapBuilder.put(key, jsonObject.getString(key));
         }
         return jsonMapBuilder.build();

@@ -3,6 +3,8 @@ package org.tchw.data.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.common.collect.ImmutableSet;
+
 public class JsonObject {
 
     private final JSONObject json;
@@ -37,6 +39,10 @@ public class JsonObject {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ImmutableSet<String> keys() {
+        return ImmutableSet.<String>copyOf(json.keys());
     }
 
     public JsonArray getArray(String name) {

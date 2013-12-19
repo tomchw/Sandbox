@@ -2,11 +2,11 @@ package org.tchw.data.json.csv;
 
 import java.util.List;
 
-import org.json.JSONArray;
+import org.tchw.data.json.JsonArray;
 
 interface JsonArrayToCsvWriter {
 
-    void process(JSONArray jsonArray, JsonArrayToCsvHandler handler);
+    void process(JsonArray jsonArray, JsonArrayToCsvHandler handler);
 
     public interface JsonArrayToCsvHandler {
 

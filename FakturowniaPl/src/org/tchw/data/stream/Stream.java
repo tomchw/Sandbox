@@ -12,6 +12,14 @@ import com.google.common.base.Preconditions;
 
 public class Stream {
 
+    public static BufferedReader toBufferedReader(Reader reader) {
+        if( reader instanceof BufferedReader ) {
+            return (BufferedReader) reader;
+        } else {
+            return new BufferedReader(reader);
+        }
+    }
+
     public static From from(InputStream inputStream) {
         return new From(inputStream);
     }

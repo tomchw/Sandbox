@@ -9,9 +9,13 @@ public class InvoiceProfit extends Profit<Invoice> {
 
     public final ImmutableList<Profit<InvoicePosition>> invoicePositionsProfits;
 
-    public InvoiceProfit(Invoice profitObject, ImmutableList<Profit<InvoicePosition>> invoicePositionsProfits) {
+    private InvoiceProfit(Invoice profitObject, ImmutableList<Profit<InvoicePosition>> invoicePositionsProfits) {
         super(profitObject, Profit.sum(invoicePositionsProfits));
         this.invoicePositionsProfits = invoicePositionsProfits;
+    }
+
+    public static Builder builder(Invoice invoice) {
+        return new Builder(invoice);
     }
 
     public static class Builder {

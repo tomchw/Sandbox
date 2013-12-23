@@ -17,14 +17,14 @@ public class Profit<T> {
         return profitObject;
     }
 
-    public BigDecimal value() {
+    public BigDecimal profitValue() {
         return value;
     }
 
     public static BigDecimal sum(Iterable<? extends Profit<?>> invoicePositionsProfits) {
         BigDecimal invoiceProfit = BigDecimal.ZERO;
         for (Profit<?> invoicePositionProfit : invoicePositionsProfits) {
-            invoiceProfit = invoiceProfit.add(invoicePositionProfit.value());
+            invoiceProfit = invoiceProfit.add(invoicePositionProfit.profitValue());
         }
         return invoiceProfit;
     }

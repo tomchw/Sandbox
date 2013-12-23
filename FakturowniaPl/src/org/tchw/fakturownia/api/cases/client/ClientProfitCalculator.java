@@ -8,8 +8,6 @@ import org.tchw.fakturownia.api.model.InvoicePosition;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.Repository;
 
-import com.google.common.collect.ImmutableList;
-
 public class ClientProfitCalculator {
 
     private final Repository repository;
@@ -18,29 +16,31 @@ public class ClientProfitCalculator {
         this.repository = repository;
     }
 
-    public BigDecimal calculate(Client client) {
-        ImmutableList<Invoice> clientInvoices = repository.invoices.byClientId(client.id());
-        BigDecimal clientProfit = BigDecimal.ZERO;
-        for (Invoice invoice : clientInvoices) {
-            clientProfit = clientProfit.add(calculateInvoiceProfit(invoice));
+    public ClientProfit calculate(Client client) {
+        ClientProfit.Builder clientProfitBuilder = ClientProfit.builder(client);
+        for (Invoice invoice : repository.invoices.byClientId(client.id())) {
+            clientProfitBuilder.add(calculateInvoiceProfit(invoice));
         }
-        return clientProfit.setScale(2);
+        return clientProfitBuilder.build();
     }
 
-    private BigDecimal calculateInvoiceProfit(Invoice invoice) {
-        BigDecimal invoiceProfit = BigDecimal.ZERO;
+    private InvoiceProfit calculateInvoiceProfit(Invoice invoice) {
+        InvoiceProfit.Builder invoiceProfitBuilder = InvoiceProfit.builder(invoice);
         for (InvoicePosition invoicePosition : invoice.positions()) {
-            BigDecimal invoicePositionQuantity = new BigDecimal(invoicePosition.quantity());
-            BigDecimal invoicePorisitionpriceNet = new BigDecimal(invoicePosition.priceNet());
-
-            Product product = repository.products.byId(invoicePosition.productId());
-            BigDecimal purchasePriceNet = new BigDecimal(product.purchasePriceNet());
-
-            BigDecimal singleProductProfit = invoicePorisitionpriceNet.min(purchasePriceNet);
-            BigDecimal invoicePositionProfit = singleProductProfit.multiply(invoicePositionQuantity);
-            invoiceProfit = invoiceProfit.add(invoicePositionProfit);
+            invoiceProfitBuilder.add(calculateInvoicePositionProfit(invoicePosition));
         }
-        return invoiceProfit;
+        return invoiceProfitBuilder.build();
     }
 
+    private Profit<InvoicePosition> calculateInvoicePositionProfit(InvoicePosition invoicePosition) {
+        BigDecimal invoicePositionQuantity = new BigDecimal(invoicePosition.quantity());
+        BigDecimal invoicePorisitionpriceNet = new BigDecimal(invoicePosition.priceNet());
+
+        Product product = repository.products.byId(invoicePosition.productId());
+        BigDecimal purchasePriceNet = new BigDecimal(product.purchasePriceNet());
+
+        BigDecimal singleProductProfit = invoicePorisitionpriceNet.min(purchasePriceNet);
+        BigDecimal profit = singleProductProfit.multiply(invoicePositionQuantity);
+        return new Profit<InvoicePosition>(invoicePosition, profit);
+    }
 }

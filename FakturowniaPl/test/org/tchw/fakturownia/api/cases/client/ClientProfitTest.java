@@ -13,8 +13,8 @@ public class ClientProfitTest {
         Repository repository = Repository.forTest(getClass());
         ClientProfitCalculator clientProfitCalculator = new ClientProfitCalculator(repository);
 
-        BigDecimal clientProfit = clientProfitCalculator.calculate(repository.clients.all().iterator().next());
-        Assert.assertTrue(new BigDecimal(15000).setScale(2).equals(clientProfit));
+        ClientProfit clientProfit = clientProfitCalculator.calculate(repository.clients.all().iterator().next());
+        Assert.assertTrue(new BigDecimal(15000).setScale(2).equals(clientProfit.profitValue()));
     }
 
 }

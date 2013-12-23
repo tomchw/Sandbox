@@ -58,25 +58,12 @@ public class Stream {
             T pass(Reader tokener);
         }
 
-        public AsReader asBufferedReader() {
-            return new AsReader(inputStream);
+        public BufferedReader asBufferedReader() {
+            return new BufferedReader(new InputStreamReader(inputStream));
         }
 
-        public class AsReader {
-
-            private final BufferedReader reader;
-
-            public AsReader(InputStream inputStream) {
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-            }
-
-            public Reader get() {
-                return reader;
-            }
-
-            public <T> T passTo(ReaderPasser<T> passer) {
-                return passer.pass(reader);
-            }
+        public <T> T passTo(ReaderPasser<T> passer) {
+            return passer.pass(asBufferedReader());
         }
     }
 }

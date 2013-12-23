@@ -11,7 +11,7 @@ public class JsonTest {
     @Test
     public void testHandling() throws JSONException {
         MyHandling handling = new MyHandling();
-        Stream.from(getClass().getResourceAsStream("simpleJson.txt")).asBufferedReader().passTo(Json.takeFromReader()).handle(handling).executeSync();
+        Stream.from(getClass().getResourceAsStream("simpleJson.txt")).passTo(Json.takeFromReader()).handle(handling).executeSync();
         Assert.assertEquals("1", handling.jsonArray.getJSONObject(0).getString("id") );
         Assert.assertEquals("B", handling.jsonArray.getJSONObject(1).getString("value") );
         Assert.assertEquals(2, handling.jsonArray.length() );
@@ -19,7 +19,7 @@ public class JsonTest {
 
     @Test
     public void testGettingByJSONArray() throws JSONException {
-        JsonArray jsonArray = Stream.fromResource(getClass(), "simpleJson.txt").asBufferedReader().passTo(Json.takeFromReader()).asJsonArray().get();
+        JsonArray jsonArray = Stream.fromResource(getClass(), "simpleJson.txt").passTo(Json.takeFromReader()).asJsonArray().get();
         Assert.assertEquals("AA", jsonArray.getObject(1).getArray("children").getObject(0).getString("child_name"));
     }
 

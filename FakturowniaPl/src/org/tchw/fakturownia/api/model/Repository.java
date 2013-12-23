@@ -18,9 +18,9 @@ public class Repository {
     }
 
     public static Repository forTest(Class<?> testClass) {
-        ClientFinder clientFinder = Stream.fromResource(testClass, "clients.txt").asBufferedReader().passTo(ClientFinderImpl.takeFromReader());
-        InvoiceFinder invoiceFinder = Stream.fromResource(testClass, "invoices.txt").asBufferedReader().passTo(InvoiceFinderImpl.takeFromReader());
-        ProductFinder productFinder = Stream.fromResource(testClass, "products.txt").asBufferedReader().passTo(ProductFinderImpl.takeFromReader());
+        ClientFinder clientFinder = Stream.fromResource(testClass, "clients.txt").passTo(ClientFinderImpl.takeFromReader());
+        InvoiceFinder invoiceFinder = Stream.fromResource(testClass, "invoices.txt").passTo(InvoiceFinderImpl.takeFromReader());
+        ProductFinder productFinder = Stream.fromResource(testClass, "products.txt").passTo(ProductFinderImpl.takeFromReader());
         return new Repository(clientFinder, invoiceFinder, productFinder);
     }
 }

@@ -1,6 +1,11 @@
 package org.tchw.fakturownia.api.model.impl;
 
+import java.io.Reader;
+
+import org.tchw.data.json.JsonLoader;
 import org.tchw.data.model.AbstractFinder;
+import org.tchw.data.stream.Stream;
+import org.tchw.data.stream.Stream.From.ReaderPasser;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.ProductFinder;
 
@@ -12,4 +17,15 @@ public class ProductFinderImpl extends AbstractFinder<Product> implements Produc
         super(items);
     }
 
+    public static ReaderPasser<ProductFinder> takeFromReader() {
+        return new Stream.From.ReaderPasser<ProductFinder>() {
+
+            @Override
+            public ProductFinder pass(Reader reader) {
+                ImmutableMap<String, Product> map = JsonLoader.create(Product.class).add(reader).build(Product.fromJson);
+                return new ProductFinderImpl(map);
+            }
+
+        };
+    }
 }

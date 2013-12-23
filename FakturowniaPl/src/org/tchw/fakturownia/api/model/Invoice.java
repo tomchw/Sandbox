@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.tchw.data.json.Json.From.JSONObjectPasser;
 import org.tchw.data.json.JsonArray;
+import org.tchw.data.json.JsonLoader.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
 
 import com.google.common.collect.ImmutableList;
@@ -16,8 +17,24 @@ public class Invoice {
 
     private final List<InvoicePosition> positions;
 
-    public Invoice(JSONObject jsonObject) {
-        this.json = JsonObject.create(jsonObject);
+    public static final JsonObjectTo<Invoice> fromJson =
+            new JsonObjectTo<Invoice>() {
+                @Override
+                public Invoice create(JsonObject json) {
+                    return Invoice.create(json);
+                }
+            };
+
+    public static Invoice create(JsonObject json) {
+        return new Invoice(json);
+    }
+
+    public static Invoice create(JSONObject json) {
+        return create(JsonObject.create(json));
+    }
+
+    private Invoice(JsonObject jsonObject) {
+        this.json = jsonObject;
         this.positions = invoicePositions(this.json.getArray("positions"));
     }
 
@@ -69,7 +86,7 @@ public class Invoice {
         public class AsInvoice {
 
             public Invoice get() {
-                return new Invoice( jsonObject );
+                return Invoice.create(jsonObject);
             }
 
             public <T> T passTo(InvoicePasser<T> passer) {

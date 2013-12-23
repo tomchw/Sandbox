@@ -1,11 +1,20 @@
 package org.tchw.fakturownia.api.model;
 
 import org.json.JSONObject;
+import org.tchw.data.json.JsonLoader.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
 
 public class Client {
 
     private final JsonObject json;
+
+    public static final JsonObjectTo<Client> fromJson =
+        new JsonObjectTo<Client>() {
+            @Override
+            public Client create(JsonObject json) {
+                return Client.create(json);
+            }
+        };
 
     public static Client create(JsonObject json) {
         return new Client(json);

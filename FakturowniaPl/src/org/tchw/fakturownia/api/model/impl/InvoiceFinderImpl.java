@@ -1,6 +1,11 @@
 package org.tchw.fakturownia.api.model.impl;
 
+import java.io.Reader;
+
+import org.tchw.data.json.JsonLoader;
 import org.tchw.data.model.AbstractFinder;
+import org.tchw.data.stream.Stream;
+import org.tchw.data.stream.Stream.From.ReaderPasser;
 import org.tchw.fakturownia.api.model.Invoice;
 import org.tchw.fakturownia.api.model.InvoiceFinder;
 
@@ -22,5 +27,17 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
                 return clientId.equals(invoice.clientId());
             }
         });
+    }
+
+    public static ReaderPasser<InvoiceFinder> takeFromReader() {
+        return new Stream.From.ReaderPasser<InvoiceFinder>() {
+
+            @Override
+            public InvoiceFinder pass(Reader reader) {
+                ImmutableMap<String, Invoice> map = JsonLoader.create(Invoice.class).add(reader).build(Invoice.fromJson);
+                return new InvoiceFinderImpl(map);
+            }
+
+        };
     }
 }

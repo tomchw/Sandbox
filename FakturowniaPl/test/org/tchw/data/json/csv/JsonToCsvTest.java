@@ -13,7 +13,7 @@ public class JsonToCsvTest {
 
     @Test
     public void test() {
-        String csvString = Stream.from(getClass().getResourceAsStream("simpleJson.txt")).passTo(Json.takeFromReader()).asJsonArray().passTo(JsonToCsv.takeFromJsonArray()).asString();
+        String csvString = Stream.from(getClass().getResourceAsStream("simpleJson.txt")).passTo(Json.takeFromReader()).passTo(JsonToCsv.takeFromJsonArray()).asString();
         Iterator<String> iterator = Splitter.onPattern("(\r\n|\n)").splitToList(csvString).iterator();
         Assert.assertEquals("id,value", iterator.next());
         Assert.assertEquals("1,A", iterator.next());

@@ -19,7 +19,7 @@ public class JsonTest {
 
     @Test
     public void testGettingByJSONArray() throws JSONException {
-        JsonArray jsonArray = Stream.fromResource(getClass(), "simpleJson.txt").passTo(Json.takeFromReader()).asJsonArray().get();
+        JsonArray jsonArray = Stream.fromResource(getClass(), "simpleJson.txt").passTo(Json.takeFromReader()).asJsonArray();
         Assert.assertEquals("AA", jsonArray.getObject(1).getArray("children").getObject(0).getString("child_name"));
     }
 

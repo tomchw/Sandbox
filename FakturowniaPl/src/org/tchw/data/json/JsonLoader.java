@@ -18,7 +18,7 @@ public class JsonLoader<T> {
     }
 
     private void appendReader(Reader reader, JsonObjectTo<T> jsonObjectTo, ImmutableMap.Builder<String, T> builder) {
-        JsonArray jsonArray = Json.takeFromReader().pass(Stream.toBufferedReader(reader)).asJsonArray().get();
+        JsonArray jsonArray = Json.takeFromReader().pass(Stream.toBufferedReader(reader)).asJsonArray();
         for (JsonObject jsonObject : jsonArray.getObjects()) {
             builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
         }

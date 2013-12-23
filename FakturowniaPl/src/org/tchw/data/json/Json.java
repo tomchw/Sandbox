@@ -35,61 +35,40 @@ public class Json {
             T pass(JSONTokener tokener);
         }
 
-        public AsJSONTokener asJSONTokener() {
-            return new AsJSONTokener();
+        public JSONTokener asJSONTokener() {
+            return new JSONTokener(reader);
         }
 
-        public class AsJSONTokener {
-
-            public JSONTokener get() {
-                return new JSONTokener(reader);
-            }
-
-            public <T> T passTo(JSONTokenerPasser<T> passer) {
-                return passer.pass(get());
-            }
+        public <T> T passTo(JSONTokenerPasser<T> passer) {
+            return passer.pass(asJSONTokener());
         }
 
         public interface JsonArrayPasser<T> {
             T pass(JsonArray tokener);
         }
 
-        public AsJsonArray asJsonArray() {
-            return new AsJsonArray();
+        public JsonArray asJsonArray() {
+            return JsonArray.create(reader);
         }
 
-        public class AsJsonArray {
-
-            public JsonArray get() {
-                return JsonArray.create(reader);
-            }
-
-            public <T> T passTo(JsonArrayPasser<T> passer) {
-                return passer.pass(get());
-            }
+        public <T> T passTo(JsonArrayPasser<T> passer) {
+            return passer.pass(asJsonArray());
         }
 
         public interface JSONObjectPasser<T> {
             T pass(JSONObject jsonObject);
         }
 
-        public AsJSONObject asJSONObject() {
-            return new AsJSONObject();
+        public JSONObject asJSONObject() {
+            try {
+                return new JSONObject( new JSONTokener(reader) );
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        public class AsJSONObject {
-
-            public JSONObject get() {
-                try {
-                    return new JSONObject( new JSONTokener(reader) );
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            public <T> T passTo(JSONObjectPasser<T> passer) {
-                return passer.pass(get());
-            }
+        public <T> T passTo(JSONObjectPasser<T> passer) {
+            return passer.pass(asJSONObject());
         }
 
         public class Execution {

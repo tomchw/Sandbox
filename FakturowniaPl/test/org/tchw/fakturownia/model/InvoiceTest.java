@@ -11,7 +11,7 @@ public class InvoiceTest {
     @Test
     public void test() {
         Invoice invoice = Stream.fromResource(getClass(), "invoice.txt").passTo(Json.takeFromReader())
-            .asJSONObject().passTo(Invoice.takeFromJSONObject()).asInvoice().get();
+            .passTo(Invoice.takeFromJSONObject()).asInvoice().get();
 
         Assert.assertEquals("376848", invoice.clientId());
         Assert.assertEquals("2/09/2013", invoice.number());

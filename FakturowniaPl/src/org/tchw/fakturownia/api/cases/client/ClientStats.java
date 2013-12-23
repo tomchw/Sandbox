@@ -7,6 +7,8 @@ import org.tchw.fakturownia.api.model.InvoicePosition;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.ProductFinder;
 
+import com.google.common.collect.ImmutableList;
+
 public class ClientStats {
 
     private final Client client;
@@ -22,7 +24,8 @@ public class ClientStats {
     }
 
     public void execute() {
-        for (Invoice invoice : invoiceFinder.byClientId(client.id())) {
+        ImmutableList<Invoice> clientInvoices = invoiceFinder.byClientId(client.id());
+        for (Invoice invoice : clientInvoices) {
             handleInvoice(invoice);
         }
     }

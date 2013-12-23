@@ -1,7 +1,7 @@
 package org.tchw.fakturownia.api.model;
 
-public interface ProductFinder {
+import org.tchw.data.model.Finder;
 
-    Product byId(String id);
+public interface ProductFinder extends Finder<Product> {
 
 }

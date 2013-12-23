@@ -21,8 +21,8 @@ public class Invoice {
         this.positions = invoicePositions(this.json.getArray("positions"));
     }
 
-    public int clientId() {
-        return json.getInt("client_id");
+    public String clientId() {
+        return json.getString("client_id");
     }
 
     public String number() {

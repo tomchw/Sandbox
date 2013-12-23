@@ -40,6 +40,11 @@ public class JsonLoader<T> {
         return this;
     }
 
+    public JsonLoader<T> addAll(Iterable<? extends Reader> readers) {
+        this.readers.addAll(readers);
+        return this;
+    }
+
     public ImmutableMap<String, T> build(JsonObjectTo<T> jsonObjectTo) {
         ImmutableMap.Builder<String, T> builder = ImmutableMap.builder();
         for (Reader reader : readers.build()) {

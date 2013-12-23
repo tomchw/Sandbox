@@ -11,7 +11,7 @@ public class Repository {
     public final InvoiceFinder invoices;
     public final ProductFinder products;
 
-    private Repository(ClientFinder clients, InvoiceFinder invoices, ProductFinder products) {
+    public Repository(ClientFinder clients, InvoiceFinder invoices, ProductFinder products) {
         this.clients = clients;
         this.invoices = invoices;
         this.products = products;

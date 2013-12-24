@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.tchw.data.stream.Stream;
 
 import com.google.common.collect.ImmutableList;
@@ -17,11 +20,9 @@ public class JsonLoader<T> {
         return new JsonLoader<T>();
     }
 
-    private void appendReader(Reader reader, JsonObjectTo<T> jsonObjectTo, ImmutableMap.Builder<String, T> builder) {
-        JsonArray jsonArray = Json.takeFromReader().pass(Stream.toBufferedReader(reader)).asJsonArray();
-        for (JsonObject jsonObject : jsonArray.getObjects()) {
-            builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
-        }
+    public interface JsonObjectTo<T> {
+
+        T create(JsonObject json);
     }
 
     private final ImmutableList.Builder<Reader> readers = ImmutableList.builder();
@@ -53,10 +54,28 @@ public class JsonLoader<T> {
         return builder.build();
     }
 
-    public interface JsonObjectTo<T> {
-
-        T create(JsonObject json);
-
+    private void appendReader(Reader reader, JsonObjectTo<T> jsonObjectTo, ImmutableMap.Builder<String, T> builder) {
+        Object value = JSONTokenerNextValue(reader);
+        if( value instanceof JSONArray ) {
+            JsonArray jsonArray = JsonArray.create((JSONArray) value);
+            for (JsonObject jsonObject : jsonArray.getObjects()) {
+                builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
+            }
+        } else if( value instanceof JSONObject ) {
+            JsonObject jsonObject = JsonObject.create((JSONObject) value);
+            builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
+        }
     }
+
+    private Object JSONTokenerNextValue(Reader reader) {
+        Object value;
+        try {
+            value = Json.takeFromReader().pass(Stream.toBufferedReader(reader)).asJSONTokener().nextValue();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return value;
+    }
+
 }
 

@@ -3,7 +3,7 @@ package org.tchw.fakturownia.api.model;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.tchw.data.json.Json.From.JSONObjectPasser;
+import org.tchw.data.json.Json.From.JsonObjectPasser;
 import org.tchw.data.json.JsonArray;
 import org.tchw.data.json.JsonLoader.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
@@ -62,10 +62,10 @@ public class Invoice {
         return builder.build();
     }
 
-    public static JSONObjectPasser<From> takeFromJSONObject() {
-        return new JSONObjectPasser<From>() {
+    public static JsonObjectPasser<From> takeFromJsonObject() {
+        return new JsonObjectPasser<From>() {
             @Override
-            public From pass(JSONObject jsonObject) {
+            public From pass(JsonObject jsonObject) {
                 return new From(jsonObject);
             }
         };
@@ -73,9 +73,9 @@ public class Invoice {
 
     public static class From {
 
-        private final JSONObject jsonObject;
+        private final JsonObject jsonObject;
 
-        public From(JSONObject jsonObject) {
+        public From(JsonObject jsonObject) {
             this.jsonObject = jsonObject;
         }
 

@@ -6,6 +6,8 @@ import org.tchw.data.json.JsonLoader;
 import org.tchw.data.model.AbstractFinder;
 import org.tchw.data.stream.Stream;
 import org.tchw.data.stream.Stream.From.ReaderPasser;
+import org.tchw.data.stream.Streams;
+import org.tchw.data.stream.Streams.From.ReadersPasser;
 import org.tchw.fakturownia.api.model.Invoice;
 import org.tchw.fakturownia.api.model.InvoiceFinder;
 
@@ -38,6 +40,16 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
                 return new InvoiceFinderImpl(map);
             }
 
+        };
+    }
+
+    public static ReadersPasser<InvoiceFinder> takeFromReaders() {
+        return new Streams.From.ReadersPasser<InvoiceFinder>() {
+            @Override
+            public InvoiceFinder pass(ImmutableList<? extends Reader> readers) {
+                ImmutableMap<String, Invoice> map = JsonLoader.create(Invoice.class).addAll(readers).build(Invoice.fromJson);
+                return new InvoiceFinderImpl(map);
+            }
         };
     }
 }

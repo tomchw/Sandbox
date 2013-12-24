@@ -55,20 +55,20 @@ public class Json {
             return passer.pass(asJsonArray());
         }
 
-        public interface JSONObjectPasser<T> {
-            T pass(JSONObject jsonObject);
+        public interface JsonObjectPasser<T> {
+            T pass(JsonObject jsonObject);
         }
 
-        public JSONObject asJSONObject() {
+        public JsonObject asJsonObject() {
             try {
-                return new JSONObject( new JSONTokener(reader) );
+                return JsonObject.create( new JSONObject( new JSONTokener(reader) ));
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        public <T> T passTo(JSONObjectPasser<T> passer) {
-            return passer.pass(asJSONObject());
+        public <T> T passTo(JsonObjectPasser<T> passer) {
+            return passer.pass(asJsonObject());
         }
 
         public class Execution {

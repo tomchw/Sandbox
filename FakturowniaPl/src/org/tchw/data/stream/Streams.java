@@ -21,6 +21,14 @@ public class Streams {
         return new From(inputStreams);
     }
 
+    public static From fromResources(Class<?> clazz, String...resourceNames) {
+        ImmutableList.Builder<InputStream> builder = ImmutableList.builder();
+        for (String resourceName : resourceNames) {
+            builder.add( clazz.getResourceAsStream(resourceName) );
+        }
+        return new From(builder.build());
+    }
+
     private static ImmutableList<InputStream> inputStreamsWithFilesInDirectory(File directory, final Pattern fileNamePattern) {
         File[] listFiles = listFiles(directory, fileNamePattern);
         return filesToInputStreams(listFiles);

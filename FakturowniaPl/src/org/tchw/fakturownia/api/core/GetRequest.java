@@ -65,17 +65,17 @@ public class GetRequest {
                     this.pageNumber = pageNumber;
                 }
 
-                public Execution writeContentToFile() {
-                    return writeContentToFile("{login}.{table}.{page}.txt");
+                public void saveContentToFile() {
+                    saveContentToFile("{login}.{table}.{page}.txt");
                 }
 
-                public Execution writeContentToFile(String filePath) {
+                public void saveContentToFile(String filePath) {
                     final File file = new File(filePath
                             .replace("{page}",  String.valueOf(pageNumber))
                             .replace("{table}", table)
                             .replace("{login}", login)
                             );
-                    return new Execution(writeToFileContantHandling(file));
+                    new Execution(writeToFileContantHandling(file)).executeSync();
                 }
 
                 public Execution printContentToSreen() {
@@ -147,9 +147,9 @@ public class GetRequest {
 
     public static void main(String[] args) {
         Login tcc1 = GetRequest.login("tcc1", "sMEuDnemiZIPcbEL5g");
-        tcc1.invoices().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
-        tcc1.products().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
-        tcc1.clients().page(1).writeContentToFile("{login}.{table}.{page}.txt").executeSync();
+        tcc1.invoices().page(1).saveContentToFile("{login}.{table}.{page}.txt");
+        tcc1.products().page(1).saveContentToFile("{login}.{table}.{page}.txt");
+        tcc1.clients().page(1).saveContentToFile("{login}.{table}.{page}.txt");
     }
 
 }

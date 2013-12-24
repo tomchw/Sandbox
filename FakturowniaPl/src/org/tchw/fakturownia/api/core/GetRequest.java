@@ -29,7 +29,7 @@ public class GetRequest {
             this.token = token;
         }
 
-        public Table invoice(int id) {
+        public Table invoice(String id) {
             return new Table("invoices/" + id + ".json");
         }
 

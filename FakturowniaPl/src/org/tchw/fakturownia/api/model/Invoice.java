@@ -38,6 +38,10 @@ public class Invoice {
         this.positions = invoicePositions(this.json.getArray("positions"));
     }
 
+    public String id() {
+        return json.getString("id");
+    }
+
     public String clientId() {
         return json.getString("client_id");
     }

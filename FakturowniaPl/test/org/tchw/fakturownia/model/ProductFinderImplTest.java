@@ -2,9 +2,9 @@ package org.tchw.fakturownia.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.fakturownia.api.model.Product;
-import org.tchw.fakturownia.api.model.ProductFinder;
-import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.fakturownia.data.model.Product;
+import org.tchw.fakturownia.data.model.ProductFinder;
+import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
 import org.tchw.generic.stream.json.JsonObject;
 import org.tchw.generic.stream.json.JsonToPojo;
 import org.tchw.generic.stream.json.JsonToPojo.JsonObjectTo;

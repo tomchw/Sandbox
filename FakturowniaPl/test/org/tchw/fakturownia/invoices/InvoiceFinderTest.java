@@ -2,9 +2,9 @@ package org.tchw.fakturownia.invoices;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.fakturownia.api.model.Invoice;
-import org.tchw.fakturownia.api.model.InvoiceFinder;
-import org.tchw.fakturownia.api.model.impl.InvoiceFinderImpl;
+import org.tchw.fakturownia.data.model.Invoice;
+import org.tchw.fakturownia.data.model.InvoiceFinder;
+import org.tchw.fakturownia.data.model.impl.InvoiceFinderImpl;
 import org.tchw.generic.stream.stream.Streams;
 
 import com.google.common.collect.UnmodifiableIterator;

@@ -1,12 +1,12 @@
-package org.tchw.fakturownia.api.cases.client;
+package org.tchw.fakturownia.data.cases.profit;
 
 import java.math.BigDecimal;
 
-import org.tchw.fakturownia.api.model.Client;
-import org.tchw.fakturownia.api.model.Invoice;
-import org.tchw.fakturownia.api.model.InvoicePosition;
-import org.tchw.fakturownia.api.model.Product;
-import org.tchw.fakturownia.api.model.Repository;
+import org.tchw.fakturownia.data.model.Client;
+import org.tchw.fakturownia.data.model.Invoice;
+import org.tchw.fakturownia.data.model.InvoicePosition;
+import org.tchw.fakturownia.data.model.Product;
+import org.tchw.fakturownia.data.model.Repository;
 
 public class ClientProfitCalculator {
 

@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.api.cases.example;
+package org.tchw.fakturownia.data.example;
 
 import org.tchw.fakturownia.api.core.GetRequest;
 import org.tchw.fakturownia.api.core.GetRequest.Login;

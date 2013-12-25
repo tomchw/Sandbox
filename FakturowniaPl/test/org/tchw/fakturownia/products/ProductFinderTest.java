@@ -3,9 +3,9 @@ package org.tchw.fakturownia.products;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.tchw.fakturownia.api.model.Product;
-import org.tchw.fakturownia.api.model.ProductFinder;
-import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.fakturownia.data.model.Product;
+import org.tchw.fakturownia.data.model.ProductFinder;
+import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
 import org.tchw.generic.stream.stream.Streams;
 
 import static org.junit.Assert.assertEquals;

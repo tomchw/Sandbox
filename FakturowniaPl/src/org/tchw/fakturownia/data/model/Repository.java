@@ -1,11 +1,11 @@
-package org.tchw.fakturownia.api.model;
+package org.tchw.fakturownia.data.model;
 
 import java.io.File;
 import java.util.regex.Pattern;
 
-import org.tchw.fakturownia.api.model.impl.ClientFinderImpl;
-import org.tchw.fakturownia.api.model.impl.InvoiceFinderImpl;
-import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.fakturownia.data.model.impl.ClientFinderImpl;
+import org.tchw.fakturownia.data.model.impl.InvoiceFinderImpl;
+import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
 import org.tchw.generic.stream.stream.Stream;
 import org.tchw.generic.stream.stream.Streams;
 

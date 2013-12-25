@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.fakturownia.api.model.Repository;
+import org.tchw.fakturownia.data.cases.profit.ClientProfit;
+import org.tchw.fakturownia.data.cases.profit.ClientProfitCalculator;
+import org.tchw.fakturownia.data.model.Repository;
 
 public class ClientProfitTest {
 

@@ -1,9 +1,9 @@
-package org.tchw.fakturownia.api.model.impl;
+package org.tchw.fakturownia.data.model.impl;
 
 import java.io.Reader;
 
-import org.tchw.fakturownia.api.model.Product;
-import org.tchw.fakturownia.api.model.ProductFinder;
+import org.tchw.fakturownia.data.model.Product;
+import org.tchw.fakturownia.data.model.ProductFinder;
 import org.tchw.generic.stream.json.JsonToPojo;
 import org.tchw.generic.stream.model.AbstractFinder;
 import org.tchw.generic.stream.stream.Stream;

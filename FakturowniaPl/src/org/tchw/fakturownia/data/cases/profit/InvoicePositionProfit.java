@@ -1,9 +1,9 @@
-package org.tchw.fakturownia.api.cases.client;
+package org.tchw.fakturownia.data.cases.profit;
 
 import java.math.BigDecimal;
 
-import org.tchw.fakturownia.api.model.InvoicePosition;
-import org.tchw.fakturownia.api.model.Product;
+import org.tchw.fakturownia.data.model.InvoicePosition;
+import org.tchw.fakturownia.data.model.Product;
 
 public class InvoicePositionProfit extends Profit<InvoicePosition> {
 

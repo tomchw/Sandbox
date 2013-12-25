@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.api.model;
+package org.tchw.fakturownia.data.model;
 
 import org.json.JSONObject;
 import org.tchw.generic.stream.json.JsonObject;

@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.api.model;
+package org.tchw.fakturownia.data.model;
 
 import java.util.List;
 

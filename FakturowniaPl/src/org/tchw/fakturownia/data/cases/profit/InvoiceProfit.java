@@ -1,6 +1,6 @@
-package org.tchw.fakturownia.api.cases.client;
+package org.tchw.fakturownia.data.cases.profit;
 
-import org.tchw.fakturownia.api.model.Invoice;
+import org.tchw.fakturownia.data.model.Invoice;
 
 import com.google.common.collect.ImmutableList;
 

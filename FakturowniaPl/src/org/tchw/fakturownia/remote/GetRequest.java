@@ -69,6 +69,10 @@ public class GetRequest {
                     saveContentToFile("{login}.{table}.{page}.txt");
                 }
 
+                public void saveContentToFile(File file) {
+                    new Execution(writeToFileContantHandling(file)).executeSync();
+                }
+
                 public void saveContentToFile(String filePath) {
                     final File file = new File(filePath
                             .replace("{page}",  String.valueOf(pageNumber))

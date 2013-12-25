@@ -25,15 +25,17 @@ public class RequestForTableData {
         this.tableType = tableType;
     }
 
-    public void execute() {
+    public File execute() {
         FilePathSupport filePathSupport;
+        File todayDirectoryFile = new File(Joiner.on("/").join(directory.getPath(), todayDirectoryName()));
         do {
             counter++;
-            String fullFilePath = Joiner.on("/").join(directory.getPath(), todayDirectoryName(), tableType, tableType + "." + counter);
+            String fullFilePath = Joiner.on("/").join(todayDirectoryFile, tableType, tableType + "." + counter);
             createParentDirs(fullFilePath);
             table.page(counter).saveContentToFile(fullFilePath);
             filePathSupport = new FilePathSupport(fullFilePath);
         } while( filePathSupport.areThereMorePages() );
+        return todayDirectoryFile;
     }
 
     private void createParentDirs(String fullFilePath) {

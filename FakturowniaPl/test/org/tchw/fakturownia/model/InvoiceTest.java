@@ -2,9 +2,9 @@ package org.tchw.fakturownia.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.data.json.Json;
-import org.tchw.data.stream.Stream;
 import org.tchw.fakturownia.api.model.Invoice;
+import org.tchw.generic.data.json.Json;
+import org.tchw.generic.data.stream.Stream;
 
 public class InvoiceTest {
 

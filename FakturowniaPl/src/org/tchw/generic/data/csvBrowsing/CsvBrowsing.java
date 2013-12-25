@@ -1,12 +1,12 @@
-package org.tchw.data.csvBrowsing;
+package org.tchw.generic.data.csvBrowsing;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
 
-import org.tchw.data.csvBrowsing.CsvLineAsMapHandler;
-import org.tchw.data.csvBrowsing.UsingCsvBeanReader.LineAsBeanHandler;
+import org.tchw.generic.data.csvBrowsing.CsvLineAsMapHandler;
+import org.tchw.generic.data.csvBrowsing.UsingCsvBeanReader.LineAsBeanHandler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;

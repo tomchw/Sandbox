@@ -3,10 +3,10 @@ package org.tchw.fakturownia.products;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.tchw.data.stream.Streams;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.ProductFinder;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.generic.data.stream.Streams;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

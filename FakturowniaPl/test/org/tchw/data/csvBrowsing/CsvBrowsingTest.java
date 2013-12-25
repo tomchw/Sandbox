@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.data.csvBrowsing.CsvBrowsing;
+import org.tchw.generic.data.csvBrowsing.CsvBrowsing;
 
 import com.google.common.collect.ImmutableList;
 

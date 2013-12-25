@@ -2,8 +2,8 @@ package org.tchw.fakturownia.data.example;
 
 import java.util.Map;
 
-import org.tchw.data.csvBrowsing.CsvBrowsing;
-import org.tchw.data.csvBrowsing.CsvLineAsMapHandler;
+import org.tchw.generic.data.csvBrowsing.CsvBrowsing;
+import org.tchw.generic.data.csvBrowsing.CsvLineAsMapHandler;
 
 import com.google.common.collect.ImmutableSortedMap;
 

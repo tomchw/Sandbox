@@ -1,4 +1,4 @@
-package org.tchw.text;
+package org.tchw.generic.text;
 
 import java.text.MessageFormat;
 

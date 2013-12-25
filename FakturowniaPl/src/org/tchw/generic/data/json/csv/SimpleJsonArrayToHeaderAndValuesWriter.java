@@ -1,8 +1,8 @@
-package org.tchw.data.json.csv;
+package org.tchw.generic.data.json.csv;
 
 import org.json.JSONException;
-import org.tchw.data.json.JsonArray;
-import org.tchw.data.json.JsonObject;
+import org.tchw.generic.data.json.JsonArray;
+import org.tchw.generic.data.json.JsonObject;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;

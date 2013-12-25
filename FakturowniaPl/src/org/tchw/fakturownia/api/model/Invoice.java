@@ -3,10 +3,10 @@ package org.tchw.fakturownia.api.model;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.tchw.data.json.Json.From.JsonObjectPasser;
-import org.tchw.data.json.JsonArray;
-import org.tchw.data.json.JsonToPojo.JsonObjectTo;
-import org.tchw.data.json.JsonObject;
+import org.tchw.generic.data.json.JsonArray;
+import org.tchw.generic.data.json.JsonObject;
+import org.tchw.generic.data.json.Json.From.JsonObjectPasser;
+import org.tchw.generic.data.json.JsonToPojo.JsonObjectTo;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;

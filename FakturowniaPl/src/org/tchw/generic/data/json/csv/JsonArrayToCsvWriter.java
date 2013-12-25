@@ -1,8 +1,8 @@
-package org.tchw.data.json.csv;
+package org.tchw.generic.data.json.csv;
 
 import java.util.List;
 
-import org.tchw.data.json.JsonArray;
+import org.tchw.generic.data.json.JsonArray;
 
 interface JsonArrayToCsvWriter {
 

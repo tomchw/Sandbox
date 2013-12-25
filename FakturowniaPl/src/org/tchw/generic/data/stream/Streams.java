@@ -1,4 +1,4 @@
-package org.tchw.data.stream;
+package org.tchw.generic.data.stream;
 
 import java.io.BufferedReader;
 import java.io.File;

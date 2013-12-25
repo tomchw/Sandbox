@@ -1,4 +1,4 @@
-package org.tchw.data.csvBrowsing;
+package org.tchw.generic.data.csvBrowsing;
 
 import java.io.BufferedReader;
 import java.io.IOException;

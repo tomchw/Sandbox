@@ -2,9 +2,9 @@ package org.tchw.fakturownia.data.example;
 
 import java.io.File;
 
-import org.tchw.data.json.Json;
-import org.tchw.data.json.csv.JsonToCsv;
-import org.tchw.data.stream.Stream;
+import org.tchw.generic.data.json.Json;
+import org.tchw.generic.data.json.csv.JsonToCsv;
+import org.tchw.generic.data.stream.Stream;
 
 public class JsonToCsvWriterExample {
 

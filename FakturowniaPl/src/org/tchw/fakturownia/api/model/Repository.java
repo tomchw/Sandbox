@@ -3,11 +3,11 @@ package org.tchw.fakturownia.api.model;
 import java.io.File;
 import java.util.regex.Pattern;
 
-import org.tchw.data.stream.Stream;
-import org.tchw.data.stream.Streams;
 import org.tchw.fakturownia.api.model.impl.ClientFinderImpl;
 import org.tchw.fakturownia.api.model.impl.InvoiceFinderImpl;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.data.stream.Streams;
 
 import com.google.common.base.Preconditions;
 

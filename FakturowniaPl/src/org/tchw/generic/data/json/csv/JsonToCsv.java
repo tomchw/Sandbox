@@ -1,4 +1,4 @@
-package org.tchw.data.json.csv;
+package org.tchw.generic.data.json.csv;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
-import org.tchw.data.json.Json;
-import org.tchw.data.json.JsonArray;
-import org.tchw.data.json.csv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
+import org.tchw.generic.data.json.Json;
+import org.tchw.generic.data.json.JsonArray;
+import org.tchw.generic.data.json.csv.JsonArrayToCsvWriter.JsonArrayToCsvHandler;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;

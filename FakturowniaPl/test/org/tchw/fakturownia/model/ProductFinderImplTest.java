@@ -2,13 +2,13 @@ package org.tchw.fakturownia.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.data.json.JsonObject;
-import org.tchw.data.json.JsonToPojo;
-import org.tchw.data.json.JsonToPojo.JsonObjectTo;
-import org.tchw.data.stream.Stream;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.ProductFinder;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+import org.tchw.generic.data.json.JsonObject;
+import org.tchw.generic.data.json.JsonToPojo;
+import org.tchw.generic.data.json.JsonToPojo.JsonObjectTo;
+import org.tchw.generic.data.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
 

@@ -1,4 +1,4 @@
-package org.tchw.data.csvBrowsing;
+package org.tchw.generic.data.csvBrowsing;
 
 import com.google.common.collect.ImmutableSortedMap;
 

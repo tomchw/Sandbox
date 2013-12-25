@@ -1,5 +1,7 @@
 package org.tchw.generic.stream.json;
 
+import java.math.BigDecimal;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +25,10 @@ public class JsonObject {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public BigDecimal getBigDecimal(String name) {
+        return new BigDecimal(getString(name));
     }
 
     public int getInt(String name) {

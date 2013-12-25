@@ -33,11 +33,11 @@ public class ClientProfitCalculator {
     }
 
     private InvoicePositionProfit calculateInvoicePositionProfit(InvoicePosition invoicePosition) {
-        BigDecimal invoicePositionQuantity = new BigDecimal(invoicePosition.quantity());
-        BigDecimal invoicePorisitionpriceNet = new BigDecimal(invoicePosition.priceNet());
+        BigDecimal invoicePositionQuantity = invoicePosition.quantity();
+        BigDecimal invoicePorisitionpriceNet = invoicePosition.priceNet();
 
         Product product = repository.products.byId(invoicePosition.productId());
-        BigDecimal purchasePriceNet = new BigDecimal(product.purchasePriceNet());
+        BigDecimal purchasePriceNet = product.purchasePriceNet();
 
         BigDecimal singleProductProfit = invoicePorisitionpriceNet.add(purchasePriceNet.negate());
         BigDecimal profit = singleProductProfit.multiply(invoicePositionQuantity);

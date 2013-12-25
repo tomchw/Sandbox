@@ -1,5 +1,7 @@
 package org.tchw.fakturownia.data.model;
 
+import java.math.BigDecimal;
+
 import org.tchw.generic.stream.json.JsonObject;
 
 public class InvoicePosition {
@@ -10,16 +12,16 @@ public class InvoicePosition {
         this.json = json;
     }
 
-    public String priceNet() {
-        return json.getString("price_net");
+    public BigDecimal priceNet() {
+        return json.getBigDecimal("price_net");
     }
 
     public String productId() {
         return json.getString("product_id");
     }
 
-    public String quantity() {
-        return json.getString("quantity");
+    public BigDecimal quantity() {
+        return json.getBigDecimal("quantity");
     }
 
     public String name() {

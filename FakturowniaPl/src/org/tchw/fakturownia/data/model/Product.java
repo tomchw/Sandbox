@@ -1,5 +1,7 @@
 package org.tchw.fakturownia.data.model;
 
+import java.math.BigDecimal;
+
 import org.json.JSONObject;
 import org.tchw.generic.stream.json.JsonObject;
 import org.tchw.generic.stream.json.JsonToPojo.JsonObjectTo;
@@ -36,8 +38,8 @@ public class Product {
         return json.getString("name");
     }
 
-    public String purchasePriceNet() {
-        return json.getString("purchase_price_net");
+    public BigDecimal purchasePriceNet() {
+        return json.getBigDecimal("purchase_price_net");
     }
 
 }

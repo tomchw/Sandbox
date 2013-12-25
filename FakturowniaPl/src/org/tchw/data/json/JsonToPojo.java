@@ -14,10 +14,10 @@ import org.tchw.data.stream.Stream;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-public class JsonLoader<T> {
+public class JsonToPojo<T> {
 
-    public static <T> JsonLoader<T> create(Class<T> clazz) {
-        return new JsonLoader<T>();
+    public static <T> JsonToPojo<T> create(Class<T> clazz) {
+        return new JsonToPojo<T>();
     }
 
     public interface JsonObjectTo<T> {
@@ -27,7 +27,7 @@ public class JsonLoader<T> {
 
     private final ImmutableList.Builder<Reader> readers = ImmutableList.builder();
 
-    public JsonLoader<T> addFile(String filePath) {
+    public JsonToPojo<T> addFile(String filePath) {
         try {
             add(new InputStreamReader(new FileInputStream(filePath)));
             return this;
@@ -36,12 +36,12 @@ public class JsonLoader<T> {
         }
     }
 
-    public JsonLoader<T> add(Reader reader) {
+    public JsonToPojo<T> add(Reader reader) {
         readers.add(reader);
         return this;
     }
 
-    public JsonLoader<T> addAll(Iterable<? extends Reader> readers) {
+    public JsonToPojo<T> addAll(Iterable<? extends Reader> readers) {
         this.readers.addAll(readers);
         return this;
     }

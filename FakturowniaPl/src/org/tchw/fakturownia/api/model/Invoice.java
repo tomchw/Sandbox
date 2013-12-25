@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.tchw.data.json.Json.From.JsonObjectPasser;
 import org.tchw.data.json.JsonArray;
-import org.tchw.data.json.JsonLoader.JsonObjectTo;
+import org.tchw.data.json.JsonToPojo.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
 
 import com.google.common.collect.ImmutableList;

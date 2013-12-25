@@ -2,7 +2,7 @@ package org.tchw.fakturownia.api.model.impl;
 
 import java.io.Reader;
 
-import org.tchw.data.json.JsonLoader;
+import org.tchw.data.json.JsonToPojo;
 import org.tchw.data.model.AbstractFinder;
 import org.tchw.data.stream.Stream;
 import org.tchw.data.stream.Stream.From.ReaderPasser;
@@ -22,7 +22,7 @@ public class ClientFinderImpl extends AbstractFinder<Client> implements ClientFi
 
             @Override
             public ClientFinder pass(Reader reader) {
-                ImmutableMap<String, Client> map = JsonLoader.create(Client.class).add(reader).build(Client.fromJson);
+                ImmutableMap<String, Client> map = JsonToPojo.create(Client.class).add(reader).build(Client.fromJson);
                 return new ClientFinderImpl(map);
             }
 

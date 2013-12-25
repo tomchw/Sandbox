@@ -1,7 +1,7 @@
 package org.tchw.fakturownia.api.model;
 
 import org.json.JSONObject;
-import org.tchw.data.json.JsonLoader.JsonObjectTo;
+import org.tchw.data.json.JsonToPojo.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
 
 public class Product {

@@ -2,7 +2,7 @@ package org.tchw.fakturownia.api.model.impl;
 
 import java.io.Reader;
 
-import org.tchw.data.json.JsonLoader;
+import org.tchw.data.json.JsonToPojo;
 import org.tchw.data.model.AbstractFinder;
 import org.tchw.data.stream.Stream;
 import org.tchw.data.stream.Stream.From.ReaderPasser;
@@ -36,7 +36,7 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
 
             @Override
             public InvoiceFinder pass(Reader reader) {
-                ImmutableMap<String, Invoice> map = JsonLoader.create(Invoice.class).add(reader).build(Invoice.fromJson);
+                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).add(reader).build(Invoice.fromJson);
                 return new InvoiceFinderImpl(map);
             }
 
@@ -47,7 +47,7 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
         return new Streams.From.ReadersPasser<InvoiceFinder>() {
             @Override
             public InvoiceFinder pass(ImmutableList<? extends Reader> readers) {
-                ImmutableMap<String, Invoice> map = JsonLoader.create(Invoice.class).addAll(readers).build(Invoice.fromJson);
+                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).addAll(readers).build(Invoice.fromJson);
                 return new InvoiceFinderImpl(map);
             }
         };

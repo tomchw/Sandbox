@@ -2,7 +2,7 @@ package org.tchw.fakturownia.api.model.impl;
 
 import java.io.Reader;
 
-import org.tchw.data.json.JsonLoader;
+import org.tchw.data.json.JsonToPojo;
 import org.tchw.data.model.AbstractFinder;
 import org.tchw.data.stream.Stream;
 import org.tchw.data.stream.Stream.From.ReaderPasser;
@@ -24,7 +24,7 @@ public class ProductFinderImpl extends AbstractFinder<Product> implements Produc
 
             @Override
             public ProductFinder pass(Reader reader) {
-                ImmutableMap<String, Product> map = JsonLoader.create(Product.class).add(reader).build(Product.fromJson);
+                ImmutableMap<String, Product> map = JsonToPojo.create(Product.class).add(reader).build(Product.fromJson);
                 return new ProductFinderImpl(map);
             }
 
@@ -35,7 +35,7 @@ public class ProductFinderImpl extends AbstractFinder<Product> implements Produc
         return new ReadersPasser<ProductFinder>() {
             @Override
             public ProductFinder pass(ImmutableList<? extends Reader> readers) {
-                ImmutableMap<String, Product> map = JsonLoader.create(Product.class).addAll(readers).build(Product.fromJson);
+                ImmutableMap<String, Product> map = JsonToPojo.create(Product.class).addAll(readers).build(Product.fromJson);
                 return new ProductFinderImpl(map);
             }
         };

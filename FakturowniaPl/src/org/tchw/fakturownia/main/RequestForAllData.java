@@ -24,7 +24,7 @@ public class RequestForAllData {
     }
 
     public void execute() {
-        File directory = new File("c:/Private/Work/Werbum/abc");
+        File directory = Werbum.directory;
         new RequestForTableData(directory, login.clients(), "clients").execute();
         new RequestForTableData(directory, login.products(), "products").execute();
         File todayDirectoryPath = new RequestForTableData(directory, login.invoices(), "tempInvoices").execute();

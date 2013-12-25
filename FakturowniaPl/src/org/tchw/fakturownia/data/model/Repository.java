@@ -1,6 +1,9 @@
 package org.tchw.fakturownia.data.model;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.tchw.fakturownia.data.model.impl.ClientFinderImpl;
@@ -9,6 +12,7 @@ import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
 import org.tchw.generic.stream.stream.Stream;
 import org.tchw.generic.stream.stream.Streams;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 
 public class Repository {
@@ -16,6 +20,20 @@ public class Repository {
     public final ClientFinder clients;
     public final InvoiceFinder invoices;
     public final ProductFinder products;
+
+    public static Repository fromDirectoryWithToday(String directory) {
+        return builder()
+            .clientsFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "clients") )
+            .invoicesFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "invoices") )
+            .productsFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "products") )
+            .build();
+    }
+
+    private static String todayDirectoryName() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
     public Repository(ClientFinder clients, InvoiceFinder invoices, ProductFinder products) {
         this.clients = clients;

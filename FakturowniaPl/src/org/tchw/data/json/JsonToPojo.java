@@ -46,24 +46,38 @@ public class JsonToPojo<T> {
         return this;
     }
 
-    public ImmutableMap<String, T> build(JsonObjectTo<T> jsonObjectTo) {
+    public ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo) {
+        return buildAsMap(jsonObjectTo, "id");
+    }
+
+    public ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo, String idFieldName) {
         ImmutableMap.Builder<String, T> builder = ImmutableMap.builder();
         for (Reader reader : readers.build()) {
-            appendReader(new BufferedReader(reader), jsonObjectTo, builder);
+            jsonObjectToPojoMap(new BufferedReader(reader), jsonObjectTo, builder, idFieldName);
         }
         return builder.build();
     }
 
-    private void appendReader(Reader reader, JsonObjectTo<T> jsonObjectTo, ImmutableMap.Builder<String, T> builder) {
+    private void jsonObjectToPojoMap(Reader reader, final JsonObjectTo<T> jsonObjectTo, final ImmutableMap.Builder<String, T> builder, final String idFieldName) {
+        Handling mapWithIdHandling = new Handling() {
+            @Override
+            public void onParsedJsonObject(JsonObject jsonObject) {
+                builder.put(jsonObject.getString(idFieldName), jsonObjectTo.create(jsonObject));
+            }
+        };
+        readJsonObjects(reader, mapWithIdHandling);
+    }
+
+    private void readJsonObjects(Reader reader, Handling handling) {
         Object value = JSONTokenerNextValue(reader);
         if( value instanceof JSONArray ) {
             JsonArray jsonArray = JsonArray.create((JSONArray) value);
             for (JsonObject jsonObject : jsonArray.getObjects()) {
-                builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
+                handling.onParsedJsonObject(jsonObject);
             }
         } else if( value instanceof JSONObject ) {
             JsonObject jsonObject = JsonObject.create((JSONObject) value);
-            builder.put(jsonObject.getString("id"), jsonObjectTo.create(jsonObject));
+            handling.onParsedJsonObject(jsonObject);
         }
     }
 
@@ -77,5 +91,10 @@ public class JsonToPojo<T> {
         return value;
     }
 
+    private interface Handling {
+
+        void onParsedJsonObject(JsonObject jsonObject);
+
+    }
 }
 

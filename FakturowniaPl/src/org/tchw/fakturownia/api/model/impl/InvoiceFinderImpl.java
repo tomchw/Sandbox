@@ -36,7 +36,7 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
 
             @Override
             public InvoiceFinder pass(Reader reader) {
-                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).add(reader).build(Invoice.fromJson);
+                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).add(reader).buildAsMap(Invoice.fromJson);
                 return new InvoiceFinderImpl(map);
             }
 
@@ -47,7 +47,7 @@ public class InvoiceFinderImpl extends AbstractFinder<Invoice> implements Invoic
         return new Streams.From.ReadersPasser<InvoiceFinder>() {
             @Override
             public InvoiceFinder pass(ImmutableList<? extends Reader> readers) {
-                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).addAll(readers).build(Invoice.fromJson);
+                ImmutableMap<String, Invoice> map = JsonToPojo.create(Invoice.class).addAll(readers).buildAsMap(Invoice.fromJson);
                 return new InvoiceFinderImpl(map);
             }
         };

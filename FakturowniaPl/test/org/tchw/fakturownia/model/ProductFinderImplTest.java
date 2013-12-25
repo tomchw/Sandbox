@@ -16,7 +16,7 @@ public class ProductFinderImplTest {
 
     @Test
     public void test() {
-        ImmutableMap<String, Product> productsAsMap = JsonToPojo.create(Product.class).add(Stream.fromResource(ProductFinderImplTest.class, "products.txt").asBufferedReader()).build(new JsonObjectTo<Product>() {
+        ImmutableMap<String, Product> productsAsMap = JsonToPojo.create(Product.class).add(Stream.fromResource(ProductFinderImplTest.class, "products.txt").asBufferedReader()).buildAsMap(new JsonObjectTo<Product>() {
             @Override
             public Product create(JsonObject json) {
                 return Product.create(json);

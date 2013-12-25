@@ -2,7 +2,6 @@ package org.tchw.data.json;
 
 import java.io.Reader;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -25,10 +24,6 @@ public class Json {
 
         public From(Reader reader) {
             this.reader = reader;
-        }
-
-        public Execution handle(JSONArrayHandling jsonArrayHandling) {
-            return new Execution(jsonArrayHandling);
         }
 
         public interface JSONTokenerPasser<T> {
@@ -71,26 +66,6 @@ public class Json {
             return passer.pass(asJsonObject());
         }
 
-        public class Execution {
-
-            private final JSONArrayHandling jsonArrayHandling;
-
-            public Execution(JSONArrayHandling jsonArrayHandling) {
-                this.jsonArrayHandling = jsonArrayHandling;
-            }
-
-            public void executeSync() {
-                jsonArrayHandling.handle(asJSONArray0(reader));
-            }
-        }
-    }
-
-    private static JSONArray asJSONArray0(Reader reader) {
-        try {
-            return new JSONArray(new JSONTokener(reader));
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

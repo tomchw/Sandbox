@@ -39,8 +39,8 @@ public class ClientProfitCalculator {
         Product product = repository.products.byId(invoicePosition.productId());
         BigDecimal purchasePriceNet = new BigDecimal(product.purchasePriceNet());
 
-        BigDecimal singleProductProfit = invoicePorisitionpriceNet.min(purchasePriceNet);
+        BigDecimal singleProductProfit = invoicePorisitionpriceNet.add(purchasePriceNet.negate());
         BigDecimal profit = singleProductProfit.multiply(invoicePositionQuantity);
-        return new InvoicePositionProfit(invoicePosition, profit, product);
+        return new InvoicePositionProfit(invoicePosition, profit, product, singleProductProfit);
     }
 }

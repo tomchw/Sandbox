@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.data.example;
+package org.tchw.temp.example;
 
 import java.util.Map;
 

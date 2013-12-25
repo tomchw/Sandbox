@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.data.example;
+package org.tchw.temp.example;
 
 import java.util.Map;
 
@@ -7,16 +7,16 @@ import org.tchw.generic.data.csvBrowsing.CsvLineAsMapHandler;
 
 import com.google.common.collect.ImmutableSortedMap;
 
-public class BrowsingInvoices {
+public class BrowsingProducts {
 
     public static void main(String[] args) {
-        String filePath = "c:/Private/Work/Werbum/firma-ksiegarska-werbum.invoices.json.1.txt.csv";
+        String filePath = "c:/Private/Work/Werbum/firma-ksiegarska-werbum.products.json.1.txt.csv";
         CsvAnalyzer.analyzeCsv(filePath);
 
         CsvBrowsing.fromFile(filePath).onLineAsMap(new CsvLineAsMapHandler() {
             @Override
             public void onCsvLineAsMap(ImmutableSortedMap<String, String> lineAsMap) {
-                print(lineAsMap, "id", "client_id", "number", "price_gross");
+                print(lineAsMap, "id", "code", "name", "purchase_price_gross", "price_gross", "quantity");
             }
         });
 
@@ -29,5 +29,4 @@ public class BrowsingInvoices {
         }
         System.out.println("--");
     }
-
 }

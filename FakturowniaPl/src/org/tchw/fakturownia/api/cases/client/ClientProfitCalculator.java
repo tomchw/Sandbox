@@ -32,7 +32,7 @@ public class ClientProfitCalculator {
         return invoiceProfitBuilder.build();
     }
 
-    private Profit<InvoicePosition> calculateInvoicePositionProfit(InvoicePosition invoicePosition) {
+    private InvoicePositionProfit calculateInvoicePositionProfit(InvoicePosition invoicePosition) {
         BigDecimal invoicePositionQuantity = new BigDecimal(invoicePosition.quantity());
         BigDecimal invoicePorisitionpriceNet = new BigDecimal(invoicePosition.priceNet());
 
@@ -41,6 +41,6 @@ public class ClientProfitCalculator {
 
         BigDecimal singleProductProfit = invoicePorisitionpriceNet.min(purchasePriceNet);
         BigDecimal profit = singleProductProfit.multiply(invoicePositionQuantity);
-        return new Profit<InvoicePosition>(invoicePosition, profit);
+        return new InvoicePositionProfit(invoicePosition, profit, product);
     }
 }

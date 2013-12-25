@@ -34,15 +34,15 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
     @Override
     public void onClientProfit(ClientProfit clientProfit) {
         Client client = clientProfit.profitObject();
-        ImmutableList<? extends Object> clientList = saveClientLine(client.name(), clientProfit.profitValue());
-        doInvoicesProfits(clientProfit.invoicesProfits, clientList);
+        writeToCsv(ImmutableList.of(client.name(), clientProfit.profitValue()));
+        doInvoicesProfits(clientProfit.invoicesProfits, ImmutableList.of(client.name(), ""));
     }
 
     private void doInvoicesProfits(ImmutableList<InvoiceProfit> invoicesProfits, ImmutableList<? extends Object> clientList) {
         for (InvoiceProfit invoiceProfit : invoicesProfits) {
             Invoice invoice = invoiceProfit.profitObject();
-            ImmutableList<? extends Object> invoiceList = saveInvoiceLine(invoice.number(), invoiceProfit.profitValue());
-            ImmutableList<Object> list = ImmutableList.builder().addAll(clientList).addAll(invoiceList).build();
+            writeToCsv(ImmutableList.builder().addAll(clientList).add(invoice.number()).add(invoiceProfit.profitValue()).build());
+            ImmutableList<Object> list = ImmutableList.builder().addAll(clientList).addAll(ImmutableList.of(invoice.number(), "")).build();
             doInvoicePositionsProfits(invoiceProfit.invoicePositionsProfits, list);
         }
     }
@@ -54,7 +54,7 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
             BigDecimal singlePositionProfit = invoicePositionProfit.singleProductProfit;
             BigDecimal fullPositionProfit = invoicePositionProfit.profitValue();
 
-            ImmutableList<? extends Object> savePositionsLine = savePositionsLine(
+            ImmutableList<? extends Object> savePositionsLine = ImmutableList.of(
                     product.name(),
                     fullPositionProfit,
                     invoicePosition.priceNet(),
@@ -68,7 +68,7 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
         }
     }
 
-    private void writeToCsv(ImmutableList<Object> wholeLineList) {
+    private void writeToCsv(ImmutableList<? extends Object> wholeLineList) {
         ImmutableList.Builder<Object> builder = ImmutableList.builder();
         for (Object object : wholeLineList) {
             if( object instanceof BigDecimal ) {
@@ -83,17 +83,4 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
             throw new RuntimeException(e);
         }
     }
-
-    private ImmutableList<? extends Object> savePositionsLine(Object...cells) {
-        return ImmutableList.copyOf(cells);
-    }
-
-    private ImmutableList<? extends Object> saveInvoiceLine(String number, BigDecimal profitValue) {
-        return ImmutableList.of(number, profitValue);
-    }
-
-    private ImmutableList<? extends Object> saveClientLine(String name, BigDecimal profitValue) {
-        return ImmutableList.of(name, profitValue);
-    }
-
 }

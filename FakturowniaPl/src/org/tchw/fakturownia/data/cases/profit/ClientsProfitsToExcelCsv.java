@@ -17,6 +17,18 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
 
     public ClientsProfitsToExcelCsv(CsvListWriter writer) {
         csvWriter = writer;
+        writeHeader();
+    }
+
+    private void writeHeader() {
+        try {
+            csvWriter.writeHeader(
+                    "Client", "Full Client Profit",
+                    "Invoice number", "Full invoice profit",
+                    "Product", "Full Product Profit", "Price net", "Purchase net", "Single Product Profit", "Quantity");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -46,8 +58,9 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
                     product.name(),
                     fullPositionProfit,
                     invoicePosition.priceNet(),
-                    invoicePosition.quantity(),
-                    singlePositionProfit
+                    product.purchasePriceNet(),
+                    singlePositionProfit,
+                    invoicePosition.quantity()
                     );
 
             ImmutableList<Object> wholeLineList = ImmutableList.builder().addAll(list).addAll(savePositionsLine).build();
@@ -63,14 +76,8 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
         }
     }
 
-    private ImmutableList<? extends Object> savePositionsLine(String name, BigDecimal fullPositionProfit, String priceNet, String quantity, BigDecimal singlePositionProfit) {
-        return ImmutableList.of(
-                name,
-                fullPositionProfit,
-                priceNet,
-                quantity,
-                singlePositionProfit
-                );
+    private ImmutableList<? extends Object> savePositionsLine(Object...cells) {
+        return ImmutableList.copyOf(cells);
     }
 
     private ImmutableList<? extends Object> saveInvoiceLine(String number, BigDecimal profitValue) {

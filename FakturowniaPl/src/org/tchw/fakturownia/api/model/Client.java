@@ -1,8 +1,8 @@
 package org.tchw.fakturownia.api.model;
 
 import org.json.JSONObject;
-import org.tchw.data.json.JsonToPojo.JsonObjectTo;
 import org.tchw.data.json.JsonObject;
+import org.tchw.data.json.JsonToPojo.JsonObjectTo;
 
 public class Client {
 
@@ -30,6 +30,10 @@ public class Client {
 
     public String id() {
         return json.getString("id");
+    }
+
+    public String name() {
+        return json.getString("name");
     }
 
 }

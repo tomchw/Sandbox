@@ -30,6 +30,10 @@ public class Repository {
         return new Repository(clientFinder, invoiceFinder, productFinder);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
 
         private ClientFinder clientFinder;
@@ -55,6 +59,9 @@ public class Repository {
         }
 
         public Repository build() {
+            Preconditions.checkNotNull(clientFinder);
+            Preconditions.checkNotNull(invoiceFinder);
+            Preconditions.checkNotNull(productFinder);
             return new Repository(clientFinder, invoiceFinder, productFinder);
         }
     }

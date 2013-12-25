@@ -21,4 +21,8 @@ public class InvoicePosition {
     public String quantity() {
         return json.getString("quantity");
     }
+
+    public String name() {
+        return json.getString("name");
+    }
 }

@@ -1,15 +1,14 @@
 package org.tchw.fakturownia.api.cases.client;
 
 import org.tchw.fakturownia.api.model.Client;
-import org.tchw.fakturownia.api.model.Invoice;
 
 import com.google.common.collect.ImmutableList;
 
 public class ClientProfit extends Profit<Client> {
 
-    public final ImmutableList<Profit<Invoice>> invoicesProfits;
+    public final ImmutableList<InvoiceProfit> invoicesProfits;
 
-    private ClientProfit(Client profitObject, ImmutableList<Profit<Invoice>> invoicesProfits) {
+    private ClientProfit(Client profitObject, ImmutableList<InvoiceProfit> invoicesProfits) {
         super(profitObject, Profit.sum(invoicesProfits));
         this.invoicesProfits = invoicesProfits;
     }
@@ -22,13 +21,13 @@ public class ClientProfit extends Profit<Client> {
 
         private final Client client;
 
-        private final ImmutableList.Builder<Profit<Invoice>> builder = ImmutableList.builder();
+        private final ImmutableList.Builder<InvoiceProfit> builder = ImmutableList.builder();
 
         public Builder(Client client) {
             this.client = client;
         }
 
-        public Builder add(Profit<Invoice> invoiceProfit) {
+        public Builder add(InvoiceProfit invoiceProfit) {
             builder.add(invoiceProfit);
             return this;
         }

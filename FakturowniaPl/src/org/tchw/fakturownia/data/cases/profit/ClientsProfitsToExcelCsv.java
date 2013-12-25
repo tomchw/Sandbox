@@ -69,8 +69,16 @@ public class ClientsProfitsToExcelCsv implements AllClientsProfitCalculator.Hand
     }
 
     private void writeToCsv(ImmutableList<Object> wholeLineList) {
+        ImmutableList.Builder<Object> builder = ImmutableList.builder();
+        for (Object object : wholeLineList) {
+            if( object instanceof BigDecimal ) {
+                builder.add(((BigDecimal) object).toPlainString().replace(".", ","));
+            } else {
+                builder.add(object);
+            }
+        }
         try {
-            csvWriter.write(wholeLineList);
+            csvWriter.write(builder.build());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

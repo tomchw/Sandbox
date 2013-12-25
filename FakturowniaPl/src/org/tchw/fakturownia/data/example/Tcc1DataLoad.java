@@ -1,7 +1,7 @@
 package org.tchw.fakturownia.data.example;
 
-import org.tchw.fakturownia.api.core.GetRequest;
-import org.tchw.fakturownia.api.core.GetRequest.Login;
+import org.tchw.fakturownia.remote.GetRequest;
+import org.tchw.fakturownia.remote.GetRequest.Login;
 
 public class Tcc1DataLoad {
 

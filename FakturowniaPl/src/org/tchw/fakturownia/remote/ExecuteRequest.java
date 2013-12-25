@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.api.core;
+package org.tchw.fakturownia.remote;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

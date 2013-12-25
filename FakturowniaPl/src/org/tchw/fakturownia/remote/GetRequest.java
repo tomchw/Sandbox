@@ -1,11 +1,11 @@
-package org.tchw.fakturownia.api.core;
+package org.tchw.fakturownia.remote;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.tchw.fakturownia.api.core.ExecuteRequest.ContentHandlingWithBufferedReader;
+import org.tchw.fakturownia.remote.ExecuteRequest.ContentHandlingWithBufferedReader;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;

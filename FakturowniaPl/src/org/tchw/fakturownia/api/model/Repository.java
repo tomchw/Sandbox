@@ -1,9 +1,15 @@
 package org.tchw.fakturownia.api.model;
 
+import java.io.File;
+import java.util.regex.Pattern;
+
 import org.tchw.data.stream.Stream;
+import org.tchw.data.stream.Streams;
 import org.tchw.fakturownia.api.model.impl.ClientFinderImpl;
 import org.tchw.fakturownia.api.model.impl.InvoiceFinderImpl;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
+
+import com.google.common.base.Preconditions;
 
 public class Repository {
 
@@ -22,5 +28,34 @@ public class Repository {
         InvoiceFinder invoiceFinder = Stream.fromResource(testClass, "invoices.txt").passTo(InvoiceFinderImpl.takeFromReader());
         ProductFinder productFinder = Stream.fromResource(testClass, "products.txt").passTo(ProductFinderImpl.takeFromReader());
         return new Repository(clientFinder, invoiceFinder, productFinder);
+    }
+
+    public static class Builder {
+
+        private ClientFinder clientFinder;
+        private InvoiceFinder invoiceFinder;
+        private ProductFinder productFinder;
+
+        public Builder invoicesFromDirectory(String directoryPath) {
+            Preconditions.checkState(invoiceFinder == null, "InvoiceFinder is already set");
+            invoiceFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(InvoiceFinderImpl.takeFromReaders());
+            return this;
+        }
+
+        public Builder productsFromDirectory(String directoryPath) {
+            Preconditions.checkState(productFinder == null, "ProductFinder is already set");
+            productFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(ProductFinderImpl.takeFromReaders());
+            return this;
+        }
+
+        public Builder clientsFromDirectory(String directoryPath) {
+            Preconditions.checkState(clientFinder == null, "ClientFinder is already set");
+            clientFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(ClientFinderImpl.takeFromReaders());
+            return this;
+        }
+
+        public Repository build() {
+            return new Repository(clientFinder, invoiceFinder, productFinder);
+        }
     }
 }

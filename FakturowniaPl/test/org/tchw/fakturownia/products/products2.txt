@@ -1,0 +1,4 @@
+[
+{ "id":3, "purchase_price_net": 30.0},
+{ "id":4, "purchase_price_net": 40.0}
+]

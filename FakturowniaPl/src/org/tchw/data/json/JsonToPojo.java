@@ -14,10 +14,10 @@ import org.tchw.data.stream.Stream;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-public class JsonToPojo<T> {
+public class JsonToPojo {
 
-    public static <T> JsonToPojo<T> create(Class<T> clazz) {
-        return new JsonToPojo<T>();
+    public static JsonToPojo create() {
+        return new JsonToPojo();
     }
 
     public interface JsonObjectTo<T> {
@@ -27,7 +27,7 @@ public class JsonToPojo<T> {
 
     private final ImmutableList.Builder<Reader> readers = ImmutableList.builder();
 
-    public JsonToPojo<T> addFile(String filePath) {
+    public JsonToPojo addFile(String filePath) {
         try {
             add(new InputStreamReader(new FileInputStream(filePath)));
             return this;
@@ -36,21 +36,21 @@ public class JsonToPojo<T> {
         }
     }
 
-    public JsonToPojo<T> add(Reader reader) {
+    public JsonToPojo add(Reader reader) {
         readers.add(reader);
         return this;
     }
 
-    public JsonToPojo<T> addAll(Iterable<? extends Reader> readers) {
+    public JsonToPojo addAll(Iterable<? extends Reader> readers) {
         this.readers.addAll(readers);
         return this;
     }
 
-    public ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo) {
+    public <T> ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo) {
         return buildAsMap(jsonObjectTo, "id");
     }
 
-    public ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo, String idFieldName) {
+    public <T> ImmutableMap<String, T> buildAsMap(JsonObjectTo<T> jsonObjectTo, String idFieldName) {
         ImmutableMap.Builder<String, T> builder = ImmutableMap.builder();
         for (Reader reader : readers.build()) {
             jsonObjectToPojoMap(new BufferedReader(reader), jsonObjectTo, builder, idFieldName);
@@ -58,7 +58,7 @@ public class JsonToPojo<T> {
         return builder.build();
     }
 
-    private void jsonObjectToPojoMap(Reader reader, final JsonObjectTo<T> jsonObjectTo, final ImmutableMap.Builder<String, T> builder, final String idFieldName) {
+    private <T> void jsonObjectToPojoMap(Reader reader, final JsonObjectTo<T> jsonObjectTo, final ImmutableMap.Builder<String, T> builder, final String idFieldName) {
         Handling mapWithIdHandling = new Handling() {
             @Override
             public void onParsedJsonObject(JsonObject jsonObject) {

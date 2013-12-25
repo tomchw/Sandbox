@@ -22,7 +22,7 @@ public class ClientFinderImpl extends AbstractFinder<Client> implements ClientFi
 
             @Override
             public ClientFinder pass(Reader reader) {
-                ImmutableMap<String, Client> map = JsonToPojo.create(Client.class).add(reader).buildAsMap(Client.fromJson);
+                ImmutableMap<String, Client> map = JsonToPojo.create().add(reader).buildAsMap(Client.fromJson);
                 return new ClientFinderImpl(map);
             }
 

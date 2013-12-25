@@ -24,7 +24,7 @@ public class ProductFinderImpl extends AbstractFinder<Product> implements Produc
 
             @Override
             public ProductFinder pass(Reader reader) {
-                ImmutableMap<String, Product> map = JsonToPojo.create(Product.class).add(reader).buildAsMap(Product.fromJson);
+                ImmutableMap<String, Product> map = JsonToPojo.create().add(reader).buildAsMap(Product.fromJson);
                 return new ProductFinderImpl(map);
             }
 
@@ -35,7 +35,7 @@ public class ProductFinderImpl extends AbstractFinder<Product> implements Produc
         return new ReadersPasser<ProductFinder>() {
             @Override
             public ProductFinder pass(ImmutableList<? extends Reader> readers) {
-                ImmutableMap<String, Product> map = JsonToPojo.create(Product.class).addAll(readers).buildAsMap(Product.fromJson);
+                ImmutableMap<String, Product> map = JsonToPojo.create().addAll(readers).buildAsMap(Product.fromJson);
                 return new ProductFinderImpl(map);
             }
         };

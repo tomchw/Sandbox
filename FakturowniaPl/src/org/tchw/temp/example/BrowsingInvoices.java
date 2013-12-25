@@ -2,8 +2,8 @@ package org.tchw.temp.example;
 
 import java.util.Map;
 
-import org.tchw.generic.data.csvBrowsing.CsvBrowsing;
-import org.tchw.generic.data.csvBrowsing.CsvLineAsMapHandler;
+import org.tchw.generic.stream.csvBrowsing.CsvBrowsing;
+import org.tchw.generic.stream.csvBrowsing.CsvLineAsMapHandler;
 
 import com.google.common.collect.ImmutableSortedMap;
 

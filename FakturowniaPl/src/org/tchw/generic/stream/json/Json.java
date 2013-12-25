@@ -1,11 +1,11 @@
-package org.tchw.generic.data.json;
+package org.tchw.generic.stream.json;
 
 import java.io.Reader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.stream.Stream;
 
 public class Json {
 

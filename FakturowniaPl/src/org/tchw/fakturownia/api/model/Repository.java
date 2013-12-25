@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 import org.tchw.fakturownia.api.model.impl.ClientFinderImpl;
 import org.tchw.fakturownia.api.model.impl.InvoiceFinderImpl;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
-import org.tchw.generic.data.stream.Stream;
-import org.tchw.generic.data.stream.Streams;
+import org.tchw.generic.stream.stream.Stream;
+import org.tchw.generic.stream.stream.Streams;
 
 import com.google.common.base.Preconditions;
 

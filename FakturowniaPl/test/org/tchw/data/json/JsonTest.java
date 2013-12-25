@@ -2,9 +2,9 @@ package org.tchw.data.json;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.generic.data.json.Json;
-import org.tchw.generic.data.json.JsonArray;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.json.Json;
+import org.tchw.generic.stream.json.JsonArray;
+import org.tchw.generic.stream.stream.Stream;
 
 public class JsonTest {
 

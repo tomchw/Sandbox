@@ -1,6 +1,6 @@
 package org.tchw.fakturownia.api.model;
 
-import org.tchw.generic.data.json.JsonObject;
+import org.tchw.generic.stream.json.JsonObject;
 
 public class InvoicePosition {
 

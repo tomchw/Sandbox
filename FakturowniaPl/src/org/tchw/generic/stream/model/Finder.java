@@ -1,4 +1,4 @@
-package org.tchw.generic.data.model;
+package org.tchw.generic.stream.model;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;

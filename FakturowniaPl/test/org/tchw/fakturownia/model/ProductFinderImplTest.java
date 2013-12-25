@@ -5,10 +5,10 @@ import org.junit.Test;
 import org.tchw.fakturownia.api.model.Product;
 import org.tchw.fakturownia.api.model.ProductFinder;
 import org.tchw.fakturownia.api.model.impl.ProductFinderImpl;
-import org.tchw.generic.data.json.JsonObject;
-import org.tchw.generic.data.json.JsonToPojo;
-import org.tchw.generic.data.json.JsonToPojo.JsonObjectTo;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.json.JsonObject;
+import org.tchw.generic.stream.json.JsonToPojo;
+import org.tchw.generic.stream.json.JsonToPojo.JsonObjectTo;
+import org.tchw.generic.stream.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
 

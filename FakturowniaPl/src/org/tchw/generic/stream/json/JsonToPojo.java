@@ -1,4 +1,4 @@
-package org.tchw.generic.data.json;
+package org.tchw.generic.stream.json;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.io.Reader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.stream.Stream;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

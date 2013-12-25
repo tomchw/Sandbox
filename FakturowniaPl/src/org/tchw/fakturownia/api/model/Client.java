@@ -1,8 +1,8 @@
 package org.tchw.fakturownia.api.model;
 
 import org.json.JSONObject;
-import org.tchw.generic.data.json.JsonObject;
-import org.tchw.generic.data.json.JsonToPojo.JsonObjectTo;
+import org.tchw.generic.stream.json.JsonObject;
+import org.tchw.generic.stream.json.JsonToPojo.JsonObjectTo;
 
 public class Client {
 

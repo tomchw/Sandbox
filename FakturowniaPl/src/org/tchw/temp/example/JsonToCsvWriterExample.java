@@ -2,9 +2,9 @@ package org.tchw.temp.example;
 
 import java.io.File;
 
-import org.tchw.generic.data.json.Json;
-import org.tchw.generic.data.json.csv.JsonToCsv;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.json.Json;
+import org.tchw.generic.stream.json.csv.JsonToCsv;
+import org.tchw.generic.stream.stream.Stream;
 
 public class JsonToCsvWriterExample {
 

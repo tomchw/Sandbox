@@ -1,6 +1,6 @@
 package org.tchw.fakturownia.api.model;
 
-import org.tchw.generic.data.model.Finder;
+import org.tchw.generic.stream.model.Finder;
 
 import com.google.common.collect.ImmutableList;
 

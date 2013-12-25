@@ -4,12 +4,12 @@ import java.io.Reader;
 
 import org.tchw.fakturownia.api.model.Invoice;
 import org.tchw.fakturownia.api.model.InvoiceFinder;
-import org.tchw.generic.data.json.JsonToPojo;
-import org.tchw.generic.data.model.AbstractFinder;
-import org.tchw.generic.data.stream.Stream;
-import org.tchw.generic.data.stream.Streams;
-import org.tchw.generic.data.stream.Stream.From.ReaderPasser;
-import org.tchw.generic.data.stream.Streams.From.ReadersPasser;
+import org.tchw.generic.stream.json.JsonToPojo;
+import org.tchw.generic.stream.model.AbstractFinder;
+import org.tchw.generic.stream.stream.Stream;
+import org.tchw.generic.stream.stream.Streams;
+import org.tchw.generic.stream.stream.Stream.From.ReaderPasser;
+import org.tchw.generic.stream.stream.Streams.From.ReadersPasser;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;

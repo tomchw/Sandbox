@@ -1,4 +1,4 @@
-package org.tchw.generic.data.json;
+package org.tchw.generic.stream.json;
 
 import java.io.Reader;
 

@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.generic.data.json.Json;
-import org.tchw.generic.data.json.csv.JsonToCsv;
-import org.tchw.generic.data.stream.Stream;
+import org.tchw.generic.stream.json.Json;
+import org.tchw.generic.stream.json.csv.JsonToCsv;
+import org.tchw.generic.stream.stream.Stream;
 
 import com.google.common.base.Splitter;
 

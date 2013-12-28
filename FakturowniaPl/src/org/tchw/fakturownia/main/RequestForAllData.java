@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.remote.GetRequest.Login;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.generic.stream.json.Json;
@@ -17,6 +18,8 @@ import com.google.common.io.Files;
 
 public class RequestForAllData {
 
+    private final Logger log = Logger.getLogger(getClass());
+
     private final Login login;
 
     public RequestForAllData(Login login) {
@@ -25,30 +28,44 @@ public class RequestForAllData {
 
     public void execute() {
         File directory = Werbum.directory;
-        new RequestForTableData(directory, login.clients(), "clients").execute();
-        new RequestForTableData(directory, login.products(), "products").execute();
-        File todayDirectoryPath = new RequestForTableData(directory, login.invoices(), "tempInvoices").execute();
-        loadFullInvoices(todayDirectoryPath);
+        log.info("Requesting for all data. Files will be saved to " + directory.getPath());
+        requestForClients(directory);
+        requestForProducts(directory);
+        File todayDirectoryPath = requestForInvoices(directory);
+        requestForFullInvoices(todayDirectoryPath);
+        log.info("End of requesting for all data");
     }
 
-    private void loadFullInvoices(File todayDirectoryPath) {
+    private File requestForInvoices(File directory) {
+        return new RequestForTableData(directory, login.invoices(), "tempInvoices").execute();
+    }
+
+    private void requestForProducts(File directory) {
+        new RequestForTableData(directory, login.products(), "products").execute();
+    }
+
+    private void requestForClients(File directory) {
+        new RequestForTableData(directory, login.clients(), "clients").execute();
+    }
+
+    private void requestForFullInvoices(File todayDirectoryPath) {
+        log.info("Request for full invoices");
         File[] listFiles = tempInvoicesDir(todayDirectoryPath).listFiles();
         for (File file : listFiles) {
-            loadForEachTempInvoiceFile(todayDirectoryPath, file);
+            requestForEachTempInvoiceFile(todayDirectoryPath, file);
         }
-
     }
 
-    private void loadForEachTempInvoiceFile(File todayDirectoryPath, File file) {
+    private void requestForEachTempInvoiceFile(File todayDirectoryPath, File file) {
         JsonArray jsonArray = Stream.from(file).passTo(Json.takeFromReader()).asJsonArray();
         Iterator<JsonObject> iterator = jsonArray.getObjects().iterator();
         while(iterator.hasNext()) {
             String id = iterator.next().getString("id");
-            loadInvoiceAndSaveToFile(todayDirectoryPath, id);
+            requestInvoiceAndSaveToFile(todayDirectoryPath, id);
         }
     }
 
-    private void loadInvoiceAndSaveToFile(File todayDirectoryPath, String id) {
+    private void requestInvoiceAndSaveToFile(File todayDirectoryPath, String id) {
         File targetFile = new File(Joiner.on("/").join(todayDirectoryPath.getPath(), "invoices", "invoice." + id ));
         createParentDirs(targetFile);
         login.invoice(id).page(1).saveContentToFile(targetFile);

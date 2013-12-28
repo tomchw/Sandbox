@@ -6,12 +6,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.remote.GetRequest.Login.Table;
 
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 
 public class RequestForTableData {
+
+    private final Logger log = Logger.getLogger(getClass());
 
     private final File directory;
     private final Table table;
@@ -26,6 +29,7 @@ public class RequestForTableData {
     }
 
     public File execute() {
+        log.info("Requesting for " + tableType);
         FilePathSupport filePathSupport;
         File todayDirectoryFile = new File(Joiner.on("/").join(directory.getPath(), todayDirectoryName()));
         do {

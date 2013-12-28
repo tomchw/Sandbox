@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.remote.GetRequest.Login;
+import org.tchw.fakturownia.remote.RequestExecution;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
@@ -33,10 +34,14 @@ public class RequestForAllData {
 
     private final RequestForTableData requestForTableData;
 
-    public RequestForAllData(Login login, RepositoryDirectory repositoryDirectory, RequestForTableData requestForTableData) {
+    private final RequestExecution requestExecution;
+
+    public RequestForAllData(Login login, RepositoryDirectory repositoryDirectory,
+            RequestForTableData requestForTableData, RequestExecution requestExecution) {
         this.login = login;
         this.repositoryDirectory = repositoryDirectory;
         this.requestForTableData = requestForTableData;
+        this.requestExecution = requestExecution;
     }
 
     public void execute() {
@@ -110,7 +115,7 @@ public class RequestForAllData {
     private void requestInvoiceAndSaveToFile(String id) {
         File targetFile = new File(Joiner.on("/").join(repositoryDirectory.repositoryDirectory().getPath(), "invoices", "invoice." + id ));
         createParentDirs(targetFile);
-        login.invoice(id).page(1).handleContent(new WriteToFileContentHandling(targetFile));
+        login.invoice(id).page(1).handleContent(requestExecution, new WriteToFileContentHandling(targetFile));
     }
 
     private File tempInvoicesDir() {

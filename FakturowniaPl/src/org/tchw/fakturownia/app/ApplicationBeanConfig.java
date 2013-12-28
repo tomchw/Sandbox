@@ -6,7 +6,7 @@ import org.tchw.fakturownia.data.model.Repository;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.data.model.file.impl.RepositoryDirectoryImpl;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
-import org.tchw.fakturownia.remote.gatherData.impl.RequestForTableDataImpl;
+import org.tchw.fakturownia.remote.gatherData.impl.RequestForTableDataToFile;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
 import org.tchw.fakturownia.services.RequestForAllData;
 import org.tchw.specific.werbum.Werbum;
@@ -26,7 +26,7 @@ public class ApplicationBeanConfig {
 
     @Bean
     public RequestForTableData requestForTableData() {
-        return new RequestForTableDataImpl(repositoryDirectory());
+        return new RequestForTableDataToFile(repositoryDirectory());
     }
 
     @Bean

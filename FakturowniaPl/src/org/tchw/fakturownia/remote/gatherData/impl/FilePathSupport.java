@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.remote.gatherData;
+package org.tchw.fakturownia.remote.gatherData.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
-public class FilePathSupport {
+class FilePathSupport {
 
     private final File file;
 

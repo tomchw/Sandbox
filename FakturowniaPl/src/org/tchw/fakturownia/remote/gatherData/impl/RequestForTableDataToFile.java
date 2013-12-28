@@ -6,20 +6,19 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.remote.GetRequest.Login.Table;
-import org.tchw.fakturownia.remote.gatherData.FilePathSupport;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
 
 import com.google.common.io.Files;
 
-public class RequestForTableDataImpl implements RequestForTableData {
+public class RequestForTableDataToFile implements RequestForTableData {
 
     private final Logger log = Logger.getLogger(getClass());
 
     private final String repositoryPath;
 
-    public RequestForTableDataImpl(RepositoryDirectory repositoryDirectory) {
+    public RequestForTableDataToFile(RepositoryDirectory repositoryDirectory) {
         this.repositoryPath = repositoryDirectory.repositoryDirectory().getPath();
     }
 

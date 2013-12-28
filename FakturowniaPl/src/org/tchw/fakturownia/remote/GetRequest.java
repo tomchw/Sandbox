@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.remote.ExecuteRequest.ContentHandlingWithBufferedReader;
 
 import com.google.common.base.Charsets;
@@ -14,6 +15,8 @@ import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 
 public class GetRequest {
+
+    private final static Logger log = Logger.getLogger(GetRequest.class);
 
     public static Login login(String login, String token) {
         return new Login(login, token);
@@ -141,6 +144,7 @@ public class GetRequest {
                     }
 
                     public void executeSync() {
+                        log.debug("Getting " + table + " page " + pageNumber );
                         String url = "https://" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "&api_token=" + token;
                         new ExecuteRequest(url, contentHandlingWithBufferedReader).executeSync();
                     }

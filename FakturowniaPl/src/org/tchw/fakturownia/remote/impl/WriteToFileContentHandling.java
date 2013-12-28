@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.tchw.fakturownia.remote.ContentHandling;
+import org.tchw.fakturownia.remote.ResponseContentHandling;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;
@@ -13,7 +13,7 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 
-public class WriteToFileContentHandling implements ContentHandling {
+public class WriteToFileContentHandling implements ResponseContentHandling {
 
     private final File file;
 

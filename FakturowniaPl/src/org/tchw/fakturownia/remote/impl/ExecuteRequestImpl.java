@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.remote;
+package org.tchw.fakturownia.remote.impl;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -10,23 +10,17 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.tchw.fakturownia.remote.ResponseContentHandling;
+import org.tchw.fakturownia.remote.RequestExecution;
 
-class ExecuteRequest {
+public class ExecuteRequestImpl implements RequestExecution {
 
-    private final String url;
-    private final ContentHandling contentHandling;
-
-    ExecuteRequest(String url, ContentHandling contentHandling) {
-        this.url = url;
-        this.contentHandling = contentHandling;
-    }
-
-    public void executeSync() {
+    public void execute(String url, ResponseContentHandling contentHandling) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
             HttpGet get = new HttpGet(url);
             CloseableHttpResponse response = httpClient.execute(get);
-            handleContentAndClose(response);
+            handleContentAndClose(contentHandling, response);
         } catch (ClientProtocolException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -36,7 +30,7 @@ class ExecuteRequest {
         }
     }
 
-    private void handleContentAndClose(CloseableHttpResponse response) throws IOException {
+    private void handleContentAndClose(ResponseContentHandling contentHandling, CloseableHttpResponse response) throws IOException {
         BufferedReader contentAsReader = new BufferedReader( new InputStreamReader( response.getEntity().getContent() ));
         try {
             contentHandling.handleContent(contentAsReader);

@@ -1,6 +1,7 @@
 package org.tchw.fakturownia.remote;
 
 import org.apache.log4j.Logger;
+import org.tchw.fakturownia.remote.impl.ExecuteRequestImpl;
 
 public class GetRequest {
 
@@ -56,22 +57,22 @@ public class GetRequest {
                     this.pageNumber = pageNumber;
                 }
 
-                public void handleContent(ContentHandling contentHandling) {
+                public void handleContent(ResponseContentHandling contentHandling) {
                     new Execution(contentHandling).executeSync();
                 }
 
                 public class Execution {
 
-                    private final ContentHandling contentHandlingWithBufferedReader;
+                    private final ResponseContentHandling contentHandlingWithBufferedReader;
 
-                    public Execution(ContentHandling contentHandlingWithBufferedReader) {
+                    public Execution(ResponseContentHandling contentHandlingWithBufferedReader) {
                         this.contentHandlingWithBufferedReader = contentHandlingWithBufferedReader;
                     }
 
                     public void executeSync() {
                         log.debug("Getting " + table + " page " + pageNumber );
                         String url = "https://" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "&api_token=" + token;
-                        new ExecuteRequest(url, contentHandlingWithBufferedReader).executeSync();
+                        new ExecuteRequestImpl().execute(url, contentHandlingWithBufferedReader);
                     }
                 }
             }

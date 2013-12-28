@@ -14,13 +14,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 class ExecuteRequest {
 
     private final String url;
-    private final ContentHandlingWithBufferedReader contentHandling;
+    private final ContentHandling contentHandling;
 
-    ExecuteRequest(String url, ContentHandlingWithBufferedReader contentHandling) {
+    ExecuteRequest(String url, ContentHandling contentHandling) {
         this.url = url;
         this.contentHandling = contentHandling;
     }
-    
+
     public void executeSync() {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
@@ -52,10 +52,5 @@ class ExecuteRequest {
             throw new RuntimeException(e);
         }
     }
-    
-    interface ContentHandlingWithBufferedReader {
-        
-        void handleContent(BufferedReader reader);
-        
-    }
+
 }

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.remote.GetRequest.Login;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
+import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.json.Json;
 import org.tchw.generic.stream.json.JsonArray;
 import org.tchw.generic.stream.json.JsonObject;
@@ -68,7 +69,7 @@ public class RequestForAllData {
     private void requestInvoiceAndSaveToFile(File todayDirectoryPath, String id) {
         File targetFile = new File(Joiner.on("/").join(todayDirectoryPath.getPath(), "invoices", "invoice." + id ));
         createParentDirs(targetFile);
-        login.invoice(id).page(1).saveContentToFile(targetFile);
+        login.invoice(id).page(1).handleContent(new WriteToFileContentHandling(targetFile));
     }
 
     private File tempInvoicesDir(File todayDirectoryPath) {

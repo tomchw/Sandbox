@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.Reader;
 
 import org.apache.log4j.Logger;
-import org.tchw.fakturownia.remote.ExecuteRequest.ContentHandlingWithBufferedReader;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;
@@ -68,12 +67,12 @@ public class GetRequest {
                     this.pageNumber = pageNumber;
                 }
 
-                public void saveContentToFile() {
-                    saveContentToFile("{login}.{table}.{page}.txt");
+                public void handleContent(ContentHandling contentHandling) {
+                    new Execution(contentHandling).executeSync();
                 }
 
-                public void saveContentToFile(File file) {
-                    new Execution(writeToFileContantHandling(file)).executeSync();
+                public void saveContentToFile() {
+                    saveContentToFile("{login}.{table}.{page}.txt");
                 }
 
                 public void saveContentToFile(String filePath) {
@@ -89,8 +88,8 @@ public class GetRequest {
                     return new Execution(writeToScreenContantHandling());
                 }
 
-                private ContentHandlingWithBufferedReader writeToScreenContantHandling() {
-                    ContentHandlingWithBufferedReader contentHandlingWithBufferedReader = new ContentHandlingWithBufferedReader() {
+                private ContentHandling writeToScreenContantHandling() {
+                    ContentHandling contentHandlingWithBufferedReader = new ContentHandling() {
                         @Override
                         public void handleContent(final BufferedReader reader) {
                             try {
@@ -106,8 +105,8 @@ public class GetRequest {
                 }
 
 
-                private ContentHandlingWithBufferedReader writeToFileContantHandling(final File file) {
-                    ContentHandlingWithBufferedReader contentHandlingWithBufferedReader = new ContentHandlingWithBufferedReader() {
+                private ContentHandling writeToFileContantHandling(final File file) {
+                    ContentHandling contentHandlingWithBufferedReader = new ContentHandling() {
                         @Override
                         public void handleContent(final BufferedReader reader) {
                             try {
@@ -137,9 +136,9 @@ public class GetRequest {
 
                 public class Execution {
 
-                    private final ContentHandlingWithBufferedReader contentHandlingWithBufferedReader;
+                    private final ContentHandling contentHandlingWithBufferedReader;
 
-                    public Execution(ContentHandlingWithBufferedReader contentHandlingWithBufferedReader) {
+                    public Execution(ContentHandling contentHandlingWithBufferedReader) {
                         this.contentHandlingWithBufferedReader = contentHandlingWithBufferedReader;
                     }
 

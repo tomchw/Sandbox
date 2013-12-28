@@ -1,7 +1,7 @@
 package org.tchw.fakturownia.remote;
 
 import org.apache.log4j.Logger;
-import org.tchw.fakturownia.remote.impl.ExecuteRequestImpl;
+import org.tchw.fakturownia.remote.impl.RequestExecutionImpl;
 
 public class GetRequest {
 
@@ -72,7 +72,7 @@ public class GetRequest {
                     public void executeSync() {
                         log.debug("Getting " + table + " page " + pageNumber );
                         String url = "https://" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "&api_token=" + token;
-                        new ExecuteRequestImpl().execute(url, contentHandlingWithBufferedReader);
+                        new RequestExecutionImpl().execute(url, contentHandlingWithBufferedReader);
                     }
                 }
             }

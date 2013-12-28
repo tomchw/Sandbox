@@ -13,7 +13,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.tchw.fakturownia.remote.ResponseContentHandling;
 import org.tchw.fakturownia.remote.RequestExecution;
 
-public class ExecuteRequestImpl implements RequestExecution {
+public class RequestExecutionImpl implements RequestExecution {
 
     public void execute(String url, ResponseContentHandling contentHandling) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();

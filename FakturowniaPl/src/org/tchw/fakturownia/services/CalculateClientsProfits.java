@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.main;
+package org.tchw.fakturownia.services;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;

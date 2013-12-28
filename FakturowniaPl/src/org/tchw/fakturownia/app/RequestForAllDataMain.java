@@ -1,14 +1,13 @@
 package org.tchw.fakturownia.app;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.tchw.fakturownia.services.CalculateClientsProfits;
+import org.tchw.fakturownia.services.RequestForAllData;
 
-public class CalculateClientsProfitsMain {
+public class RequestForAllDataMain {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-        CalculateClientsProfits calculateClientsProfits = application.getBean(CalculateClientsProfits.class);
-        calculateClientsProfits.execute();
+        application.getBean(RequestForAllData.class).execute();
     }
 
 }

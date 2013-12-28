@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.main;
+package org.tchw.fakturownia.services;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,10 +81,6 @@ public class RequestForAllData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) {
-        new RequestForAllData(Werbum.login).execute();
     }
 
 }

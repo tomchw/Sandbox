@@ -8,6 +8,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.remote.GetRequest.Login.Table;
+import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
@@ -36,7 +37,7 @@ public class RequestForTableData {
             counter++;
             String fullFilePath = Joiner.on("/").join(todayDirectoryFile, tableType, tableType + "." + counter);
             createParentDirs(fullFilePath);
-            table.page(counter).saveContentToFile(fullFilePath);
+            table.page(counter).handleContent(new WriteToFileContentHandling(new File(fullFilePath)));
             filePathSupport = new FilePathSupport(fullFilePath);
         } while( filePathSupport.areThereMorePages() );
         return todayDirectoryFile;

@@ -1,5 +1,7 @@
 package org.tchw.fakturownia.model;
 
+import java.math.BigDecimal;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.tchw.fakturownia.data.model.Invoice;
@@ -15,7 +17,7 @@ public class InvoiceTest {
 
         Assert.assertEquals("376848", invoice.clientId());
         Assert.assertEquals("2/09/2013", invoice.number());
-        Assert.assertEquals("21.5", invoice.positions().get(0).priceNet());
+        Assert.assertEquals(new BigDecimal(21.5), invoice.positions().get(0).priceNet());
     }
 
 }

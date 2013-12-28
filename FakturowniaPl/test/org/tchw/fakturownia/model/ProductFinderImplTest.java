@@ -1,5 +1,7 @@
 package org.tchw.fakturownia.model;
 
+import java.math.BigDecimal;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.tchw.fakturownia.data.model.Product;
@@ -24,7 +26,7 @@ public class ProductFinderImplTest {
         });
         ProductFinder productFinder = new ProductFinderImpl(productsAsMap);
         Assert.assertEquals("1", productFinder.byId("1").id());
-        Assert.assertEquals("20.0", productFinder.byId("2").purchasePriceNet());
+        Assert.assertEquals(new BigDecimal("20.0"), productFinder.byId("2").purchasePriceNet());
     }
 
 }

@@ -1,5 +1,6 @@
 package org.tchw.fakturownia.products;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class ProductFinderTest {
         assertEquals("1", products.next().id());
         assertEquals("B", products.next().name());
         assertEquals("3", products.next().id());
-        assertEquals("40.0", products.next().purchasePriceNet());
+        assertEquals(new BigDecimal("40.0"), products.next().purchasePriceNet());
         assertFalse(products.hasNext());
     }
 

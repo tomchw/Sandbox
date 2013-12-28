@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.impl.ClientFinderImpl;
 import org.tchw.fakturownia.data.model.impl.InvoiceFinderImpl;
 import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
@@ -16,6 +17,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 
 public class Repository {
+
+    private static final Logger log = Logger.getLogger(Repository.class);
 
     public final ClientFinder clients;
     public final InvoiceFinder invoices;
@@ -60,18 +63,21 @@ public class Repository {
 
         public Builder invoicesFromDirectory(String directoryPath) {
             Preconditions.checkState(invoiceFinder == null, "InvoiceFinder is already set");
+            log.debug("Reading invoices from " + directoryPath);
             invoiceFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(InvoiceFinderImpl.takeFromReaders());
             return this;
         }
 
         public Builder productsFromDirectory(String directoryPath) {
             Preconditions.checkState(productFinder == null, "ProductFinder is already set");
+            log.debug("Reading products from " + directoryPath);
             productFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(ProductFinderImpl.takeFromReaders());
             return this;
         }
 
         public Builder clientsFromDirectory(String directoryPath) {
             Preconditions.checkState(clientFinder == null, "ClientFinder is already set");
+            log.debug("Reading clients from " + directoryPath);
             clientFinder = Streams.from(new File(directoryPath), Pattern.compile(".*?")).passTo(ClientFinderImpl.takeFromReaders());
             return this;
         }

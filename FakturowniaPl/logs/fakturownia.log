@@ -1,27 +1,5 @@
-2013-12-28 16:13:24 INFO  RequestForAllData:31 - Requesting for all data. Files will be saved to c:\Private\Work\Werbum\abc
-2013-12-28 16:13:24 INFO  RequestForTableData:32 - Requesting for clients
-2013-12-28 16:13:24 DEBUG GetRequest:147 - Getting clients.json page 1
-2013-12-28 16:13:26 DEBUG GetRequest:147 - Getting clients.json page 2
-2013-12-28 16:13:27 INFO  RequestForTableData:32 - Requesting for products
-2013-12-28 16:13:27 DEBUG GetRequest:147 - Getting products.json page 1
-2013-12-28 16:13:28 DEBUG GetRequest:147 - Getting products.json page 2
-2013-12-28 16:13:29 DEBUG GetRequest:147 - Getting products.json page 3
-2013-12-28 16:13:29 DEBUG GetRequest:147 - Getting products.json page 4
-2013-12-28 16:13:30 DEBUG GetRequest:147 - Getting products.json page 5
-2013-12-28 16:13:30 INFO  RequestForTableData:32 - Requesting for tempInvoices
-2013-12-28 16:13:30 DEBUG GetRequest:147 - Getting invoices.json page 1
-2013-12-28 16:13:31 DEBUG GetRequest:147 - Getting invoices.json page 2
-2013-12-28 16:13:31 INFO  RequestForAllData:52 - Request for full invoices
-2013-12-28 16:13:31 DEBUG GetRequest:147 - Getting invoices/1457904.json page 1
-2013-12-28 16:13:34 DEBUG GetRequest:147 - Getting invoices/1454736.json page 1
-2013-12-28 16:13:35 DEBUG GetRequest:147 - Getting invoices/1442070.json page 1
-2013-12-28 16:13:39 DEBUG GetRequest:147 - Getting invoices/1441526.json page 1
-2013-12-28 16:13:40 DEBUG GetRequest:147 - Getting invoices/1422731.json page 1
-2013-12-28 16:13:45 DEBUG GetRequest:147 - Getting invoices/1405981.json page 1
-2013-12-28 16:13:46 DEBUG GetRequest:147 - Getting invoices/1399016.json page 1
-2013-12-28 16:13:47 DEBUG GetRequest:147 - Getting invoices/1393980.json page 1
-2013-12-28 16:13:50 DEBUG GetRequest:147 - Getting invoices/1328360.json page 1
-2013-12-28 16:13:51 DEBUG GetRequest:147 - Getting invoices/1263732.json page 1
-2013-12-28 16:13:51 DEBUG GetRequest:147 - Getting invoices/1251024.json page 1
-2013-12-28 16:13:52 DEBUG GetRequest:147 - Getting invoices/1250265.json page 1
-2013-12-28 16:13:52 INFO  RequestForAllData:36 - End of requesting for all data
+2013-12-28 16:20:57 INFO  CalculateClientsProfits:25 - Calculating clients profits takig data from c:\Private\Work\Werbum\abc
+2013-12-28 16:20:57 DEBUG Repository:80 - Reading clients from c:\Private\Work\Werbum\abc/2013-12-28/clients
+2013-12-28 16:20:57 DEBUG Repository:66 - Reading invoices from c:\Private\Work\Werbum\abc/2013-12-28/invoices
+2013-12-28 16:20:57 DEBUG Repository:73 - Reading products from c:\Private\Work\Werbum\abc/2013-12-28/products
+2013-12-28 16:20:57 INFO  CalculateClientsProfits:38 - End of calculating clients profits

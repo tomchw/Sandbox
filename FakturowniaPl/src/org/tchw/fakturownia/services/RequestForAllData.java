@@ -7,7 +7,7 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.remote.GetRequest.Login;
-import org.tchw.fakturownia.remote.gatherData.impl.RequestForTableDataImpl;
+import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
 import org.tchw.generic.stream.json.Json;
@@ -27,9 +27,12 @@ public class RequestForAllData {
 
     private final RepositoryDirectory repositoryDirectory;
 
-    public RequestForAllData(Login login, RepositoryDirectory repositoryDirectory) {
+    private final RequestForTableData requestForTableData;
+
+    public RequestForAllData(Login login, RepositoryDirectory repositoryDirectory, RequestForTableData requestForTableData) {
         this.login = login;
         this.repositoryDirectory = repositoryDirectory;
+        this.requestForTableData = requestForTableData;
     }
 
     public void execute() {
@@ -43,15 +46,15 @@ public class RequestForAllData {
     }
 
     private void requestForInvoices() {
-        new RequestForTableDataImpl(repositoryDirectory).execute(login.invoices(), "tempInvoices");
+        requestForTableData.gatherTableData(login.invoices(), "tempInvoices");
     }
 
     private void requestForProducts() {
-        new RequestForTableDataImpl(repositoryDirectory).execute(login.products(), "products");
+        requestForTableData.gatherTableData(login.products(), "products");
     }
 
     private void requestForClients() {
-        new RequestForTableDataImpl(repositoryDirectory).execute(login.clients(), "clients");
+        requestForTableData.gatherTableData(login.clients(), "clients");
     }
 
     private void requestForFullInvoices() {

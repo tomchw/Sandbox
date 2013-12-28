@@ -7,24 +7,24 @@ import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.remote.GetRequest.Login.Table;
 import org.tchw.fakturownia.remote.gatherData.FilePathSupport;
+import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
 
 import com.google.common.io.Files;
 
-public class RequestForTableDataImpl {
+public class RequestForTableDataImpl implements RequestForTableData {
 
     private final Logger log = Logger.getLogger(getClass());
 
     private final String repositoryPath;
 
-    private int counter;
-
     public RequestForTableDataImpl(RepositoryDirectory repositoryDirectory) {
         this.repositoryPath = repositoryDirectory.repositoryDirectory().getPath();
     }
 
-    public void execute(Table table, String tableType) {
+    public void gatherTableData(Table table, String tableType) {
+        int counter = 0;
         log.info("Requesting for " + tableType);
         FilePathSupport filePathSupport;
         do {

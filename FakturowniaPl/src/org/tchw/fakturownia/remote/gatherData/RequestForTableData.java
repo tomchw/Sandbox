@@ -4,6 +4,6 @@ import org.tchw.fakturownia.remote.GetRequest.Login.Table;
 
 public interface RequestForTableData {
 
-    public void gatherTableData(Table table);
+    public void gatherTableData(Table table, String tableType);
 
 }

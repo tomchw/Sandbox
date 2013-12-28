@@ -6,7 +6,7 @@ import org.tchw.fakturownia.services.RequestForAllData;
 public class RequestForAllDataMain {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class);
         application.getBean(RequestForAllData.class).execute();
     }
 

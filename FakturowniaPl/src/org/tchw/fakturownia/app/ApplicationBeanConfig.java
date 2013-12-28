@@ -6,7 +6,7 @@ import org.tchw.fakturownia.services.CalculateClientsProfits;
 import org.tchw.fakturownia.services.RequestForAllData;
 import org.tchw.specific.werbum.Werbum;
 
-public class ApplicationConfig {
+public class ApplicationBeanConfig {
 
     @Bean
     public CalculateClientsProfits calculateClientsProfits() {

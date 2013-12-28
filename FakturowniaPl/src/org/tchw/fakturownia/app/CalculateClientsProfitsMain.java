@@ -6,7 +6,7 @@ import org.tchw.fakturownia.services.CalculateClientsProfits;
 public class CalculateClientsProfitsMain {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class);
         CalculateClientsProfits calculateClientsProfits = application.getBean(CalculateClientsProfits.class);
         calculateClientsProfits.execute();
     }

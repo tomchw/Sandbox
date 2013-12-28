@@ -1,5 +1,0 @@
-2013-12-28 16:20:57 INFO  CalculateClientsProfits:25 - Calculating clients profits takig data from c:\Private\Work\Werbum\abc
-2013-12-28 16:20:57 DEBUG Repository:80 - Reading clients from c:\Private\Work\Werbum\abc/2013-12-28/clients
-2013-12-28 16:20:57 DEBUG Repository:66 - Reading invoices from c:\Private\Work\Werbum\abc/2013-12-28/invoices
-2013-12-28 16:20:57 DEBUG Repository:73 - Reading products from c:\Private\Work\Werbum\abc/2013-12-28/products
-2013-12-28 16:20:57 INFO  CalculateClientsProfits:38 - End of calculating clients profits

@@ -47,4 +47,9 @@ public class JsonArray {
     public int length() {
         return json.length();
     }
+
+    @Override
+    public String toString() {
+        return json.toString();
+    }
 }

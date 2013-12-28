@@ -2,6 +2,7 @@ package org.tchw.fakturownia.data.cases.profit;
 
 import java.math.BigDecimal;
 
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.Client;
 import org.tchw.fakturownia.data.model.Invoice;
 import org.tchw.fakturownia.data.model.InvoicePosition;
@@ -10,6 +11,8 @@ import org.tchw.fakturownia.data.model.Repository;
 
 public class ClientProfitCalculator {
 
+    private final Logger log = Logger.getLogger(getClass());
+
     private final Repository repository;
 
     public ClientProfitCalculator(Repository repository) {
@@ -17,6 +20,7 @@ public class ClientProfitCalculator {
     }
 
     public ClientProfit calculate(Client client) {
+        log.debug("Calculating profit for client " + client.name());
         ClientProfit.Builder clientProfitBuilder = ClientProfit.builder(client);
         for (Invoice invoice : repository.invoices.byClientId(client.id())) {
             clientProfitBuilder.add(calculateInvoiceProfit(invoice));
@@ -25,9 +29,14 @@ public class ClientProfitCalculator {
     }
 
     private InvoiceProfit calculateInvoiceProfit(Invoice invoice) {
+        log.debug("Calculating profit for invoice " + invoice.number());
         InvoiceProfit.Builder invoiceProfitBuilder = InvoiceProfit.builder(invoice);
         for (InvoicePosition invoicePosition : invoice.positions()) {
-            invoiceProfitBuilder.add(calculateInvoicePositionProfit(invoicePosition));
+            try {
+                invoiceProfitBuilder.add(calculateInvoicePositionProfit(invoicePosition));
+            } catch (RuntimeException e) {
+                log.warn("Cannot calculate profit for invoice " + invoice.number() + "(id:" + invoice.id() + ")" + " and inovice position " + invoicePosition.name(), e);
+            }
         }
         return invoiceProfitBuilder.build();
     }

@@ -27,4 +27,9 @@ public class InvoicePosition {
     public String name() {
         return json.getString("name");
     }
+
+    @Override
+    public String toString() {
+        return json.toString();
+    }
 }

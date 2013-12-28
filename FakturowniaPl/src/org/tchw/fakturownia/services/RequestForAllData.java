@@ -3,6 +3,9 @@ package org.tchw.fakturownia.services;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
@@ -17,6 +20,7 @@ import org.tchw.generic.stream.stream.Stream;
 import org.tchw.specific.werbum.Werbum;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
 
 public class RequestForAllData {
@@ -66,11 +70,40 @@ public class RequestForAllData {
     }
 
     private void requestForEachTempInvoiceFile(File file) {
+        ImmutableList.Builder<Callable<Object>> fetchInvoiceBuilder = ImmutableList.builder();
         JsonArray jsonArray = Stream.from(file).passTo(Json.takeFromReader()).asJsonArray();
         Iterator<JsonObject> iterator = jsonArray.getObjects().iterator();
         while(iterator.hasNext()) {
             String id = iterator.next().getString("id");
+            fetchInvoiceBuilder.add(new FetchInvoice(id));
+        }
+
+        fetchInvoicesUsingMultiThreading(fetchInvoiceBuilder.build());
+    }
+
+    private void fetchInvoicesUsingMultiThreading(ImmutableList<Callable<Object>> fetchInvoices) {
+        ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(5);
+        try {
+            newFixedThreadPool.invokeAll(fetchInvoices);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            newFixedThreadPool.shutdown();
+        }
+    }
+
+    private class FetchInvoice implements Callable<Object> {
+
+        private final String id;
+
+        public FetchInvoice(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public Object call() throws Exception {
             requestInvoiceAndSaveToFile(id);
+            return null;
         }
     }
 

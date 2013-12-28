@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.data.model.impl.ClientFinderImpl;
 import org.tchw.fakturownia.data.model.impl.InvoiceFinderImpl;
 import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
@@ -23,6 +24,10 @@ public class Repository {
     public final ClientFinder clients;
     public final InvoiceFinder invoices;
     public final ProductFinder products;
+
+    public static Repository useRepositoryDirectory(RepositoryDirectory directory) {
+        return fromDirectoryWithToday(directory.repositoryDirectory().getPath());
+    }
 
     public static Repository fromDirectoryWithToday(String directory) {
         return builder()

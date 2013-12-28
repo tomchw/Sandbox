@@ -6,7 +6,7 @@ import java.io.IOException;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
-class FilePathSupport {
+public class FilePathSupport {
 
     private final File file;
 

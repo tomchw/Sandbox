@@ -19,11 +19,15 @@ import org.tchw.specific.werbum.Werbum;
 public class CalculateClientsProfits {
 
     private final Logger log = Logger.getLogger(getClass());
+    private final Repository repository;
+
+    public CalculateClientsProfits(Repository repository) {
+        this.repository = repository;
+    }
 
     public void execute() {
         String repositoryPath = Werbum.directory.getPath();
         log.info("Calculating clients profits takig data from " + repositoryPath);
-        Repository repository = Repository.fromDirectoryWithToday(repositoryPath);
 
         AllClientsProfitCalculator allClientsProfitCalculator = new AllClientsProfitCalculator(repository, new ClientProfitCalculator(repository));
 
@@ -56,8 +60,5 @@ public class CalculateClientsProfits {
         }
     }
 
-    public static void main(String[] args) {
-        new CalculateClientsProfits().execute();
-    }
 
 }

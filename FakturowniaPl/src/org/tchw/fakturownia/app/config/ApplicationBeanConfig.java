@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.tchw.fakturownia.model.Repository;
 import org.tchw.fakturownia.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
@@ -46,7 +47,11 @@ public class ApplicationBeanConfig {
         return Repository.useRepositoryDirectory(repositoryDirectory);
     }
 
-    private static final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class, MayOverrideApplicationBeanConfig.class);
+    private static final AbstractApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class, MayOverrideApplicationBeanConfig.class);
+
+    static {
+        applicationContext.registerShutdownHook();
+    }
 
     public static ApplicationContext applicationContext() {
         return applicationContext;

@@ -1,14 +1,14 @@
 package org.tchw.fakturownia.data.cases.profit;
 
-import java.nio.charset.Charset;
-import java.util.SortedMap;
-
+import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.Client;
 import org.tchw.fakturownia.data.model.Repository;
 
 import com.google.common.collect.ImmutableList;
 
 public class AllClientsProfitCalculator {
+
+    private final Logger log = Logger.getLogger(getClass());
 
     private final Repository repository;
     private final ClientProfitCalculator clientProfilCalculator;
@@ -24,7 +24,7 @@ public class AllClientsProfitCalculator {
             try {
                 handling.onClientProfit( clientProfilCalculator.calculate(client) );
             } catch(RuntimeException e) {
-                e.printStackTrace();
+                log.warn("Cannot calculate profit for client " + client.name(), e);
             }
         }
     }
@@ -35,10 +35,4 @@ public class AllClientsProfitCalculator {
 
     }
 
-    public static void main(String[] args) {
-        SortedMap<String, Charset> availableCharsets = Charset.availableCharsets();
-        for (String string : availableCharsets.keySet()) {
-            System.out.println(string);
-        }
-    }
 }

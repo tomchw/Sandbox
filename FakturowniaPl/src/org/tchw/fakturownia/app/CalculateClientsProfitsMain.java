@@ -1,5 +1,6 @@
 package org.tchw.fakturownia.app;
 
+import org.tchw.fakturownia.app.config.ApplicationBeanConfig;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
 
 public class CalculateClientsProfitsMain {

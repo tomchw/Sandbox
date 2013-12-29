@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.tchw.fakturownia.data.model.Repository;
+import org.tchw.fakturownia.model.Repository;
 
 import static org.junit.Assert.assertEquals;
 

@@ -3,9 +3,9 @@ package org.tchw.fakturownia.api.cases.client;
 import java.math.BigDecimal;
 
 import org.junit.Test;
-import org.tchw.fakturownia.data.cases.profit.ClientProfit;
-import org.tchw.fakturownia.data.cases.profit.ClientProfitCalculator;
-import org.tchw.fakturownia.data.model.Repository;
+import org.tchw.fakturownia.model.Repository;
+import org.tchw.fakturownia.services.calculateClientsProfits.ClientProfit;
+import org.tchw.fakturownia.services.calculateClientsProfits.ClientProfitCalculator;
 
 import static org.junit.Assert.assertEquals;
 

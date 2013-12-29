@@ -2,8 +2,8 @@ package org.tchw.fakturownia.services;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
-import org.tchw.fakturownia.app.ApplicationBeanConfig;
-import org.tchw.fakturownia.app.MayOverrideApplicationBeanConfig;
+import org.tchw.fakturownia.app.config.ApplicationBeanConfig;
+import org.tchw.fakturownia.app.config.MayOverrideApplicationBeanConfig;
 
 @ContextHierarchy({
     @ContextConfiguration(name = "override", classes = {MayOverrideApplicationBeanConfig.class}),

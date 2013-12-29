@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tchw.fakturownia.data.model.Product;
-import org.tchw.fakturownia.data.model.ProductFinder;
-import org.tchw.fakturownia.data.model.impl.ProductFinderImpl;
+import org.tchw.fakturownia.model.Product;
+import org.tchw.fakturownia.model.ProductFinder;
+import org.tchw.fakturownia.model.impl.ProductFinderImpl;
 import org.tchw.generic.stream.json.JsonObject;
 import org.tchw.generic.stream.json.JsonToPojo;
 import org.tchw.generic.stream.json.JsonToPojo.JsonObjectTo;

@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.context.annotation.Bean;
-import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
-import org.tchw.fakturownia.remote.RequestExecution;
-import org.tchw.fakturownia.remote.ResponseContentHandling;
+import org.tchw.fakturownia.model.file.RepositoryDirectory;
+import org.tchw.fakturownia.services.requestForAllData.RequestExecution;
+import org.tchw.fakturownia.services.requestForAllData.ResponseContentHandling;
 import org.tchw.generic.stream.stream.Stream;
 
 import com.google.common.io.Files;

@@ -10,10 +10,10 @@ import java.nio.charset.Charset;
 import org.apache.log4j.Logger;
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
-import org.tchw.fakturownia.data.cases.profit.AllClientsProfitCalculator;
-import org.tchw.fakturownia.data.cases.profit.ClientProfitCalculator;
-import org.tchw.fakturownia.data.cases.profit.ClientsProfitsToExcelCsv;
-import org.tchw.fakturownia.data.model.Repository;
+import org.tchw.fakturownia.model.Repository;
+import org.tchw.fakturownia.services.calculateClientsProfits.AllClientsProfitCalculator;
+import org.tchw.fakturownia.services.calculateClientsProfits.ClientProfitCalculator;
+import org.tchw.fakturownia.services.calculateClientsProfits.ClientsProfitsToExcelCsv;
 import org.tchw.specific.werbum.Werbum;
 
 public class CalculateClientsProfits {

@@ -11,11 +11,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
-import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
-import org.tchw.fakturownia.remote.GetRequest.Login;
-import org.tchw.fakturownia.remote.RequestExecution;
-import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
-import org.tchw.fakturownia.remote.impl.WriteToFileContentHandling;
+import org.tchw.fakturownia.model.file.RepositoryDirectory;
+import org.tchw.fakturownia.services.requestForAllData.RequestExecution;
+import org.tchw.fakturownia.services.requestForAllData.GetRequest.Login;
+import org.tchw.fakturownia.services.requestForAllData.gatherData.RequestForTableData;
+import org.tchw.fakturownia.services.requestForAllData.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
 import org.tchw.generic.stream.json.Json;
 import org.tchw.generic.stream.json.JsonArray;

@@ -7,10 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.tchw.fakturownia.data.model.Repository;
-import org.tchw.fakturownia.remote.RequestExecution;
 import org.tchw.fakturownia.remote.gatherData.RequestForTableData;
 import org.tchw.fakturownia.remote.gatherData.impl.RequestForTableDataToFile;
-import org.tchw.fakturownia.remote.impl.RequestExecutionImpl;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
 import org.tchw.fakturownia.services.RequestForAllData;
 import org.tchw.specific.werbum.Werbum;
@@ -29,23 +27,18 @@ public class ApplicationBeanConfig {
 
     @Bean
     public RequestForAllData requestForAllData() {
-        return new RequestForAllData(Werbum.login, mayOverride.repositoryDirectory(), requestForTableData(), requestExecution());
+        return new RequestForAllData(Werbum.login, mayOverride.repositoryDirectory(), requestForTableData(), mayOverride.requestExecution());
     }
 
     @Bean
     public RequestForTableData requestForTableData() {
-        return new RequestForTableDataToFile(mayOverride.repositoryDirectory(), requestExecution());
-    }
-
-    @Bean
-    public RequestExecution requestExecution() {
-        return new RequestExecutionImpl();
+        return new RequestForTableDataToFile(mayOverride.repositoryDirectory(), mayOverride.requestExecution());
     }
 
     @Bean
     @Lazy
     public Repository repository() {
-        return Repository.fromDirectoryWithToday(Werbum.directory.getPath());
+        return Repository.useRepositoryDirectory(mayOverride.repositoryDirectory());
     }
 
     private static final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class, MayOverrideApplicationBeanConfig.class);

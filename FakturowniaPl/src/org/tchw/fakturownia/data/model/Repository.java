@@ -1,9 +1,6 @@
 package org.tchw.fakturownia.data.model;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -26,21 +23,15 @@ public class Repository {
     public final ProductFinder products;
 
     public static Repository useRepositoryDirectory(RepositoryDirectory directory) {
-        return fromDirectoryWithToday(directory.repositoryDirectory().getPath());
+        return fromDirectory(directory.repositoryDirectory().getPath());
     }
 
-    public static Repository fromDirectoryWithToday(String directory) {
+    private static Repository fromDirectory(String directory) {
         return builder()
-            .clientsFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "clients") )
-            .invoicesFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "invoices") )
-            .productsFromDirectory( Joiner.on("/").join(directory, todayDirectoryName(), "products") )
+            .clientsFromDirectory( Joiner.on("/").join(directory, "clients") )
+            .invoicesFromDirectory( Joiner.on("/").join(directory, "invoices") )
+            .productsFromDirectory( Joiner.on("/").join(directory, "products") )
             .build();
-    }
-
-    private static String todayDirectoryName() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 
     public Repository(ClientFinder clients, InvoiceFinder invoices, ProductFinder products) {

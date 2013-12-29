@@ -1,12 +1,14 @@
 package org.tchw.generic.stream.stream;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
 
 import com.google.common.base.Preconditions;
 
@@ -18,6 +20,10 @@ public class Stream {
         } else {
             return new BufferedReader(reader);
         }
+    }
+
+    public static From from(String s) {
+        return from(new ByteArrayInputStream(s.getBytes(Charset.forName("UTF-8"))));
     }
 
     public static From from(InputStream inputStream) {

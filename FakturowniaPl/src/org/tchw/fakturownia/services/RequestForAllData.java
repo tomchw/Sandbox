@@ -3,9 +3,12 @@ package org.tchw.fakturownia.services;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
@@ -89,8 +92,13 @@ public class RequestForAllData {
     private void fetchInvoicesUsingMultiThreading(ImmutableList<Callable<Object>> fetchInvoices) {
         ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(5);
         try {
-            newFixedThreadPool.invokeAll(fetchInvoices);
+            List<Future<Object>> futures = newFixedThreadPool.invokeAll(fetchInvoices);
+            for (Future<Object> future : futures) {
+                future.get();
+            }
         } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } finally {
             newFixedThreadPool.shutdown();

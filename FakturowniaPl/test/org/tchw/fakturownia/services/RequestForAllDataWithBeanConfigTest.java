@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.tchw.fakturownia.data.model.Repository;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextHierarchy({
@@ -15,11 +18,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class RequestForAllDataWithBeanConfigTest extends ApplicationBeanConfigAwareTest {
 
     @Autowired
-    private ApplicationContext application;
+    private ApplicationContext app;
 
     @Test
     public void test() {
-        //application.getBean(RequestForAllData.class).requestForAllData();
+        app.getBean(RequestForAllData.class).requestForAllData();
+        assertEquals("20002", app.getBean(Repository.class).invoices.byId("30001").positions().get(1).productId());
     }
 
 }

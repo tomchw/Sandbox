@@ -44,7 +44,7 @@ public class RequestForAllData {
         this.requestExecution = requestExecution;
     }
 
-    public void execute() {
+    public void requestForAllData() {
         File directory = Werbum.directory;
         log.info("Requesting for all data. Files will be saved to " + directory.getPath());
         requestForClients();

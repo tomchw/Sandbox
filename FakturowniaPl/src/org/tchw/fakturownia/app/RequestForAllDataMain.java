@@ -7,7 +7,7 @@ public class RequestForAllDataMain {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class);
-        application.getBean(RequestForAllData.class).execute();
+        application.getBean(RequestForAllData.class).requestForAllData();
     }
 
 }

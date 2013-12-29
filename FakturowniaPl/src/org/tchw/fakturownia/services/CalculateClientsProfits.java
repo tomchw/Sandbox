@@ -25,7 +25,7 @@ public class CalculateClientsProfits {
         this.repository = repository;
     }
 
-    public void execute() {
+    public void calculateClientsProfits() {
         String repositoryPath = Werbum.directory.getPath();
         log.info("Calculating clients profits takig data from " + repositoryPath);
 

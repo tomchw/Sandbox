@@ -59,7 +59,7 @@ public class GetRequest {
                 public void handleContent(RequestExecution requestExecution, ResponseContentHandling contentHandling) {
                     log.debug("Getting " + table + " page " + pageNumber );
                     String url = "https://" + login + ".fakturownia.pl/" + table + "?page=" + pageNumber + "&api_token=" + token;
-                    requestExecution.execute(url, contentHandling);
+                    requestExecution.doGet(url, contentHandling);
                 }
 
             }

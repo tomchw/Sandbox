@@ -15,7 +15,7 @@ import org.tchw.fakturownia.remote.RequestExecution;
 
 public class RequestExecutionImpl implements RequestExecution {
 
-    public void execute(String url, ResponseContentHandling contentHandling) {
+    public void doGet(String url, ResponseContentHandling contentHandling) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
             HttpGet get = new HttpGet(url);

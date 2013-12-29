@@ -5,7 +5,6 @@ import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.tchw.fakturownia.data.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.remote.RequestExecution;
@@ -20,14 +19,7 @@ public class TestApplicationBeanConfig {
     public RepositoryDirectory repositoryDirectory() {
         return new RepositoryDirectory() {
 
-            private final Logger log = Logger.getLogger(getClass());
-
             private final File file = Files.createTempDir();
-
-            {
-                log.debug("Temporary directory: " + file.getPath());
-                file.deleteOnExit();
-            }
 
             @Override
             public File repositoryDirectory() {

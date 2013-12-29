@@ -21,7 +21,6 @@ import org.tchw.generic.stream.json.Json;
 import org.tchw.generic.stream.json.JsonArray;
 import org.tchw.generic.stream.json.JsonObject;
 import org.tchw.generic.stream.stream.Stream;
-import org.tchw.specific.werbum.Werbum;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
@@ -48,8 +47,7 @@ public class RequestForAllData {
     }
 
     public void requestForAllData() {
-        File directory = Werbum.directory;
-        log.info("Requesting for all data. Files will be saved to " + directory.getPath());
+        log.info("Requesting for all data. Files will be saved to " + repositoryDirectory.repositoryDirectory().getPath());
         requestForClients();
         requestForProducts();
         requestForInvoices();

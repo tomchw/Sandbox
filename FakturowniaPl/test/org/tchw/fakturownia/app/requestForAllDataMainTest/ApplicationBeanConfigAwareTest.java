@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.services;
+package org.tchw.fakturownia.app.requestForAllDataMainTest;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;

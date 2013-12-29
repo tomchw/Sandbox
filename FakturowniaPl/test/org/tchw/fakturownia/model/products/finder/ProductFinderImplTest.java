@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.model;
+package org.tchw.fakturownia.model.products.finder;
 
 import java.math.BigDecimal;
 

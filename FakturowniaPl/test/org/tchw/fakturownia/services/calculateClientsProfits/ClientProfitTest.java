@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.api.cases.client;
+package org.tchw.fakturownia.services.calculateClientsProfits;
 
 import java.math.BigDecimal;
 

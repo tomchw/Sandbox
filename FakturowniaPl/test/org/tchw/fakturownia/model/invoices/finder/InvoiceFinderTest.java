@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.invoices;
+package org.tchw.fakturownia.model.invoices.finder;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package org.tchw.fakturownia.model;
+package org.tchw.fakturownia.model.invoices.simple;
 
 import java.math.BigDecimal;
 

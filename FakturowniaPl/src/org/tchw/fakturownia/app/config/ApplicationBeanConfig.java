@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.tchw.fakturownia.model.Repository;
+import org.tchw.fakturownia.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
 import org.tchw.fakturownia.services.RequestForAllData;
+import org.tchw.fakturownia.services.requestForAllData.RequestExecution;
 import org.tchw.fakturownia.services.requestForAllData.gatherData.RequestForTableData;
 import org.tchw.fakturownia.services.requestForAllData.gatherData.impl.RequestForTableDataToFile;
 import org.tchw.specific.werbum.Werbum;
@@ -17,7 +19,10 @@ import org.tchw.specific.werbum.Werbum;
 public class ApplicationBeanConfig {
 
     @Autowired
-    private MayOverrideApplicationBeanConfig mayOverride;
+    private RepositoryDirectory repositoryDirectory;
+
+    @Autowired
+    private RequestExecution requestExecution;
 
     @Bean
     @Lazy
@@ -27,18 +32,18 @@ public class ApplicationBeanConfig {
 
     @Bean
     public RequestForAllData requestForAllData() {
-        return new RequestForAllData(Werbum.login, mayOverride.repositoryDirectory(), requestForTableData(), mayOverride.requestExecution());
+        return new RequestForAllData(Werbum.login, repositoryDirectory, requestForTableData(), requestExecution);
     }
 
     @Bean
     public RequestForTableData requestForTableData() {
-        return new RequestForTableDataToFile(mayOverride.repositoryDirectory(), mayOverride.requestExecution());
+        return new RequestForTableDataToFile(repositoryDirectory, requestExecution);
     }
 
     @Bean
     @Lazy
     public Repository repository() {
-        return Repository.useRepositoryDirectory(mayOverride.repositoryDirectory());
+        return Repository.useRepositoryDirectory(repositoryDirectory);
     }
 
     private static final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class, MayOverrideApplicationBeanConfig.class);

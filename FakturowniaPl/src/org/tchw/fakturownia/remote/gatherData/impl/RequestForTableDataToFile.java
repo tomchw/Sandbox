@@ -32,12 +32,19 @@ public class RequestForTableDataToFile implements RequestForTableData {
         log.info("Requesting for " + tableType);
         FilePathSupport filePathSupport;
         do {
+            throwExceptionIfToMuchFiles(tableType, counter);
             counter++;
             String fullFilePath = FileHelper.joiner().join(repositoryPath, tableType, tableType + "." + counter);
             createParentDirs(fullFilePath);
             table.page(counter).handleContent(requestExecution, new WriteToFileContentHandling(new File(fullFilePath)));
             filePathSupport = new FilePathSupport(fullFilePath);
         } while( filePathSupport.areThereMorePages() );
+    }
+
+    private void throwExceptionIfToMuchFiles(String tableType, int counter) {
+        if( counter > 99 ) {
+            throw new RuntimeException("It is already " + counter + " pages gathered for " + tableType + ". Stopped gathering. Are there such many pages to gather or empty JSON file will never come?");
+        }
     }
 
     private void createParentDirs(String fullFilePath) {

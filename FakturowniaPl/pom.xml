@@ -4,7 +4,6 @@
   <artifactId>FakturowniaPl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -15,7 +14,7 @@
         </configuration>
       </plugin>
     </plugins>
-  </build>
+  </build>  
   <properties>
     <spring.version>3.2.6.RELEASE</spring.version>
   </properties>   

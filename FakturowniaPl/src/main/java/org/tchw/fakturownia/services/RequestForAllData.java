@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 import org.tchw.fakturownia.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.services.requestForAllData.RequestExecution;
-import org.tchw.fakturownia.services.requestForAllData.GetRequest.Login;
+import org.tchw.fakturownia.services.requestForAllData.RequestLogin;
 import org.tchw.fakturownia.services.requestForAllData.gatherData.RequestForTableData;
 import org.tchw.fakturownia.services.requestForAllData.impl.WriteToFileContentHandling;
 import org.tchw.generic.stream.FileHelper;
@@ -30,7 +30,7 @@ public class RequestForAllData {
 
     private final Logger log = Logger.getLogger(getClass());
 
-    private final Login login;
+    private final RequestLogin requestLogin;
 
     private final RepositoryDirectory repositoryDirectory;
 
@@ -38,9 +38,9 @@ public class RequestForAllData {
 
     private final RequestExecution requestExecution;
 
-    public RequestForAllData(Login login, RepositoryDirectory repositoryDirectory,
+    public RequestForAllData(RequestLogin requestLogin, RepositoryDirectory repositoryDirectory,
             RequestForTableData requestForTableData, RequestExecution requestExecution) {
-        this.login = login;
+        this.requestLogin = requestLogin;
         this.repositoryDirectory = repositoryDirectory;
         this.requestForTableData = requestForTableData;
         this.requestExecution = requestExecution;
@@ -56,15 +56,15 @@ public class RequestForAllData {
     }
 
     private void requestForInvoices() {
-        requestForTableData.gatherTableData(login.invoices(), "tempInvoices");
+        requestForTableData.gatherTableData(requestLogin.login().invoices(), "tempInvoices");
     }
 
     private void requestForProducts() {
-        requestForTableData.gatherTableData(login.products(), "products");
+        requestForTableData.gatherTableData(requestLogin.login().products(), "products");
     }
 
     private void requestForClients() {
-        requestForTableData.gatherTableData(login.clients(), "clients");
+        requestForTableData.gatherTableData(requestLogin.login().clients(), "clients");
     }
 
     private void requestForFullInvoices() {
@@ -121,7 +121,7 @@ public class RequestForAllData {
     private void requestInvoiceAndSaveToFile(String id) {
         File targetFile = new File(Joiner.on("/").join(repositoryDirectory.repositoryDirectory().getPath(), "invoices", "invoice." + id ));
         createParentDirs(targetFile);
-        login.invoice(id).page(1).handleContent(requestExecution, new WriteToFileContentHandling(targetFile));
+        requestLogin.login().invoice(id).page(1).handleContent(requestExecution, new WriteToFileContentHandling(targetFile));
     }
 
     private File tempInvoicesDir() {

@@ -11,27 +11,30 @@ import org.apache.log4j.Logger;
 import org.supercsv.io.CsvListWriter;
 import org.supercsv.prefs.CsvPreference;
 import org.tchw.fakturownia.model.Repository;
+import org.tchw.fakturownia.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.services.calculateClientsProfits.AllClientsProfitCalculator;
 import org.tchw.fakturownia.services.calculateClientsProfits.ClientProfitCalculator;
 import org.tchw.fakturownia.services.calculateClientsProfits.ClientsProfitsToExcelCsv;
-import org.tchw.specific.werbum.Werbum;
+import org.tchw.generic.stream.FileHelper;
 
 public class CalculateClientsProfits {
 
     private final Logger log = Logger.getLogger(getClass());
     private final Repository repository;
+    private final RepositoryDirectory repositoryDirectory;
 
-    public CalculateClientsProfits(Repository repository) {
+    public CalculateClientsProfits(Repository repository, RepositoryDirectory repositoryDirectory) {
         this.repository = repository;
+        this.repositoryDirectory = repositoryDirectory;
     }
 
     public void calculateClientsProfits() {
-        String repositoryPath = Werbum.directory.getPath();
+        String repositoryPath = repositoryDirectory.repositoryDirectory().getPath();
         log.info("Calculating clients profits takig data from " + repositoryPath);
 
         AllClientsProfitCalculator allClientsProfitCalculator = new AllClientsProfitCalculator(repository, new ClientProfitCalculator(repository));
 
-        BufferedWriter writer = bufferedWriter("c:/Private/Work/Werbum/result.csv");
+        BufferedWriter writer = bufferedWriter( FileHelper.joiner().join( repositoryDirectory.repositoryDirectory(), "clientsProfits.csv") );
         CsvListWriter csvListWriter = new CsvListWriter(writer, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
         try {
             allClientsProfitCalculator.calculate(new ClientsProfitsToExcelCsv(csvListWriter));

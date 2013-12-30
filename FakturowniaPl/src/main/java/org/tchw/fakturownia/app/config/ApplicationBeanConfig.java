@@ -6,17 +6,20 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.tchw.fakturownia.model.Repository;
 import org.tchw.fakturownia.model.file.RepositoryDirectory;
 import org.tchw.fakturownia.services.CalculateClientsProfits;
 import org.tchw.fakturownia.services.RequestForAllData;
 import org.tchw.fakturownia.services.requestForAllData.RequestExecution;
+import org.tchw.fakturownia.services.requestForAllData.RequestLogin;
 import org.tchw.fakturownia.services.requestForAllData.gatherData.RequestForTableData;
 import org.tchw.fakturownia.services.requestForAllData.gatherData.impl.RequestForTableDataToFile;
-import org.tchw.specific.werbum.Werbum;
 
 @Configuration
+@PropertySource("classpath:fakturownia.properties")
 public class ApplicationBeanConfig {
 
     @Autowired
@@ -28,12 +31,12 @@ public class ApplicationBeanConfig {
     @Bean
     @Lazy
     public CalculateClientsProfits calculateClientsProfits() {
-        return new CalculateClientsProfits(repository());
+        return new CalculateClientsProfits(repository(), repositoryDirectory);
     }
 
     @Bean
     public RequestForAllData requestForAllData() {
-        return new RequestForAllData(Werbum.login, repositoryDirectory, requestForTableData(), requestExecution);
+        return new RequestForAllData(requestLogin(), repositoryDirectory, requestForTableData(), requestExecution);
     }
 
     @Bean
@@ -45,6 +48,16 @@ public class ApplicationBeanConfig {
     @Lazy
     public Repository repository() {
         return Repository.useRepositoryDirectory(repositoryDirectory);
+    }
+
+    @Bean
+    public RequestLogin requestLogin() {
+        return new RequestLogin();
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer properties() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     private static final AbstractApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationBeanConfig.class, MayOverrideApplicationBeanConfig.class);
